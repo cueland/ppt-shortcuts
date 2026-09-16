@@ -15,7 +15,7 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.0.0"
+VERSION = "0.3.1.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 
 B = lambda cid, label, icon, desc: {"id": cid, "label": label, "icon": icon, "desc": desc}
@@ -23,31 +23,25 @@ M = lambda mid, label, icon, items, desc="": {"menu": mid, "label": label, "icon
 
 RIBBON = [
     ("Position", "alignLeft", [
-        M("align", "Align", "alignLeft", [
-            B("alignLeft", "Left", "alignLeft", "Left edges to the reference; single shape → slide"),
-            B("alignRight", "Right", "alignRight", "Right edges to the reference"),
-            B("alignTop", "Top", "alignTop", "Top edges to the reference"),
-            B("alignBottom", "Bottom", "alignBottom", "Bottom edges to the reference"),
-            B("alignCenter", "Centre", "alignCenter", "Horizontal centres to the reference"),
-            B("alignMiddle", "Middle", "alignMiddle", "Vertical centres to the reference"),
-        ], "Align to the last-selected shape"),
-        M("distribute", "Distribute", "distributeH", [
-            B("distributeH", "Horizontally", "distributeH", "Outer two stay; gaps evened"),
-            B("distributeV", "Vertically", "distributeV", "Outer two stay; gaps evened"),
-        ]),
-        M("dock", "Dock", "dockRight", [
-            B("dockLeft", "Left", "dockLeft", "Move left until touching the reference"),
-            B("dockRight", "Right", "dockRight", "Move right until touching the reference"),
-            B("dockUp", "Up", "dockUp", "Move up until touching the reference"),
-            B("dockDown", "Down", "dockDown", "Move down until touching the reference"),
-        ]),
-        M("arrange", "Arrange", "stackH", [
-            B("stackH", "Stack horizontally", "stackH", "Butt together left to right, in selection order"),
-            B("stackV", "Stack vertically", "stackV", "Butt together top to bottom, in selection order"),
-            B("swap", "Swap", "swap", "Exchange two shapes' positions and layer order"),
-            B("goldenCanon", "Golden canon", "golden", "Inside the reference, bottom margin = 2x top"),
+        B("alignLeft", "Left", "alignLeft", "Left edges to the reference; single shape → slide"),
+        B("alignRight", "Right", "alignRight", "Right edges to the reference"),
+        B("alignTop", "Top", "alignTop", "Top edges to the reference"),
+        B("alignBottom", "Bottom", "alignBottom", "Bottom edges to the reference"),
+        B("alignCenter", "Centre", "alignCenter", "Horizontal centres to the reference"),
+        B("alignMiddle", "Middle", "alignMiddle", "Vertical centres to the reference"),
+        B("distributeH", "Distr. H", "distributeH", "Distribute horizontally: outer two stay, gaps evened"),
+        B("distributeV", "Distr. V", "distributeV", "Distribute vertically: outer two stay, gaps evened"),
+        B("dockLeft", "Dock L", "dockLeft", "Move left until touching the reference"),
+        B("dockRight", "Dock R", "dockRight", "Move right until touching the reference"),
+        B("dockUp", "Dock U", "dockUp", "Move up until touching the reference"),
+        B("dockDown", "Dock D", "dockDown", "Move down until touching the reference"),
+        B("stackH", "Stack H", "stackH", "Butt together left to right, in selection order"),
+        B("stackV", "Stack V", "stackV", "Butt together top to bottom, in selection order"),
+        B("swap", "Swap", "swap", "Exchange two shapes' positions and layer order"),
+        B("alignInTable", "In table", "table", "Snap loose shapes into the table cells they overlap"),
+        M("more", "More", "matrix", [
             B("matrix", "Align in matrix", "matrix", "Rows x cols from the pane settings"),
-            B("alignInTable", "Align in table", "table", "Snap loose shapes into the table cells they overlap"),
+            B("goldenCanon", "Golden canon", "golden", "Inside the reference, bottom margin = 2x top"),
         ]),
         M("nudge", "Nudge", "nudgeRight", [
             B("nudgeLeft", "Left", "nudgeLeft", "Move by the nudge amount"),
@@ -57,25 +51,19 @@ RIBBON = [
         ]),
     ]),
     ("Size", "matchWidth", [
-        M("match", "Match", "matchBoth", [
-            B("matchWidth", "Width", "matchWidth", "Target width := reference width"),
-            B("matchHeight", "Height", "matchHeight", "Target height := reference height"),
-            B("matchBoth", "Both", "matchBoth", "Both dimensions, non-proportional"),
-            B("fitInside", "Fit inside", "fitInside", "Scale proportionally to fit within the reference"),
-            B("fillOutside", "Fill reference", "fillOutside", "Scale proportionally to cover the reference"),
-        ], "Match the last-selected shape"),
-        M("stretch", "Stretch", "stretchRight", [
-            B("stretchLeft", "Left", "stretchLeft", "Extend to the reference's far-left edge"),
-            B("stretchRight", "Right", "stretchRight", "Extend to the reference's far-right edge"),
-            B("stretchUp", "Up", "stretchUp", "Extend to the reference's top edge"),
-            B("stretchDown", "Down", "stretchDown", "Extend to the reference's bottom edge"),
-        ]),
-        M("fillgap", "Fill gap", "fillRight", [
-            B("fillLeft", "Left", "fillLeft", "Grow left to touch the reference"),
-            B("fillRight", "Right", "fillRight", "Grow right to touch the reference"),
-            B("fillUp", "Up", "fillUp", "Grow up to touch the reference"),
-            B("fillDown", "Down", "fillDown", "Grow down to touch the reference"),
-        ]),
+        B("matchWidth", "Width", "matchWidth", "Target width := reference width"),
+        B("matchHeight", "Height", "matchHeight", "Target height := reference height"),
+        B("matchBoth", "Both", "matchBoth", "Both dimensions, non-proportional"),
+        B("fitInside", "Fit inside", "fitInside", "Scale proportionally to fit within the reference"),
+        B("fillOutside", "Fill ref", "fillOutside", "Scale proportionally to cover the reference"),
+        B("stretchLeft", "Stretch L", "stretchLeft", "Extend to the reference's far-left edge"),
+        B("stretchRight", "Stretch R", "stretchRight", "Extend to the reference's far-right edge"),
+        B("stretchUp", "Stretch U", "stretchUp", "Extend to the reference's top edge"),
+        B("stretchDown", "Stretch D", "stretchDown", "Extend to the reference's bottom edge"),
+        B("fillLeft", "Gap L", "fillLeft", "Grow left to touch the reference"),
+        B("fillRight", "Gap R", "fillRight", "Grow right to touch the reference"),
+        B("fillUp", "Gap U", "fillUp", "Grow up to touch the reference"),
+        B("fillDown", "Gap D", "fillDown", "Grow down to touch the reference"),
         M("resize", "Resize", "resizeUp", [
             B("resizeUp", "Bigger", "resizeUp", "Magic Resizer: scale by the factor in the pane"),
             B("resizeDown", "Smaller", "resizeDown", "Magic Resizer: scale by 1 / factor"),
@@ -88,24 +76,22 @@ RIBBON = [
         M("fontc", "Font", "font", [B(f"font{i}", f"Slot {i}", "font", f"Font colour = palette slot {i}") for i in range(1, 11)], "Font colour from the palette"),
     ]),
     ("Text", "margins", [
-        M("textbox", "Text box", "margins", [
-            B("setMargins", "Set margins", "margins", "Apply the margins from the pane"),
-            B("marginsZero", "Zero margins", "marginsZero", "All four text margins to 0"),
-            B("fitFormToText", "Fit shape to text", "fitText", "Resize the shape to its text"),
-            B("wrapToggle", "Wrap text", "wrap", "Toggle word wrap"),
-            B("bulletsToggle", "Bullets on/off", "bullets", "Toggle bullets"),
-            B("setFontSize", "Set font size", "fontSize", "Apply the font size from the pane"),
-        ]),
+        B("setMargins", "Margins", "margins", "Apply the margins from the pane"),
+        B("marginsZero", "Zero margins", "marginsZero", "All four text margins to 0"),
+        B("fitFormToText", "Fit to text", "fitText", "Resize the shape to its text"),
+        B("wrapToggle", "Wrap", "wrap", "Toggle word wrap"),
         B("splitTextBox", "Split", "split", "Two boxes from one, at the cursor"),
         B("mergeTextBoxes", "Merge", "merge", "Combine text boxes in selection order"),
+        B("bulletsToggle", "Bullets", "bullets", "Toggle bullets"),
+        B("setFontSize", "Font size", "fontSize", "Apply the font size from the pane"),
     ]),
     ("Format", "pickup", [
         B("formatPickup", "Pick up", "pickup", "Pick up the last-selected shape's format; applies to the others if several are selected"),
         B("formatApply", "Apply", "apply", "Apply the picked-up format to the selection"),
-        M("formats", "My Formats", "star", [
-            B("formatPainter", "Painter on/off", "painter", "Apply the picked-up format to every new selection until toggled off"),
-            B("saveMyFormat", "Save as My Format", "star", "Store the picked-up format as a named preset"),
-        ] + [B(f"myFormat{i}", f"My Format {i}", "preset", f"Apply saved format #{i}") for i in range(1, 6)]),
+        B("formatPainter", "Painter", "painter", "Apply the picked-up format to every new selection until toggled off"),
+        B("saveMyFormat", "Save", "star", "Store the picked-up format as a named preset"),
+        B("myFormat1", "My Format 1", "preset", "Apply saved format #1"),
+        M("formats", "My Formats", "preset", [B(f"myFormat{i}", f"My Format {i}", "preset", f"Apply saved format #{i}") for i in range(2, 6)], "My Formats 2-5"),
     ]),
     ("Tools", "similar", [
         M("tools", "Tools", "similar", [
@@ -120,9 +106,8 @@ RIBBON = [
             B("masterLabelAdd", "Master label +", "master", "Add the label to every slide layout"),
             B("masterLabelRemove", "Master label -", "masterOff", "Remove it from every layout"),
         ]),
-        M("sticky", "Sticky", "sticky", [
-            B("addSticky", "Sticky (default colour)", "sticky", "Reviewer note with initials + timestamp"),
-        ] + [B(f"sticky_{n.lower()}", n, "sticky", f"Sticky in {n}") for n in ["Yellow", "Green", "Pink", "Orange", "Blue", "Purple"]]),
+        B("addSticky", "Sticky", "sticky", "Reviewer note with initials + timestamp, in the default colour"),
+        M("stickyc", "Colour", "sticky", [B(f"sticky_{n.lower()}", n, "sticky", f"Sticky in {n}") for n in ["Yellow", "Green", "Pink", "Orange", "Blue", "Purple"]], "Sticky in a specific colour"),
         B("togglePane", "Pane", "pane", "Show / hide the ChristiantialElements pane"),
     ]),
 ]

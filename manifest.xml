@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
   <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
-  <Version>0.3.0.0</Version>
+  <Version>0.3.1.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ChristiantialElements"/>
@@ -63,139 +63,118 @@
 <Group id="CE.group.Position">
   <Label resid="S_group_Position"/>
   <Icon><bt:Image size="16" resid="Icon.alignLeft.16"/><bt:Image size="32" resid="Icon.alignLeft.32"/><bt:Image size="80" resid="Icon.alignLeft.80"/></Icon>
-<Control xsi:type="Menu" id="CE.menu.align">
-  <Label resid="S_menu_align"/>
-  <Supertip><Title resid="S_menu_align"/><Description resid="L_menu_desc_align"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.alignLeft.16"/><bt:Image size="32" resid="Icon.alignLeft.32"/><bt:Image size="80" resid="Icon.alignLeft.80"/></Icon>
-  <Items>
-<Item id="CE.alignLeft">
+<Control xsi:type="Button" id="CE.alignLeft">
   <Label resid="S_lbl_alignLeft"/>
   <Supertip><Title resid="S_lbl_alignLeft"/><Description resid="L_desc_alignLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignLeft.16"/><bt:Image size="32" resid="Icon.alignLeft.32"/><bt:Image size="80" resid="Icon.alignLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignLeft</FunctionName></Action>
-</Item>
-<Item id="CE.alignRight">
+</Control>
+<Control xsi:type="Button" id="CE.alignRight">
   <Label resid="S_lbl_alignRight"/>
   <Supertip><Title resid="S_lbl_alignRight"/><Description resid="L_desc_alignRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignRight.16"/><bt:Image size="32" resid="Icon.alignRight.32"/><bt:Image size="80" resid="Icon.alignRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignRight</FunctionName></Action>
-</Item>
-<Item id="CE.alignTop">
+</Control>
+<Control xsi:type="Button" id="CE.alignTop">
   <Label resid="S_lbl_alignTop"/>
   <Supertip><Title resid="S_lbl_alignTop"/><Description resid="L_desc_alignTop"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignTop.16"/><bt:Image size="32" resid="Icon.alignTop.32"/><bt:Image size="80" resid="Icon.alignTop.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignTop</FunctionName></Action>
-</Item>
-<Item id="CE.alignBottom">
+</Control>
+<Control xsi:type="Button" id="CE.alignBottom">
   <Label resid="S_lbl_alignBottom"/>
   <Supertip><Title resid="S_lbl_alignBottom"/><Description resid="L_desc_alignBottom"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignBottom.16"/><bt:Image size="32" resid="Icon.alignBottom.32"/><bt:Image size="80" resid="Icon.alignBottom.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignBottom</FunctionName></Action>
-</Item>
-<Item id="CE.alignCenter">
+</Control>
+<Control xsi:type="Button" id="CE.alignCenter">
   <Label resid="S_lbl_alignCenter"/>
   <Supertip><Title resid="S_lbl_alignCenter"/><Description resid="L_desc_alignCenter"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignCenter.16"/><bt:Image size="32" resid="Icon.alignCenter.32"/><bt:Image size="80" resid="Icon.alignCenter.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignCenter</FunctionName></Action>
-</Item>
-<Item id="CE.alignMiddle">
+</Control>
+<Control xsi:type="Button" id="CE.alignMiddle">
   <Label resid="S_lbl_alignMiddle"/>
   <Supertip><Title resid="S_lbl_alignMiddle"/><Description resid="L_desc_alignMiddle"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignMiddle.16"/><bt:Image size="32" resid="Icon.alignMiddle.32"/><bt:Image size="80" resid="Icon.alignMiddle.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignMiddle</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.distribute">
-  <Label resid="S_menu_distribute"/>
-  <Supertip><Title resid="S_menu_distribute"/><Description resid="L_menu_desc_distribute"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.distributeH.16"/><bt:Image size="32" resid="Icon.distributeH.32"/><bt:Image size="80" resid="Icon.distributeH.80"/></Icon>
-  <Items>
-<Item id="CE.distributeH">
+<Control xsi:type="Button" id="CE.distributeH">
   <Label resid="S_lbl_distributeH"/>
   <Supertip><Title resid="S_lbl_distributeH"/><Description resid="L_desc_distributeH"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.distributeH.16"/><bt:Image size="32" resid="Icon.distributeH.32"/><bt:Image size="80" resid="Icon.distributeH.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeH</FunctionName></Action>
-</Item>
-<Item id="CE.distributeV">
+</Control>
+<Control xsi:type="Button" id="CE.distributeV">
   <Label resid="S_lbl_distributeV"/>
   <Supertip><Title resid="S_lbl_distributeV"/><Description resid="L_desc_distributeV"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.distributeV.16"/><bt:Image size="32" resid="Icon.distributeV.32"/><bt:Image size="80" resid="Icon.distributeV.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeV</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.dock">
-  <Label resid="S_menu_dock"/>
-  <Supertip><Title resid="S_menu_dock"/><Description resid="L_menu_desc_dock"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.dockRight.16"/><bt:Image size="32" resid="Icon.dockRight.32"/><bt:Image size="80" resid="Icon.dockRight.80"/></Icon>
-  <Items>
-<Item id="CE.dockLeft">
+<Control xsi:type="Button" id="CE.dockLeft">
   <Label resid="S_lbl_dockLeft"/>
   <Supertip><Title resid="S_lbl_dockLeft"/><Description resid="L_desc_dockLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockLeft.16"/><bt:Image size="32" resid="Icon.dockLeft.32"/><bt:Image size="80" resid="Icon.dockLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockLeft</FunctionName></Action>
-</Item>
-<Item id="CE.dockRight">
+</Control>
+<Control xsi:type="Button" id="CE.dockRight">
   <Label resid="S_lbl_dockRight"/>
   <Supertip><Title resid="S_lbl_dockRight"/><Description resid="L_desc_dockRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockRight.16"/><bt:Image size="32" resid="Icon.dockRight.32"/><bt:Image size="80" resid="Icon.dockRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockRight</FunctionName></Action>
-</Item>
-<Item id="CE.dockUp">
+</Control>
+<Control xsi:type="Button" id="CE.dockUp">
   <Label resid="S_lbl_dockUp"/>
   <Supertip><Title resid="S_lbl_dockUp"/><Description resid="L_desc_dockUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockUp.16"/><bt:Image size="32" resid="Icon.dockUp.32"/><bt:Image size="80" resid="Icon.dockUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockUp</FunctionName></Action>
-</Item>
-<Item id="CE.dockDown">
+</Control>
+<Control xsi:type="Button" id="CE.dockDown">
   <Label resid="S_lbl_dockDown"/>
   <Supertip><Title resid="S_lbl_dockDown"/><Description resid="L_desc_dockDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockDown.16"/><bt:Image size="32" resid="Icon.dockDown.32"/><bt:Image size="80" resid="Icon.dockDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockDown</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.arrange">
-  <Label resid="S_menu_arrange"/>
-  <Supertip><Title resid="S_menu_arrange"/><Description resid="L_menu_desc_arrange"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.stackH.16"/><bt:Image size="32" resid="Icon.stackH.32"/><bt:Image size="80" resid="Icon.stackH.80"/></Icon>
-  <Items>
-<Item id="CE.stackH">
+<Control xsi:type="Button" id="CE.stackH">
   <Label resid="S_lbl_stackH"/>
   <Supertip><Title resid="S_lbl_stackH"/><Description resid="L_desc_stackH"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stackH.16"/><bt:Image size="32" resid="Icon.stackH.32"/><bt:Image size="80" resid="Icon.stackH.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stackH</FunctionName></Action>
-</Item>
-<Item id="CE.stackV">
+</Control>
+<Control xsi:type="Button" id="CE.stackV">
   <Label resid="S_lbl_stackV"/>
   <Supertip><Title resid="S_lbl_stackV"/><Description resid="L_desc_stackV"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stackV.16"/><bt:Image size="32" resid="Icon.stackV.32"/><bt:Image size="80" resid="Icon.stackV.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stackV</FunctionName></Action>
-</Item>
-<Item id="CE.swap">
+</Control>
+<Control xsi:type="Button" id="CE.swap">
   <Label resid="S_lbl_swap"/>
   <Supertip><Title resid="S_lbl_swap"/><Description resid="L_desc_swap"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.swap.16"/><bt:Image size="32" resid="Icon.swap.32"/><bt:Image size="80" resid="Icon.swap.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_swap</FunctionName></Action>
-</Item>
-<Item id="CE.goldenCanon">
-  <Label resid="S_lbl_goldenCanon"/>
-  <Supertip><Title resid="S_lbl_goldenCanon"/><Description resid="L_desc_goldenCanon"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.golden.16"/><bt:Image size="32" resid="Icon.golden.32"/><bt:Image size="80" resid="Icon.golden.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_goldenCanon</FunctionName></Action>
-</Item>
+</Control>
+<Control xsi:type="Button" id="CE.alignInTable">
+  <Label resid="S_lbl_alignInTable"/>
+  <Supertip><Title resid="S_lbl_alignInTable"/><Description resid="L_desc_alignInTable"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.table.16"/><bt:Image size="32" resid="Icon.table.32"/><bt:Image size="80" resid="Icon.table.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignInTable</FunctionName></Action>
+</Control>
+<Control xsi:type="Menu" id="CE.menu.more">
+  <Label resid="S_menu_more"/>
+  <Supertip><Title resid="S_menu_more"/><Description resid="L_menu_desc_more"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.matrix.16"/><bt:Image size="32" resid="Icon.matrix.32"/><bt:Image size="80" resid="Icon.matrix.80"/></Icon>
+  <Items>
 <Item id="CE.matrix">
   <Label resid="S_lbl_matrix"/>
   <Supertip><Title resid="S_lbl_matrix"/><Description resid="L_desc_matrix"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matrix.16"/><bt:Image size="32" resid="Icon.matrix.32"/><bt:Image size="80" resid="Icon.matrix.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matrix</FunctionName></Action>
 </Item>
-<Item id="CE.alignInTable">
-  <Label resid="S_lbl_alignInTable"/>
-  <Supertip><Title resid="S_lbl_alignInTable"/><Description resid="L_desc_alignInTable"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.table.16"/><bt:Image size="32" resid="Icon.table.32"/><bt:Image size="80" resid="Icon.table.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignInTable</FunctionName></Action>
+<Item id="CE.goldenCanon">
+  <Label resid="S_lbl_goldenCanon"/>
+  <Supertip><Title resid="S_lbl_goldenCanon"/><Description resid="L_desc_goldenCanon"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.golden.16"/><bt:Image size="32" resid="Icon.golden.32"/><bt:Image size="80" resid="Icon.golden.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_goldenCanon</FunctionName></Action>
 </Item>
   </Items>
 </Control>
@@ -234,104 +213,83 @@
 <Group id="CE.group.Size">
   <Label resid="S_group_Size"/>
   <Icon><bt:Image size="16" resid="Icon.matchWidth.16"/><bt:Image size="32" resid="Icon.matchWidth.32"/><bt:Image size="80" resid="Icon.matchWidth.80"/></Icon>
-<Control xsi:type="Menu" id="CE.menu.match">
-  <Label resid="S_menu_match"/>
-  <Supertip><Title resid="S_menu_match"/><Description resid="L_menu_desc_match"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.matchBoth.16"/><bt:Image size="32" resid="Icon.matchBoth.32"/><bt:Image size="80" resid="Icon.matchBoth.80"/></Icon>
-  <Items>
-<Item id="CE.matchWidth">
+<Control xsi:type="Button" id="CE.matchWidth">
   <Label resid="S_lbl_matchWidth"/>
   <Supertip><Title resid="S_lbl_matchWidth"/><Description resid="L_desc_matchWidth"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matchWidth.16"/><bt:Image size="32" resid="Icon.matchWidth.32"/><bt:Image size="80" resid="Icon.matchWidth.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchWidth</FunctionName></Action>
-</Item>
-<Item id="CE.matchHeight">
+</Control>
+<Control xsi:type="Button" id="CE.matchHeight">
   <Label resid="S_lbl_matchHeight"/>
   <Supertip><Title resid="S_lbl_matchHeight"/><Description resid="L_desc_matchHeight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matchHeight.16"/><bt:Image size="32" resid="Icon.matchHeight.32"/><bt:Image size="80" resid="Icon.matchHeight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchHeight</FunctionName></Action>
-</Item>
-<Item id="CE.matchBoth">
+</Control>
+<Control xsi:type="Button" id="CE.matchBoth">
   <Label resid="S_lbl_matchBoth"/>
   <Supertip><Title resid="S_lbl_matchBoth"/><Description resid="L_desc_matchBoth"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matchBoth.16"/><bt:Image size="32" resid="Icon.matchBoth.32"/><bt:Image size="80" resid="Icon.matchBoth.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchBoth</FunctionName></Action>
-</Item>
-<Item id="CE.fitInside">
+</Control>
+<Control xsi:type="Button" id="CE.fitInside">
   <Label resid="S_lbl_fitInside"/>
   <Supertip><Title resid="S_lbl_fitInside"/><Description resid="L_desc_fitInside"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fitInside.16"/><bt:Image size="32" resid="Icon.fitInside.32"/><bt:Image size="80" resid="Icon.fitInside.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fitInside</FunctionName></Action>
-</Item>
-<Item id="CE.fillOutside">
+</Control>
+<Control xsi:type="Button" id="CE.fillOutside">
   <Label resid="S_lbl_fillOutside"/>
   <Supertip><Title resid="S_lbl_fillOutside"/><Description resid="L_desc_fillOutside"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillOutside.16"/><bt:Image size="32" resid="Icon.fillOutside.32"/><bt:Image size="80" resid="Icon.fillOutside.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillOutside</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.stretch">
-  <Label resid="S_menu_stretch"/>
-  <Supertip><Title resid="S_menu_stretch"/><Description resid="L_menu_desc_stretch"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.stretchRight.16"/><bt:Image size="32" resid="Icon.stretchRight.32"/><bt:Image size="80" resid="Icon.stretchRight.80"/></Icon>
-  <Items>
-<Item id="CE.stretchLeft">
+<Control xsi:type="Button" id="CE.stretchLeft">
   <Label resid="S_lbl_stretchLeft"/>
   <Supertip><Title resid="S_lbl_stretchLeft"/><Description resid="L_desc_stretchLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchLeft.16"/><bt:Image size="32" resid="Icon.stretchLeft.32"/><bt:Image size="80" resid="Icon.stretchLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchLeft</FunctionName></Action>
-</Item>
-<Item id="CE.stretchRight">
+</Control>
+<Control xsi:type="Button" id="CE.stretchRight">
   <Label resid="S_lbl_stretchRight"/>
   <Supertip><Title resid="S_lbl_stretchRight"/><Description resid="L_desc_stretchRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchRight.16"/><bt:Image size="32" resid="Icon.stretchRight.32"/><bt:Image size="80" resid="Icon.stretchRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchRight</FunctionName></Action>
-</Item>
-<Item id="CE.stretchUp">
+</Control>
+<Control xsi:type="Button" id="CE.stretchUp">
   <Label resid="S_lbl_stretchUp"/>
   <Supertip><Title resid="S_lbl_stretchUp"/><Description resid="L_desc_stretchUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchUp.16"/><bt:Image size="32" resid="Icon.stretchUp.32"/><bt:Image size="80" resid="Icon.stretchUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchUp</FunctionName></Action>
-</Item>
-<Item id="CE.stretchDown">
+</Control>
+<Control xsi:type="Button" id="CE.stretchDown">
   <Label resid="S_lbl_stretchDown"/>
   <Supertip><Title resid="S_lbl_stretchDown"/><Description resid="L_desc_stretchDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchDown.16"/><bt:Image size="32" resid="Icon.stretchDown.32"/><bt:Image size="80" resid="Icon.stretchDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchDown</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.fillgap">
-  <Label resid="S_menu_fillgap"/>
-  <Supertip><Title resid="S_menu_fillgap"/><Description resid="L_menu_desc_fillgap"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.fillRight.16"/><bt:Image size="32" resid="Icon.fillRight.32"/><bt:Image size="80" resid="Icon.fillRight.80"/></Icon>
-  <Items>
-<Item id="CE.fillLeft">
+<Control xsi:type="Button" id="CE.fillLeft">
   <Label resid="S_lbl_fillLeft"/>
   <Supertip><Title resid="S_lbl_fillLeft"/><Description resid="L_desc_fillLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillLeft.16"/><bt:Image size="32" resid="Icon.fillLeft.32"/><bt:Image size="80" resid="Icon.fillLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillLeft</FunctionName></Action>
-</Item>
-<Item id="CE.fillRight">
+</Control>
+<Control xsi:type="Button" id="CE.fillRight">
   <Label resid="S_lbl_fillRight"/>
   <Supertip><Title resid="S_lbl_fillRight"/><Description resid="L_desc_fillRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillRight.16"/><bt:Image size="32" resid="Icon.fillRight.32"/><bt:Image size="80" resid="Icon.fillRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillRight</FunctionName></Action>
-</Item>
-<Item id="CE.fillUp">
+</Control>
+<Control xsi:type="Button" id="CE.fillUp">
   <Label resid="S_lbl_fillUp"/>
   <Supertip><Title resid="S_lbl_fillUp"/><Description resid="L_desc_fillUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillUp.16"/><bt:Image size="32" resid="Icon.fillUp.32"/><bt:Image size="80" resid="Icon.fillUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillUp</FunctionName></Action>
-</Item>
-<Item id="CE.fillDown">
+</Control>
+<Control xsi:type="Button" id="CE.fillDown">
   <Label resid="S_lbl_fillDown"/>
   <Supertip><Title resid="S_lbl_fillDown"/><Description resid="L_desc_fillDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillDown.16"/><bt:Image size="32" resid="Icon.fillDown.32"/><bt:Image size="80" resid="Icon.fillDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillDown</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
 <Control xsi:type="Menu" id="CE.menu.resize">
   <Label resid="S_menu_resize"/>
@@ -567,48 +525,29 @@
 <Group id="CE.group.Text">
   <Label resid="S_group_Text"/>
   <Icon><bt:Image size="16" resid="Icon.margins.16"/><bt:Image size="32" resid="Icon.margins.32"/><bt:Image size="80" resid="Icon.margins.80"/></Icon>
-<Control xsi:type="Menu" id="CE.menu.textbox">
-  <Label resid="S_menu_textbox"/>
-  <Supertip><Title resid="S_menu_textbox"/><Description resid="L_menu_desc_textbox"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.margins.16"/><bt:Image size="32" resid="Icon.margins.32"/><bt:Image size="80" resid="Icon.margins.80"/></Icon>
-  <Items>
-<Item id="CE.setMargins">
+<Control xsi:type="Button" id="CE.setMargins">
   <Label resid="S_lbl_setMargins"/>
   <Supertip><Title resid="S_lbl_setMargins"/><Description resid="L_desc_setMargins"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.margins.16"/><bt:Image size="32" resid="Icon.margins.32"/><bt:Image size="80" resid="Icon.margins.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_setMargins</FunctionName></Action>
-</Item>
-<Item id="CE.marginsZero">
+</Control>
+<Control xsi:type="Button" id="CE.marginsZero">
   <Label resid="S_lbl_marginsZero"/>
   <Supertip><Title resid="S_lbl_marginsZero"/><Description resid="L_desc_marginsZero"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.marginsZero.16"/><bt:Image size="32" resid="Icon.marginsZero.32"/><bt:Image size="80" resid="Icon.marginsZero.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_marginsZero</FunctionName></Action>
-</Item>
-<Item id="CE.fitFormToText">
+</Control>
+<Control xsi:type="Button" id="CE.fitFormToText">
   <Label resid="S_lbl_fitFormToText"/>
   <Supertip><Title resid="S_lbl_fitFormToText"/><Description resid="L_desc_fitFormToText"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fitText.16"/><bt:Image size="32" resid="Icon.fitText.32"/><bt:Image size="80" resid="Icon.fitText.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fitFormToText</FunctionName></Action>
-</Item>
-<Item id="CE.wrapToggle">
+</Control>
+<Control xsi:type="Button" id="CE.wrapToggle">
   <Label resid="S_lbl_wrapToggle"/>
   <Supertip><Title resid="S_lbl_wrapToggle"/><Description resid="L_desc_wrapToggle"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.wrap.16"/><bt:Image size="32" resid="Icon.wrap.32"/><bt:Image size="80" resid="Icon.wrap.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_wrapToggle</FunctionName></Action>
-</Item>
-<Item id="CE.bulletsToggle">
-  <Label resid="S_lbl_bulletsToggle"/>
-  <Supertip><Title resid="S_lbl_bulletsToggle"/><Description resid="L_desc_bulletsToggle"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.bullets.16"/><bt:Image size="32" resid="Icon.bullets.32"/><bt:Image size="80" resid="Icon.bullets.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_bulletsToggle</FunctionName></Action>
-</Item>
-<Item id="CE.setFontSize">
-  <Label resid="S_lbl_setFontSize"/>
-  <Supertip><Title resid="S_lbl_setFontSize"/><Description resid="L_desc_setFontSize"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.fontSize.16"/><bt:Image size="32" resid="Icon.fontSize.32"/><bt:Image size="80" resid="Icon.fontSize.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_setFontSize</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
 <Control xsi:type="Button" id="CE.splitTextBox">
   <Label resid="S_lbl_splitTextBox"/>
@@ -621,6 +560,18 @@
   <Supertip><Title resid="S_lbl_mergeTextBoxes"/><Description resid="L_desc_mergeTextBoxes"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.merge.16"/><bt:Image size="32" resid="Icon.merge.32"/><bt:Image size="80" resid="Icon.merge.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_mergeTextBoxes</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.bulletsToggle">
+  <Label resid="S_lbl_bulletsToggle"/>
+  <Supertip><Title resid="S_lbl_bulletsToggle"/><Description resid="L_desc_bulletsToggle"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.bullets.16"/><bt:Image size="32" resid="Icon.bullets.32"/><bt:Image size="80" resid="Icon.bullets.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_bulletsToggle</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.setFontSize">
+  <Label resid="S_lbl_setFontSize"/>
+  <Supertip><Title resid="S_lbl_setFontSize"/><Description resid="L_desc_setFontSize"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.fontSize.16"/><bt:Image size="32" resid="Icon.fontSize.32"/><bt:Image size="80" resid="Icon.fontSize.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_setFontSize</FunctionName></Action>
 </Control>
 </Group>
 <Group id="CE.group.Format">
@@ -638,29 +589,29 @@
   <Icon><bt:Image size="16" resid="Icon.apply.16"/><bt:Image size="32" resid="Icon.apply.32"/><bt:Image size="80" resid="Icon.apply.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_formatApply</FunctionName></Action>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.formats">
-  <Label resid="S_menu_formats"/>
-  <Supertip><Title resid="S_menu_formats"/><Description resid="L_menu_desc_formats"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.star.16"/><bt:Image size="32" resid="Icon.star.32"/><bt:Image size="80" resid="Icon.star.80"/></Icon>
-  <Items>
-<Item id="CE.formatPainter">
+<Control xsi:type="Button" id="CE.formatPainter">
   <Label resid="S_lbl_formatPainter"/>
   <Supertip><Title resid="S_lbl_formatPainter"/><Description resid="L_desc_formatPainter"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.painter.16"/><bt:Image size="32" resid="Icon.painter.32"/><bt:Image size="80" resid="Icon.painter.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_formatPainter</FunctionName></Action>
-</Item>
-<Item id="CE.saveMyFormat">
+</Control>
+<Control xsi:type="Button" id="CE.saveMyFormat">
   <Label resid="S_lbl_saveMyFormat"/>
   <Supertip><Title resid="S_lbl_saveMyFormat"/><Description resid="L_desc_saveMyFormat"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.star.16"/><bt:Image size="32" resid="Icon.star.32"/><bt:Image size="80" resid="Icon.star.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_saveMyFormat</FunctionName></Action>
-</Item>
-<Item id="CE.myFormat1">
+</Control>
+<Control xsi:type="Button" id="CE.myFormat1">
   <Label resid="S_lbl_myFormat1"/>
   <Supertip><Title resid="S_lbl_myFormat1"/><Description resid="L_desc_myFormat1"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.preset.16"/><bt:Image size="32" resid="Icon.preset.32"/><bt:Image size="80" resid="Icon.preset.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_myFormat1</FunctionName></Action>
-</Item>
+</Control>
+<Control xsi:type="Menu" id="CE.menu.formats">
+  <Label resid="S_menu_formats"/>
+  <Supertip><Title resid="S_menu_formats"/><Description resid="L_menu_desc_formats"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.preset.16"/><bt:Image size="32" resid="Icon.preset.32"/><bt:Image size="80" resid="Icon.preset.80"/></Icon>
+  <Items>
 <Item id="CE.myFormat2">
   <Label resid="S_lbl_myFormat2"/>
   <Supertip><Title resid="S_lbl_myFormat2"/><Description resid="L_desc_myFormat2"/></Supertip>
@@ -758,17 +709,17 @@
 </Item>
   </Items>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.sticky">
-  <Label resid="S_menu_sticky"/>
-  <Supertip><Title resid="S_menu_sticky"/><Description resid="L_menu_desc_sticky"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.sticky.16"/><bt:Image size="32" resid="Icon.sticky.32"/><bt:Image size="80" resid="Icon.sticky.80"/></Icon>
-  <Items>
-<Item id="CE.addSticky">
+<Control xsi:type="Button" id="CE.addSticky">
   <Label resid="S_lbl_addSticky"/>
   <Supertip><Title resid="S_lbl_addSticky"/><Description resid="L_desc_addSticky"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.sticky.16"/><bt:Image size="32" resid="Icon.sticky.32"/><bt:Image size="80" resid="Icon.sticky.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_addSticky</FunctionName></Action>
-</Item>
+</Control>
+<Control xsi:type="Menu" id="CE.menu.stickyc">
+  <Label resid="S_menu_stickyc"/>
+  <Supertip><Title resid="S_menu_stickyc"/><Description resid="L_menu_desc_stickyc"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.sticky.16"/><bt:Image size="32" resid="Icon.sticky.32"/><bt:Image size="80" resid="Icon.sticky.80"/></Icon>
+  <Items>
 <Item id="CE.sticky_yellow">
   <Label resid="S_lbl_sticky_yellow"/>
   <Supertip><Title resid="S_lbl_sticky_yellow"/><Description resid="L_desc_sticky_yellow"/></Supertip>
@@ -870,15 +821,15 @@
         <bt:Image id="Icon.swap.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/swap-16.png"/>
         <bt:Image id="Icon.swap.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/swap-32.png"/>
         <bt:Image id="Icon.swap.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/swap-80.png"/>
-        <bt:Image id="Icon.golden.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/golden-16.png"/>
-        <bt:Image id="Icon.golden.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/golden-32.png"/>
-        <bt:Image id="Icon.golden.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/golden-80.png"/>
-        <bt:Image id="Icon.matrix.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matrix-16.png"/>
-        <bt:Image id="Icon.matrix.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matrix-32.png"/>
-        <bt:Image id="Icon.matrix.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matrix-80.png"/>
         <bt:Image id="Icon.table.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/table-16.png"/>
         <bt:Image id="Icon.table.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/table-32.png"/>
         <bt:Image id="Icon.table.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/table-80.png"/>
+        <bt:Image id="Icon.matrix.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matrix-16.png"/>
+        <bt:Image id="Icon.matrix.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matrix-32.png"/>
+        <bt:Image id="Icon.matrix.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matrix-80.png"/>
+        <bt:Image id="Icon.golden.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/golden-16.png"/>
+        <bt:Image id="Icon.golden.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/golden-32.png"/>
+        <bt:Image id="Icon.golden.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/golden-80.png"/>
         <bt:Image id="Icon.nudgeLeft.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/nudgeLeft-16.png"/>
         <bt:Image id="Icon.nudgeLeft.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/nudgeLeft-32.png"/>
         <bt:Image id="Icon.nudgeLeft.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/nudgeLeft-80.png"/>
@@ -960,18 +911,18 @@
         <bt:Image id="Icon.wrap.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/wrap-16.png"/>
         <bt:Image id="Icon.wrap.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/wrap-32.png"/>
         <bt:Image id="Icon.wrap.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/wrap-80.png"/>
-        <bt:Image id="Icon.bullets.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/bullets-16.png"/>
-        <bt:Image id="Icon.bullets.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/bullets-32.png"/>
-        <bt:Image id="Icon.bullets.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/bullets-80.png"/>
-        <bt:Image id="Icon.fontSize.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fontSize-16.png"/>
-        <bt:Image id="Icon.fontSize.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fontSize-32.png"/>
-        <bt:Image id="Icon.fontSize.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fontSize-80.png"/>
         <bt:Image id="Icon.split.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/split-16.png"/>
         <bt:Image id="Icon.split.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/split-32.png"/>
         <bt:Image id="Icon.split.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/split-80.png"/>
         <bt:Image id="Icon.merge.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/merge-16.png"/>
         <bt:Image id="Icon.merge.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/merge-32.png"/>
         <bt:Image id="Icon.merge.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/merge-80.png"/>
+        <bt:Image id="Icon.bullets.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/bullets-16.png"/>
+        <bt:Image id="Icon.bullets.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/bullets-32.png"/>
+        <bt:Image id="Icon.bullets.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/bullets-80.png"/>
+        <bt:Image id="Icon.fontSize.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fontSize-16.png"/>
+        <bt:Image id="Icon.fontSize.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fontSize-32.png"/>
+        <bt:Image id="Icon.fontSize.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fontSize-80.png"/>
         <bt:Image id="Icon.pickup.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/pickup-16.png"/>
         <bt:Image id="Icon.pickup.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/pickup-32.png"/>
         <bt:Image id="Icon.pickup.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/pickup-80.png"/>
@@ -1038,22 +989,19 @@
         <bt:String id="S_lbl_alignBottom" DefaultValue="Bottom"/>
         <bt:String id="S_lbl_alignCenter" DefaultValue="Centre"/>
         <bt:String id="S_lbl_alignMiddle" DefaultValue="Middle"/>
-        <bt:String id="S_menu_align" DefaultValue="Align"/>
-        <bt:String id="S_lbl_distributeH" DefaultValue="Horizontally"/>
-        <bt:String id="S_lbl_distributeV" DefaultValue="Vertically"/>
-        <bt:String id="S_menu_distribute" DefaultValue="Distribute"/>
-        <bt:String id="S_lbl_dockLeft" DefaultValue="Left"/>
-        <bt:String id="S_lbl_dockRight" DefaultValue="Right"/>
-        <bt:String id="S_lbl_dockUp" DefaultValue="Up"/>
-        <bt:String id="S_lbl_dockDown" DefaultValue="Down"/>
-        <bt:String id="S_menu_dock" DefaultValue="Dock"/>
-        <bt:String id="S_lbl_stackH" DefaultValue="Stack horizontally"/>
-        <bt:String id="S_lbl_stackV" DefaultValue="Stack vertically"/>
+        <bt:String id="S_lbl_distributeH" DefaultValue="Distr. H"/>
+        <bt:String id="S_lbl_distributeV" DefaultValue="Distr. V"/>
+        <bt:String id="S_lbl_dockLeft" DefaultValue="Dock L"/>
+        <bt:String id="S_lbl_dockRight" DefaultValue="Dock R"/>
+        <bt:String id="S_lbl_dockUp" DefaultValue="Dock U"/>
+        <bt:String id="S_lbl_dockDown" DefaultValue="Dock D"/>
+        <bt:String id="S_lbl_stackH" DefaultValue="Stack H"/>
+        <bt:String id="S_lbl_stackV" DefaultValue="Stack V"/>
         <bt:String id="S_lbl_swap" DefaultValue="Swap"/>
-        <bt:String id="S_lbl_goldenCanon" DefaultValue="Golden canon"/>
+        <bt:String id="S_lbl_alignInTable" DefaultValue="In table"/>
         <bt:String id="S_lbl_matrix" DefaultValue="Align in matrix"/>
-        <bt:String id="S_lbl_alignInTable" DefaultValue="Align in table"/>
-        <bt:String id="S_menu_arrange" DefaultValue="Arrange"/>
+        <bt:String id="S_lbl_goldenCanon" DefaultValue="Golden canon"/>
+        <bt:String id="S_menu_more" DefaultValue="More"/>
         <bt:String id="S_lbl_nudgeLeft" DefaultValue="Left"/>
         <bt:String id="S_lbl_nudgeRight" DefaultValue="Right"/>
         <bt:String id="S_lbl_nudgeUp" DefaultValue="Up"/>
@@ -1064,18 +1012,15 @@
         <bt:String id="S_lbl_matchHeight" DefaultValue="Height"/>
         <bt:String id="S_lbl_matchBoth" DefaultValue="Both"/>
         <bt:String id="S_lbl_fitInside" DefaultValue="Fit inside"/>
-        <bt:String id="S_lbl_fillOutside" DefaultValue="Fill reference"/>
-        <bt:String id="S_menu_match" DefaultValue="Match"/>
-        <bt:String id="S_lbl_stretchLeft" DefaultValue="Left"/>
-        <bt:String id="S_lbl_stretchRight" DefaultValue="Right"/>
-        <bt:String id="S_lbl_stretchUp" DefaultValue="Up"/>
-        <bt:String id="S_lbl_stretchDown" DefaultValue="Down"/>
-        <bt:String id="S_menu_stretch" DefaultValue="Stretch"/>
-        <bt:String id="S_lbl_fillLeft" DefaultValue="Left"/>
-        <bt:String id="S_lbl_fillRight" DefaultValue="Right"/>
-        <bt:String id="S_lbl_fillUp" DefaultValue="Up"/>
-        <bt:String id="S_lbl_fillDown" DefaultValue="Down"/>
-        <bt:String id="S_menu_fillgap" DefaultValue="Fill gap"/>
+        <bt:String id="S_lbl_fillOutside" DefaultValue="Fill ref"/>
+        <bt:String id="S_lbl_stretchLeft" DefaultValue="Stretch L"/>
+        <bt:String id="S_lbl_stretchRight" DefaultValue="Stretch R"/>
+        <bt:String id="S_lbl_stretchUp" DefaultValue="Stretch U"/>
+        <bt:String id="S_lbl_stretchDown" DefaultValue="Stretch D"/>
+        <bt:String id="S_lbl_fillLeft" DefaultValue="Gap L"/>
+        <bt:String id="S_lbl_fillRight" DefaultValue="Gap R"/>
+        <bt:String id="S_lbl_fillUp" DefaultValue="Gap U"/>
+        <bt:String id="S_lbl_fillDown" DefaultValue="Gap D"/>
         <bt:String id="S_lbl_resizeUp" DefaultValue="Bigger"/>
         <bt:String id="S_lbl_resizeDown" DefaultValue="Smaller"/>
         <bt:String id="S_lbl_slice" DefaultValue="Slice / multiply"/>
@@ -1115,20 +1060,19 @@
         <bt:String id="S_lbl_font10" DefaultValue="Slot 10"/>
         <bt:String id="S_menu_fontc" DefaultValue="Font"/>
         <bt:String id="S_group_Colour" DefaultValue="Colour"/>
-        <bt:String id="S_lbl_setMargins" DefaultValue="Set margins"/>
+        <bt:String id="S_lbl_setMargins" DefaultValue="Margins"/>
         <bt:String id="S_lbl_marginsZero" DefaultValue="Zero margins"/>
-        <bt:String id="S_lbl_fitFormToText" DefaultValue="Fit shape to text"/>
-        <bt:String id="S_lbl_wrapToggle" DefaultValue="Wrap text"/>
-        <bt:String id="S_lbl_bulletsToggle" DefaultValue="Bullets on/off"/>
-        <bt:String id="S_lbl_setFontSize" DefaultValue="Set font size"/>
-        <bt:String id="S_menu_textbox" DefaultValue="Text box"/>
+        <bt:String id="S_lbl_fitFormToText" DefaultValue="Fit to text"/>
+        <bt:String id="S_lbl_wrapToggle" DefaultValue="Wrap"/>
         <bt:String id="S_lbl_splitTextBox" DefaultValue="Split"/>
         <bt:String id="S_lbl_mergeTextBoxes" DefaultValue="Merge"/>
+        <bt:String id="S_lbl_bulletsToggle" DefaultValue="Bullets"/>
+        <bt:String id="S_lbl_setFontSize" DefaultValue="Font size"/>
         <bt:String id="S_group_Text" DefaultValue="Text"/>
         <bt:String id="S_lbl_formatPickup" DefaultValue="Pick up"/>
         <bt:String id="S_lbl_formatApply" DefaultValue="Apply"/>
-        <bt:String id="S_lbl_formatPainter" DefaultValue="Painter on/off"/>
-        <bt:String id="S_lbl_saveMyFormat" DefaultValue="Save as My Format"/>
+        <bt:String id="S_lbl_formatPainter" DefaultValue="Painter"/>
+        <bt:String id="S_lbl_saveMyFormat" DefaultValue="Save"/>
         <bt:String id="S_lbl_myFormat1" DefaultValue="My Format 1"/>
         <bt:String id="S_lbl_myFormat2" DefaultValue="My Format 2"/>
         <bt:String id="S_lbl_myFormat3" DefaultValue="My Format 3"/>
@@ -1147,14 +1091,14 @@
         <bt:String id="S_lbl_masterLabelAdd" DefaultValue="Master label +"/>
         <bt:String id="S_lbl_masterLabelRemove" DefaultValue="Master label -"/>
         <bt:String id="S_menu_tools" DefaultValue="Tools"/>
-        <bt:String id="S_lbl_addSticky" DefaultValue="Sticky (default colour)"/>
+        <bt:String id="S_lbl_addSticky" DefaultValue="Sticky"/>
         <bt:String id="S_lbl_sticky_yellow" DefaultValue="Yellow"/>
         <bt:String id="S_lbl_sticky_green" DefaultValue="Green"/>
         <bt:String id="S_lbl_sticky_pink" DefaultValue="Pink"/>
         <bt:String id="S_lbl_sticky_orange" DefaultValue="Orange"/>
         <bt:String id="S_lbl_sticky_blue" DefaultValue="Blue"/>
         <bt:String id="S_lbl_sticky_purple" DefaultValue="Purple"/>
-        <bt:String id="S_menu_sticky" DefaultValue="Sticky"/>
+        <bt:String id="S_menu_stickyc" DefaultValue="Colour"/>
         <bt:String id="S_lbl_togglePane" DefaultValue="Pane"/>
         <bt:String id="S_group_Tools" DefaultValue="Tools"/>
         <bt:String id="S_tab" DefaultValue="ChristiantialElements"/>
@@ -1169,22 +1113,19 @@
         <bt:String id="L_desc_alignBottom" DefaultValue="Bottom edges to the reference"/>
         <bt:String id="L_desc_alignCenter" DefaultValue="Horizontal centres to the reference"/>
         <bt:String id="L_desc_alignMiddle" DefaultValue="Vertical centres to the reference"/>
-        <bt:String id="L_menu_desc_align" DefaultValue="Align to the last-selected shape"/>
-        <bt:String id="L_desc_distributeH" DefaultValue="Outer two stay; gaps evened"/>
-        <bt:String id="L_desc_distributeV" DefaultValue="Outer two stay; gaps evened"/>
-        <bt:String id="L_menu_desc_distribute" DefaultValue="Distribute"/>
+        <bt:String id="L_desc_distributeH" DefaultValue="Distribute horizontally: outer two stay, gaps evened"/>
+        <bt:String id="L_desc_distributeV" DefaultValue="Distribute vertically: outer two stay, gaps evened"/>
         <bt:String id="L_desc_dockLeft" DefaultValue="Move left until touching the reference"/>
         <bt:String id="L_desc_dockRight" DefaultValue="Move right until touching the reference"/>
         <bt:String id="L_desc_dockUp" DefaultValue="Move up until touching the reference"/>
         <bt:String id="L_desc_dockDown" DefaultValue="Move down until touching the reference"/>
-        <bt:String id="L_menu_desc_dock" DefaultValue="Dock"/>
         <bt:String id="L_desc_stackH" DefaultValue="Butt together left to right, in selection order"/>
         <bt:String id="L_desc_stackV" DefaultValue="Butt together top to bottom, in selection order"/>
         <bt:String id="L_desc_swap" DefaultValue="Exchange two shapes' positions and layer order"/>
-        <bt:String id="L_desc_goldenCanon" DefaultValue="Inside the reference, bottom margin = 2x top"/>
-        <bt:String id="L_desc_matrix" DefaultValue="Rows x cols from the pane settings"/>
         <bt:String id="L_desc_alignInTable" DefaultValue="Snap loose shapes into the table cells they overlap"/>
-        <bt:String id="L_menu_desc_arrange" DefaultValue="Arrange"/>
+        <bt:String id="L_desc_matrix" DefaultValue="Rows x cols from the pane settings"/>
+        <bt:String id="L_desc_goldenCanon" DefaultValue="Inside the reference, bottom margin = 2x top"/>
+        <bt:String id="L_menu_desc_more" DefaultValue="More"/>
         <bt:String id="L_desc_nudgeLeft" DefaultValue="Move by the nudge amount"/>
         <bt:String id="L_desc_nudgeRight" DefaultValue="Move by the nudge amount"/>
         <bt:String id="L_desc_nudgeUp" DefaultValue="Move by the nudge amount"/>
@@ -1195,17 +1136,14 @@
         <bt:String id="L_desc_matchBoth" DefaultValue="Both dimensions, non-proportional"/>
         <bt:String id="L_desc_fitInside" DefaultValue="Scale proportionally to fit within the reference"/>
         <bt:String id="L_desc_fillOutside" DefaultValue="Scale proportionally to cover the reference"/>
-        <bt:String id="L_menu_desc_match" DefaultValue="Match the last-selected shape"/>
         <bt:String id="L_desc_stretchLeft" DefaultValue="Extend to the reference's far-left edge"/>
         <bt:String id="L_desc_stretchRight" DefaultValue="Extend to the reference's far-right edge"/>
         <bt:String id="L_desc_stretchUp" DefaultValue="Extend to the reference's top edge"/>
         <bt:String id="L_desc_stretchDown" DefaultValue="Extend to the reference's bottom edge"/>
-        <bt:String id="L_menu_desc_stretch" DefaultValue="Stretch"/>
         <bt:String id="L_desc_fillLeft" DefaultValue="Grow left to touch the reference"/>
         <bt:String id="L_desc_fillRight" DefaultValue="Grow right to touch the reference"/>
         <bt:String id="L_desc_fillUp" DefaultValue="Grow up to touch the reference"/>
         <bt:String id="L_desc_fillDown" DefaultValue="Grow down to touch the reference"/>
-        <bt:String id="L_menu_desc_fillgap" DefaultValue="Fill gap"/>
         <bt:String id="L_desc_resizeUp" DefaultValue="Magic Resizer: scale by the factor in the pane"/>
         <bt:String id="L_desc_resizeDown" DefaultValue="Magic Resizer: scale by 1 / factor"/>
         <bt:String id="L_desc_slice" DefaultValue="Split one shape into rows x cols"/>
@@ -1247,11 +1185,10 @@
         <bt:String id="L_desc_marginsZero" DefaultValue="All four text margins to 0"/>
         <bt:String id="L_desc_fitFormToText" DefaultValue="Resize the shape to its text"/>
         <bt:String id="L_desc_wrapToggle" DefaultValue="Toggle word wrap"/>
-        <bt:String id="L_desc_bulletsToggle" DefaultValue="Toggle bullets"/>
-        <bt:String id="L_desc_setFontSize" DefaultValue="Apply the font size from the pane"/>
-        <bt:String id="L_menu_desc_textbox" DefaultValue="Text box"/>
         <bt:String id="L_desc_splitTextBox" DefaultValue="Two boxes from one, at the cursor"/>
         <bt:String id="L_desc_mergeTextBoxes" DefaultValue="Combine text boxes in selection order"/>
+        <bt:String id="L_desc_bulletsToggle" DefaultValue="Toggle bullets"/>
+        <bt:String id="L_desc_setFontSize" DefaultValue="Apply the font size from the pane"/>
         <bt:String id="L_desc_formatPickup" DefaultValue="Pick up the last-selected shape's format; applies to the others if several are selected"/>
         <bt:String id="L_desc_formatApply" DefaultValue="Apply the picked-up format to the selection"/>
         <bt:String id="L_desc_formatPainter" DefaultValue="Apply the picked-up format to every new selection until toggled off"/>
@@ -1261,7 +1198,7 @@
         <bt:String id="L_desc_myFormat3" DefaultValue="Apply saved format #3"/>
         <bt:String id="L_desc_myFormat4" DefaultValue="Apply saved format #4"/>
         <bt:String id="L_desc_myFormat5" DefaultValue="Apply saved format #5"/>
-        <bt:String id="L_menu_desc_formats" DefaultValue="My Formats"/>
+        <bt:String id="L_menu_desc_formats" DefaultValue="My Formats 2-5"/>
         <bt:String id="L_desc_selectSimilar" DefaultValue="Select shapes with the same type and fill"/>
         <bt:String id="L_desc_decomposeTable" DefaultValue="Table → one text box per cell"/>
         <bt:String id="L_desc_slidesAsPictures" DefaultValue="Selected slides tiled as images on a new slide"/>
@@ -1273,14 +1210,14 @@
         <bt:String id="L_desc_masterLabelAdd" DefaultValue="Add the label to every slide layout"/>
         <bt:String id="L_desc_masterLabelRemove" DefaultValue="Remove it from every layout"/>
         <bt:String id="L_menu_desc_tools" DefaultValue="Tools"/>
-        <bt:String id="L_desc_addSticky" DefaultValue="Reviewer note with initials + timestamp"/>
+        <bt:String id="L_desc_addSticky" DefaultValue="Reviewer note with initials + timestamp, in the default colour"/>
         <bt:String id="L_desc_sticky_yellow" DefaultValue="Sticky in Yellow"/>
         <bt:String id="L_desc_sticky_green" DefaultValue="Sticky in Green"/>
         <bt:String id="L_desc_sticky_pink" DefaultValue="Sticky in Pink"/>
         <bt:String id="L_desc_sticky_orange" DefaultValue="Sticky in Orange"/>
         <bt:String id="L_desc_sticky_blue" DefaultValue="Sticky in Blue"/>
         <bt:String id="L_desc_sticky_purple" DefaultValue="Sticky in Purple"/>
-        <bt:String id="L_menu_desc_sticky" DefaultValue="Sticky"/>
+        <bt:String id="L_menu_desc_stickyc" DefaultValue="Sticky in a specific colour"/>
         <bt:String id="L_desc_togglePane" DefaultValue="Show / hide the ChristiantialElements pane"/>
         <bt:String id="L_home_open_desc" DefaultValue="Open the ChristiantialElements pane: icons, key assignment, settings, log."/>
         <bt:String id="L_gs_desc" DefaultValue="Shortcuts are registered. Press Ctrl+Shift+Option+K or use the ChristiantialElements tab."/>
