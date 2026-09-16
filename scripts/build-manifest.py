@@ -15,7 +15,7 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.6.0"
+VERSION = "0.3.7.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 ICON_V = "2"        # bump when any icon PNG changes (Office caches by URL)
 
@@ -102,8 +102,10 @@ RIBBON = [
             B("agendaWizard", "Agenda", "agenda", "Agenda + divider slides from the pane's list"),
             B("masterLabelAdd", "Master label +", "master", "Add the label to every slide layout"),
             B("masterLabelRemove", "Master label -", "masterOff", "Remove it from every layout"),
+            B("exportSlidesSimplified", "Slides to new deck (simplified)", "newDeckLite", "New deck from the selected slides, unused layouts and masters dropped"),
         ]),
         B("duplicateSlide", "Duplicate slide", "duplicate", "Insert an exact copy of the current slide right after it"),
+        B("exportSlides", "Slides to new deck", "newDeck", "Open the selected slides as a new presentation, template kept exactly"),
         B("addSticky", "Sticky", "sticky", "Reviewer note with initials + timestamp, in the default colour"),
         M("stickyc", "Colour", "sticky", [B(f"sticky_{n.lower()}", n, "sticky", f"Sticky in {n}") for n in ["Yellow", "Green", "Pink", "Orange", "Blue", "Purple"]], "Sticky in a specific colour"),
         B("togglePane", "Pane", "pane", "Show / hide the ChristiantialElements pane"),

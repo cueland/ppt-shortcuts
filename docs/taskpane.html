@@ -7,6 +7,8 @@
   <title>ChristiantialElements</title>
   <!-- Office.js must load before commands.js; the CDN URL is the only supported source. -->
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <!-- JSZip: needed only by "Slides → new deck" (edits the .pptx package in memory). -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <style>
     :root { color-scheme: light dark; --accent: #1e40af; --line: rgba(127,127,127,.3); --soft: rgba(127,127,127,.12); }
     body { font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 10px 12px 24px; }
@@ -162,7 +164,7 @@
   <pre id="log"></pre>
 
   <!-- ?b= is a cache-buster; bump it with BUILD in commands.js so a fresh page always gets fresh scripts. -->
-  <script src="native-shortcuts.js?b=17"></script>
-  <script src="commands.js?b=17"></script>
+  <script src="native-shortcuts.js?b=18"></script>
+  <script src="commands.js?b=18"></script>
 </body>
 </html>

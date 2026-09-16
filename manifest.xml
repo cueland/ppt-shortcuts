@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
   <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
-  <Version>0.3.6.0</Version>
+  <Version>0.3.7.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ChristiantialElements"/>
@@ -693,6 +693,12 @@
   <Icon><bt:Image size="16" resid="Icon.masterOff.16"/><bt:Image size="32" resid="Icon.masterOff.32"/><bt:Image size="80" resid="Icon.masterOff.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_masterLabelRemove</FunctionName></Action>
 </Item>
+<Item id="CE.exportSlidesSimplified">
+  <Label resid="S_lbl_exportSlidesSimplified"/>
+  <Supertip><Title resid="S_lbl_exportSlidesSimplified"/><Description resid="L_desc_exportSlidesSimplified"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.newDeckLite.16"/><bt:Image size="32" resid="Icon.newDeckLite.32"/><bt:Image size="80" resid="Icon.newDeckLite.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_exportSlidesSimplified</FunctionName></Action>
+</Item>
   </Items>
 </Control>
 <Control xsi:type="Button" id="CE.duplicateSlide">
@@ -700,6 +706,12 @@
   <Supertip><Title resid="S_lbl_duplicateSlide"/><Description resid="L_desc_duplicateSlide"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.duplicate.16"/><bt:Image size="32" resid="Icon.duplicate.32"/><bt:Image size="80" resid="Icon.duplicate.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_duplicateSlide</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.exportSlides">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_exportSlides"/><Description resid="L_desc_exportSlides"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.newDeck.16"/><bt:Image size="32" resid="Icon.newDeck.32"/><bt:Image size="80" resid="Icon.newDeck.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_exportSlides</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.addSticky">
   <Label resid="S_blank"/>
@@ -960,9 +972,15 @@
         <bt:Image id="Icon.masterOff.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/masterOff-16.png?v=2"/>
         <bt:Image id="Icon.masterOff.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/masterOff-32.png?v=2"/>
         <bt:Image id="Icon.masterOff.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/masterOff-80.png?v=2"/>
+        <bt:Image id="Icon.newDeckLite.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeckLite-16.png?v=2"/>
+        <bt:Image id="Icon.newDeckLite.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeckLite-32.png?v=2"/>
+        <bt:Image id="Icon.newDeckLite.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeckLite-80.png?v=2"/>
         <bt:Image id="Icon.duplicate.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/duplicate-16.png?v=2"/>
         <bt:Image id="Icon.duplicate.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/duplicate-32.png?v=2"/>
         <bt:Image id="Icon.duplicate.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/duplicate-80.png?v=2"/>
+        <bt:Image id="Icon.newDeck.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeck-16.png?v=2"/>
+        <bt:Image id="Icon.newDeck.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeck-32.png?v=2"/>
+        <bt:Image id="Icon.newDeck.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeck-80.png?v=2"/>
         <bt:Image id="Icon.sticky.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/sticky-16.png?v=2"/>
         <bt:Image id="Icon.sticky.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/sticky-32.png?v=2"/>
         <bt:Image id="Icon.sticky.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/sticky-80.png?v=2"/>
@@ -1083,8 +1101,10 @@
         <bt:String id="S_lbl_agendaWizard" DefaultValue="Agenda"/>
         <bt:String id="S_lbl_masterLabelAdd" DefaultValue="Master label +"/>
         <bt:String id="S_lbl_masterLabelRemove" DefaultValue="Master label -"/>
+        <bt:String id="S_lbl_exportSlidesSimplified" DefaultValue="Slides to new deck (simplified)"/>
         <bt:String id="S_menu_tools" DefaultValue="Tools"/>
         <bt:String id="S_lbl_duplicateSlide" DefaultValue="Duplicate slide"/>
+        <bt:String id="S_lbl_exportSlides" DefaultValue="Slides to new deck"/>
         <bt:String id="S_lbl_addSticky" DefaultValue="Sticky"/>
         <bt:String id="S_lbl_sticky_yellow" DefaultValue="Yellow"/>
         <bt:String id="S_lbl_sticky_green" DefaultValue="Green"/>
@@ -1202,8 +1222,10 @@
         <bt:String id="L_desc_agendaWizard" DefaultValue="Agenda + divider slides from the pane's list"/>
         <bt:String id="L_desc_masterLabelAdd" DefaultValue="Add the label to every slide layout"/>
         <bt:String id="L_desc_masterLabelRemove" DefaultValue="Remove it from every layout"/>
+        <bt:String id="L_desc_exportSlidesSimplified" DefaultValue="New deck from the selected slides, unused layouts and masters dropped"/>
         <bt:String id="L_menu_desc_tools" DefaultValue="Tools"/>
         <bt:String id="L_desc_duplicateSlide" DefaultValue="Insert an exact copy of the current slide right after it"/>
+        <bt:String id="L_desc_exportSlides" DefaultValue="Open the selected slides as a new presentation, template kept exactly"/>
         <bt:String id="L_desc_addSticky" DefaultValue="Reviewer note with initials + timestamp, in the default colour"/>
         <bt:String id="L_desc_sticky_yellow" DefaultValue="Sticky in Yellow"/>
         <bt:String id="L_desc_sticky_green" DefaultValue="Sticky in Green"/>

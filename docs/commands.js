@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-16.17";
+const BUILD = "2026-09-16.18";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -767,6 +767,148 @@ async function duplicateSlide() {
   });
 }
 
+
+// ---- Export selected slides as a new presentation (package surgery on the real .pptx) ----
+//   getFileAsync gives the whole current deck as bytes; we delete the unselected slide parts
+//   (masters/layouts/theme/media untouched) and open the result with PowerPoint.createPresentation.
+//   simplify=true also drops layouts and masters that no remaining slide uses.
+
+function getDeckBytes() {
+  return new Promise((resolve, reject) => {
+    Office.context.document.getFileAsync(Office.FileType.Compressed, { sliceSize: 4194304 }, (r) => {
+      if (r.status !== Office.AsyncResultStatus.Succeeded) return reject(new Error(r.error && r.error.message || "getFileAsync failed"));
+      const file = r.value, parts = [];
+      let i = 0;
+      const next = () => {
+        if (i >= file.sliceCount) {
+          file.closeAsync(() => {});
+          const total = parts.reduce((n, p) => n + p.length, 0);
+          const out = new Uint8Array(total); let off = 0;
+          for (const p of parts) { out.set(p, off); off += p.length; }
+          return resolve(out);
+        }
+        file.getSliceAsync(i, (sr) => {
+          if (sr.status !== Office.AsyncResultStatus.Succeeded) { file.closeAsync(() => {}); return reject(new Error(sr.error && sr.error.message || "getSliceAsync failed")); }
+          const d = sr.value.data;
+          parts.push(d instanceof Uint8Array ? d : Array.isArray(d) ? Uint8Array.from(d) : new Uint8Array(d));
+          i++; next();
+        });
+      };
+      next();
+    });
+  });
+}
+
+const xmlParse = (text) => new DOMParser().parseFromString(text, "application/xml");
+const xmlOut = (doc) => new XMLSerializer().serializeToString(doc);
+const relsPath = (partPath) => { const i = partPath.lastIndexOf("/"); return partPath.slice(0, i) + "/_rels/" + partPath.slice(i + 1) + ".rels"; };
+const resolveTarget = (fromPart, target) => {
+  if (target.startsWith("/")) return target.slice(1);
+  const base = fromPart.slice(0, fromPart.lastIndexOf("/")).split("/");
+  for (const seg of target.split("/")) { if (seg === "..") base.pop(); else if (seg !== ".") base.push(seg); }
+  return base.join("/");
+};
+
+async function readRels(zip, partPath) {
+  const f = zip.file(relsPath(partPath));
+  if (!f) return { doc: null, rels: [] };
+  const doc = xmlParse(await f.async("string"));
+  const rels = [...doc.getElementsByTagName("Relationship")].map((el) => ({ el, id: el.getAttribute("Id"), type: el.getAttribute("Type"), target: resolveTarget(partPath, el.getAttribute("Target")), raw: el.getAttribute("Target"), mode: el.getAttribute("TargetMode") }));
+  return { doc, rels };
+}
+
+function removeContentType(ctDoc, partPath) {
+  for (const o of [...ctDoc.getElementsByTagName("Override")]) if (o.getAttribute("PartName") === "/" + partPath) o.parentNode.removeChild(o);
+}
+
+async function deletePart(zip, ctDoc, partPath) {
+  zip.remove(partPath); zip.remove(relsPath(partPath)); removeContentType(ctDoc, partPath);
+}
+
+async function buildSubsetDeck(bytes, keepIndices, simplify) {
+  if (typeof JSZip === "undefined") throw new Error("JSZip didn't load (offline?) — the export needs it.");
+  const zip = await JSZip.loadAsync(bytes);
+  const ctDoc = xmlParse(await zip.file("[Content_Types].xml").async("string"));
+  const presPath = "ppt/presentation.xml";
+  const presDoc = xmlParse(await zip.file(presPath).async("string"));
+  const presRels = await readRels(zip, presPath);
+  const sldIds = [...presDoc.getElementsByTagNameNS("http://schemas.openxmlformats.org/presentationml/2006/main", "sldId")];
+  const keep = new Set(keepIndices);
+  let removed = 0;
+  for (let i = 0; i < sldIds.length; i++) {
+    if (keep.has(i)) continue;
+    const el = sldIds[i];
+    const rid = el.getAttributeNS("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "id") || el.getAttribute("r:id");
+    const rel = presRels.rels.find((r) => r.id === rid);
+    el.parentNode.removeChild(el);
+    if (rel) {
+      rel.el.parentNode.removeChild(rel.el);
+      // notes slide + comments hanging off this slide go too
+      const srels = await readRels(zip, rel.target);
+      for (const r of srels.rels) if (/notesSlide|comments/.test(r.type) && r.mode !== "External") await deletePart(zip, ctDoc, r.target);
+      await deletePart(zip, ctDoc, rel.target);
+      removed++;
+    }
+  }
+  let droppedLayouts = 0, droppedMasters = 0;
+  if (simplify) {
+    // layouts used by the remaining slides
+    const usedLayouts = new Set();
+    for (const rel of presRels.rels.filter((r) => /\/slide$/.test(r.type))) {
+      const srels = await readRels(zip, rel.target);
+      for (const r of srels.rels) if (/slideLayout$/.test(r.type)) usedLayouts.add(r.target);
+    }
+    const masterRels = presRels.rels.filter((r) => /slideMaster$/.test(r.type));
+    const sldMasterIds = [...presDoc.getElementsByTagNameNS("http://schemas.openxmlformats.org/presentationml/2006/main", "sldMasterId")];
+    for (const mrel of masterRels) {
+      const mPath = mrel.target;
+      const mDoc = xmlParse(await zip.file(mPath).async("string"));
+      const mRels = await readRels(zip, mPath);
+      const layoutIds = [...mDoc.getElementsByTagNameNS("http://schemas.openxmlformats.org/presentationml/2006/main", "sldLayoutId")];
+      let kept = 0;
+      for (const lid of layoutIds) {
+        const rid = lid.getAttributeNS("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "id") || lid.getAttribute("r:id");
+        const lrel = mRels.rels.find((r) => r.id === rid);
+        if (lrel && !usedLayouts.has(lrel.target)) {
+          lid.parentNode.removeChild(lid); lrel.el.parentNode.removeChild(lrel.el);
+          await deletePart(zip, ctDoc, lrel.target); droppedLayouts++;
+        } else kept++;
+      }
+      if (kept === 0) {
+        const mid = sldMasterIds.find((x) => (x.getAttributeNS("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "id") || x.getAttribute("r:id")) === mrel.id);
+        if (mid) mid.parentNode.removeChild(mid);
+        mrel.el.parentNode.removeChild(mrel.el);
+        await deletePart(zip, ctDoc, mPath); droppedMasters++;
+      } else {
+        zip.file(mPath, xmlOut(mDoc)); zip.file(relsPath(mPath), xmlOut(mRels.doc));
+      }
+    }
+  }
+  zip.file(presPath, xmlOut(presDoc));
+  zip.file(relsPath(presPath), xmlOut(presRels.doc));
+  zip.file("[Content_Types].xml", xmlOut(ctDoc));
+  const base64 = await zip.generateAsync({ type: "base64", compression: "DEFLATE" });
+  return { base64, removed, droppedLayouts, droppedMasters, total: sldIds.length };
+}
+
+/** Selected slides → a new presentation window, template intact (or simplified). */
+async function exportSelectedSlides(simplify) {
+  const keepIndices = await PowerPoint.run(async (context) => {
+    const sel = context.presentation.getSelectedSlides(); sel.load("items/id");
+    const all = context.presentation.slides; all.load("items/id");
+    await context.sync();
+    if (!sel.items.length) throw new Error("Select one or more slides first (thumbnail pane).");
+    const ids = new Set(sel.items.map((s) => s.id));
+    return all.items.map((s, i) => (ids.has(s.id) ? i : -1)).filter((i) => i >= 0);
+  });
+  log(`export: reading the deck…`);
+  const bytes = await getDeckBytes();
+  log(`export: ${Math.round(bytes.length / 1024)} KB, keeping ${keepIndices.length} slide(s)${simplify ? ", simplifying template" : ""}`);
+  const r = await buildSubsetDeck(bytes, keepIndices, simplify);
+  await PowerPoint.createPresentation(r.base64);
+  log(`export: opened a new presentation with ${keepIndices.length} of ${r.total} slides (removed ${r.removed}${simplify ? `, dropped ${r.droppedLayouts} layout(s) + ${r.droppedMasters} master(s)` : ""}). Save it with ⌘S.`);
+}
+
 async function goToSlide() {
   const n = Math.max(1, parseInt(settings.gotoSlide, 10) || 1);
   return PowerPoint.run(async (context) => {
@@ -984,6 +1126,8 @@ const COMMANDS = [
   { id: "exportImage", group: "Tools", label: "Export as image", icon: "export", desc: "Render the selected shape to PNG in the pane.", run: () => exportImage() },
   { id: "hide", group: "Tools", label: "Hide selected", icon: "hide", desc: "Hide (keeps position and layer).", run: () => setVisible(false) },
   { id: "unhide", group: "Tools", label: "Unhide all", icon: "unhide", desc: "Show every hidden shape on the slide.", run: () => setVisible(true) },
+  { id: "exportSlides", group: "Tools", label: "Slides → new deck", icon: "newDeck", desc: "Open the selected slides as a new presentation, template kept exactly.", run: () => exportSelectedSlides(false) },
+  { id: "exportSlidesSimplified", group: "Tools", label: "Slides → new deck (simplified)", icon: "newDeckLite", desc: "Same, but drop layouts and masters the selected slides don't use.", run: () => exportSelectedSlides(true) },
   { id: "duplicateSlide", group: "Tools", label: "Duplicate slide", icon: "duplicate", desc: "Insert an exact copy of the current slide right after it (backup before editing).", run: () => duplicateSlide() },
   { id: "goToSlide", group: "Tools", label: "Go to slide", icon: "goto", desc: "Jump to the slide number below.", run: () => goToSlide() },
   { id: "agendaWizard", group: "Tools", label: "Agenda", icon: "agenda", desc: "Agenda + divider slides from the items below (v1, appended at the end).", run: () => agendaWizard() },
@@ -1178,6 +1322,8 @@ const ICONS = {
   export: S('<rect x="3" y="3" width="18" height="18"/><path d="M3 17l5-5 4 4 3-3 6 6"/><circle cx="16" cy="8" r="2"/>'),
   hide: S('<path d="M3 3l18 18M10 6.5A9.7 9.7 0 0 1 12 6c5 0 9 6 9 6a15 15 0 0 1-3.2 3.5M6.5 8A15 15 0 0 0 3 12s4 6 9 6a9 9 0 0 0 3-.5"/>'),
   unhide: S('<path d="M3 12s4-6 9-6 9 6 9 6-4 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/>'),
+  newDeck: S('<rect x="3" y="5" width="12" height="9"/><path d="M15 9h6M18 6l3 3-3 3"/><rect x="3" y="17" width="12" height="3" opacity=".5"/>'),
+  newDeckLite: S('<rect x="3" y="5" width="12" height="9"/><path d="M15 9h6M18 6l3 3-3 3"/><path d="M3 18.5h12" stroke-dasharray="2 2" opacity=".6"/>'),
   duplicate: S('<rect x="3" y="7" width="13" height="10"/><path d="M8 7V4h13v10h-3"/><path d="M9.5 12h4M11.5 10v4"/>'),
   goto: S('<rect x="3" y="4" width="18" height="16"/><path d="M9 9l-1.5 6M15.5 9L14 15M7 11h10M6.5 13.5h10"/>'),
   agenda: S('<path d="M5 7h14M5 12h14M5 17h9"/><circle cx="3" cy="7" r=".8" fill="currentColor"/><circle cx="3" cy="12" r=".8" fill="currentColor"/><circle cx="3" cy="17" r=".8" fill="currentColor"/>'),
