@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-16.14";
+const BUILD = "2026-09-16.15";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -977,6 +977,9 @@ for (const kind of ["fill", "line", "font"]) {
       run: () => { const hex = (settings.palette || DEFAULT_PALETTE)[i - 1]; if (!hex) throw new Error(`Palette slot ${i} is empty.`); return applyColor(kind, hex); } });
   }
 }
+// Position/Size icon order mirrors the ribbon: L/centre/R, T/middle/B, dock-L/distribute/dock-R …
+const ICON_ORDER = ["alignLeft", "alignCenter", "alignRight", "alignTop", "alignMiddle", "alignBottom", "dockLeft", "distributeH", "dockRight", "dockUp", "distributeV", "dockDown", "stackH", "stackV", "swap", "alignInTable", "matrix", "goldenCanon", "nudgeLeft", "nudgeRight", "nudgeUp", "nudgeDown", "stretchLeft", "matchWidth", "stretchRight", "stretchUp", "matchHeight", "stretchDown", "fillLeft", "matchBoth", "fillRight", "fillUp", "fitInside", "fillDown", "fillOutside", "resizeUp", "resizeDown", "slice"];
+COMMANDS.sort((a, b) => { const ia = ICON_ORDER.indexOf(a.id), ib = ICON_ORDER.indexOf(b.id); return (ia < 0 || ib < 0) ? 0 : ia - ib; });
 const COMMAND_BY_ID = Object.fromEntries(COMMANDS.map((c) => [c.id, c]));
 const GROUPS = ["Position", "Size", "Colour", "Text", "Format", "Tools", "Sticky", "Add-in"];
 

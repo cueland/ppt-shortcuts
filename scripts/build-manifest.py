@@ -15,7 +15,7 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.3.0"
+VERSION = "0.3.4.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 
 B = lambda cid, label, icon, desc: {"id": cid, "label": label, "icon": icon, "desc": desc}
@@ -24,16 +24,16 @@ M = lambda mid, label, icon, items, desc="", nolabel=False: {"menu": mid, "label
 RIBBON = [
     ("Position", "alignLeft", [
         B("alignLeft", "Left", "alignLeft", "Left edges to the reference; single shape → slide"),
+        B("alignCenter", "Centre", "alignCenter", "Horizontal centres to the reference"),
         B("alignRight", "Right", "alignRight", "Right edges to the reference"),
         B("alignTop", "Top", "alignTop", "Top edges to the reference"),
-        B("alignBottom", "Bottom", "alignBottom", "Bottom edges to the reference"),
-        B("alignCenter", "Centre", "alignCenter", "Horizontal centres to the reference"),
         B("alignMiddle", "Middle", "alignMiddle", "Vertical centres to the reference"),
-        B("distributeH", "Distr. H", "distributeH", "Distribute horizontally: outer two stay, gaps evened"),
-        B("distributeV", "Distr. V", "distributeV", "Distribute vertically: outer two stay, gaps evened"),
+        B("alignBottom", "Bottom", "alignBottom", "Bottom edges to the reference"),
         B("dockLeft", "Dock L", "dockLeft", "Move left until touching the reference"),
+        B("distributeH", "Distr. H", "distributeH", "Distribute horizontally: outer two stay, gaps evened"),
         B("dockRight", "Dock R", "dockRight", "Move right until touching the reference"),
         B("dockUp", "Dock U", "dockUp", "Move up until touching the reference"),
+        B("distributeV", "Distr. V", "distributeV", "Distribute vertically: outer two stay, gaps evened"),
         B("dockDown", "Dock D", "dockDown", "Move down until touching the reference"),
         B("stackH", "Stack H", "stackH", "Butt together left to right, in selection order"),
         B("stackV", "Stack V", "stackV", "Butt together top to bottom, in selection order"),
@@ -49,19 +49,19 @@ RIBBON = [
         ], "Nudge by the amount set in the pane", nolabel=True),
     ]),
     ("Size", "matchWidth", [
-        B("matchWidth", "Width", "matchWidth", "Target width := reference width"),
-        B("matchHeight", "Height", "matchHeight", "Target height := reference height"),
-        B("matchBoth", "Both", "matchBoth", "Both dimensions, non-proportional"),
-        B("fitInside", "Fit inside", "fitInside", "Scale proportionally to fit within the reference"),
-        B("fillOutside", "Fill ref", "fillOutside", "Scale proportionally to cover the reference"),
         B("stretchLeft", "Stretch L", "stretchLeft", "Extend to the reference's far-left edge"),
+        B("matchWidth", "Width", "matchWidth", "Target width := reference width"),
         B("stretchRight", "Stretch R", "stretchRight", "Extend to the reference's far-right edge"),
         B("stretchUp", "Stretch U", "stretchUp", "Extend to the reference's top edge"),
+        B("matchHeight", "Height", "matchHeight", "Target height := reference height"),
         B("stretchDown", "Stretch D", "stretchDown", "Extend to the reference's bottom edge"),
         B("fillLeft", "Gap L", "fillLeft", "Grow left to touch the reference"),
+        B("matchBoth", "Both", "matchBoth", "Both dimensions, non-proportional"),
         B("fillRight", "Gap R", "fillRight", "Grow right to touch the reference"),
         B("fillUp", "Gap U", "fillUp", "Grow up to touch the reference"),
+        B("fitInside", "Fit inside", "fitInside", "Scale proportionally to fit within the reference"),
         B("fillDown", "Gap D", "fillDown", "Grow down to touch the reference"),
+        B("fillOutside", "Fill ref", "fillOutside", "Scale proportionally to cover the reference"),
         B("resizeUp", "Bigger", "resizeUp", "Magic Resizer: scale by the factor in the pane"),
         B("resizeDown", "Smaller", "resizeDown", "Magic Resizer: scale by 1 / factor"),
         B("slice", "Slice / multiply", "slice", "Split one shape into rows x cols"),

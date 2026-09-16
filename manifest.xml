@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
   <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
-  <Version>0.3.3.0</Version>
+  <Version>0.3.4.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ChristiantialElements"/>
@@ -69,6 +69,12 @@
   <Icon><bt:Image size="16" resid="Icon.alignLeft.16"/><bt:Image size="32" resid="Icon.alignLeft.32"/><bt:Image size="80" resid="Icon.alignLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignLeft</FunctionName></Action>
 </Control>
+<Control xsi:type="Button" id="CE.alignCenter">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_alignCenter"/><Description resid="L_desc_alignCenter"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.alignCenter.16"/><bt:Image size="32" resid="Icon.alignCenter.32"/><bt:Image size="80" resid="Icon.alignCenter.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignCenter</FunctionName></Action>
+</Control>
 <Control xsi:type="Button" id="CE.alignRight">
   <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignRight"/><Description resid="L_desc_alignRight"/></Supertip>
@@ -81,41 +87,29 @@
   <Icon><bt:Image size="16" resid="Icon.alignTop.16"/><bt:Image size="32" resid="Icon.alignTop.32"/><bt:Image size="80" resid="Icon.alignTop.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignTop</FunctionName></Action>
 </Control>
-<Control xsi:type="Button" id="CE.alignBottom">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_alignBottom"/><Description resid="L_desc_alignBottom"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.alignBottom.16"/><bt:Image size="32" resid="Icon.alignBottom.32"/><bt:Image size="80" resid="Icon.alignBottom.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignBottom</FunctionName></Action>
-</Control>
-<Control xsi:type="Button" id="CE.alignCenter">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_alignCenter"/><Description resid="L_desc_alignCenter"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.alignCenter.16"/><bt:Image size="32" resid="Icon.alignCenter.32"/><bt:Image size="80" resid="Icon.alignCenter.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignCenter</FunctionName></Action>
-</Control>
 <Control xsi:type="Button" id="CE.alignMiddle">
   <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignMiddle"/><Description resid="L_desc_alignMiddle"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignMiddle.16"/><bt:Image size="32" resid="Icon.alignMiddle.32"/><bt:Image size="80" resid="Icon.alignMiddle.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignMiddle</FunctionName></Action>
 </Control>
-<Control xsi:type="Button" id="CE.distributeH">
+<Control xsi:type="Button" id="CE.alignBottom">
   <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_distributeH"/><Description resid="L_desc_distributeH"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.distributeH.16"/><bt:Image size="32" resid="Icon.distributeH.32"/><bt:Image size="80" resid="Icon.distributeH.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeH</FunctionName></Action>
-</Control>
-<Control xsi:type="Button" id="CE.distributeV">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_distributeV"/><Description resid="L_desc_distributeV"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.distributeV.16"/><bt:Image size="32" resid="Icon.distributeV.32"/><bt:Image size="80" resid="Icon.distributeV.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeV</FunctionName></Action>
+  <Supertip><Title resid="S_lbl_alignBottom"/><Description resid="L_desc_alignBottom"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.alignBottom.16"/><bt:Image size="32" resid="Icon.alignBottom.32"/><bt:Image size="80" resid="Icon.alignBottom.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignBottom</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.dockLeft">
   <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_dockLeft"/><Description resid="L_desc_dockLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockLeft.16"/><bt:Image size="32" resid="Icon.dockLeft.32"/><bt:Image size="80" resid="Icon.dockLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockLeft</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.distributeH">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_distributeH"/><Description resid="L_desc_distributeH"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.distributeH.16"/><bt:Image size="32" resid="Icon.distributeH.32"/><bt:Image size="80" resid="Icon.distributeH.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeH</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.dockRight">
   <Label resid="S_blank"/>
@@ -128,6 +122,12 @@
   <Supertip><Title resid="S_lbl_dockUp"/><Description resid="L_desc_dockUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockUp.16"/><bt:Image size="32" resid="Icon.dockUp.32"/><bt:Image size="80" resid="Icon.dockUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockUp</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.distributeV">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_distributeV"/><Description resid="L_desc_distributeV"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.distributeV.16"/><bt:Image size="32" resid="Icon.distributeV.32"/><bt:Image size="80" resid="Icon.distributeV.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeV</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.dockDown">
   <Label resid="S_blank"/>
@@ -206,41 +206,17 @@
 <Group id="CE.group.Size">
   <Label resid="S_group_Size"/>
   <Icon><bt:Image size="16" resid="Icon.matchWidth.16"/><bt:Image size="32" resid="Icon.matchWidth.32"/><bt:Image size="80" resid="Icon.matchWidth.80"/></Icon>
-<Control xsi:type="Button" id="CE.matchWidth">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_matchWidth"/><Description resid="L_desc_matchWidth"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.matchWidth.16"/><bt:Image size="32" resid="Icon.matchWidth.32"/><bt:Image size="80" resid="Icon.matchWidth.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchWidth</FunctionName></Action>
-</Control>
-<Control xsi:type="Button" id="CE.matchHeight">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_matchHeight"/><Description resid="L_desc_matchHeight"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.matchHeight.16"/><bt:Image size="32" resid="Icon.matchHeight.32"/><bt:Image size="80" resid="Icon.matchHeight.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchHeight</FunctionName></Action>
-</Control>
-<Control xsi:type="Button" id="CE.matchBoth">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_matchBoth"/><Description resid="L_desc_matchBoth"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.matchBoth.16"/><bt:Image size="32" resid="Icon.matchBoth.32"/><bt:Image size="80" resid="Icon.matchBoth.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchBoth</FunctionName></Action>
-</Control>
-<Control xsi:type="Button" id="CE.fitInside">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_fitInside"/><Description resid="L_desc_fitInside"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.fitInside.16"/><bt:Image size="32" resid="Icon.fitInside.32"/><bt:Image size="80" resid="Icon.fitInside.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fitInside</FunctionName></Action>
-</Control>
-<Control xsi:type="Button" id="CE.fillOutside">
-  <Label resid="S_blank"/>
-  <Supertip><Title resid="S_lbl_fillOutside"/><Description resid="L_desc_fillOutside"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.fillOutside.16"/><bt:Image size="32" resid="Icon.fillOutside.32"/><bt:Image size="80" resid="Icon.fillOutside.80"/></Icon>
-  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillOutside</FunctionName></Action>
-</Control>
 <Control xsi:type="Button" id="CE.stretchLeft">
   <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stretchLeft"/><Description resid="L_desc_stretchLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchLeft.16"/><bt:Image size="32" resid="Icon.stretchLeft.32"/><bt:Image size="80" resid="Icon.stretchLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchLeft</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.matchWidth">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_matchWidth"/><Description resid="L_desc_matchWidth"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.matchWidth.16"/><bt:Image size="32" resid="Icon.matchWidth.32"/><bt:Image size="80" resid="Icon.matchWidth.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchWidth</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.stretchRight">
   <Label resid="S_blank"/>
@@ -254,6 +230,12 @@
   <Icon><bt:Image size="16" resid="Icon.stretchUp.16"/><bt:Image size="32" resid="Icon.stretchUp.32"/><bt:Image size="80" resid="Icon.stretchUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchUp</FunctionName></Action>
 </Control>
+<Control xsi:type="Button" id="CE.matchHeight">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_matchHeight"/><Description resid="L_desc_matchHeight"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.matchHeight.16"/><bt:Image size="32" resid="Icon.matchHeight.32"/><bt:Image size="80" resid="Icon.matchHeight.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchHeight</FunctionName></Action>
+</Control>
 <Control xsi:type="Button" id="CE.stretchDown">
   <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stretchDown"/><Description resid="L_desc_stretchDown"/></Supertip>
@@ -265,6 +247,12 @@
   <Supertip><Title resid="S_lbl_fillLeft"/><Description resid="L_desc_fillLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillLeft.16"/><bt:Image size="32" resid="Icon.fillLeft.32"/><bt:Image size="80" resid="Icon.fillLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillLeft</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.matchBoth">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_matchBoth"/><Description resid="L_desc_matchBoth"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.matchBoth.16"/><bt:Image size="32" resid="Icon.matchBoth.32"/><bt:Image size="80" resid="Icon.matchBoth.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchBoth</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fillRight">
   <Label resid="S_blank"/>
@@ -278,11 +266,23 @@
   <Icon><bt:Image size="16" resid="Icon.fillUp.16"/><bt:Image size="32" resid="Icon.fillUp.32"/><bt:Image size="80" resid="Icon.fillUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillUp</FunctionName></Action>
 </Control>
+<Control xsi:type="Button" id="CE.fitInside">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_fitInside"/><Description resid="L_desc_fitInside"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.fitInside.16"/><bt:Image size="32" resid="Icon.fitInside.32"/><bt:Image size="80" resid="Icon.fitInside.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fitInside</FunctionName></Action>
+</Control>
 <Control xsi:type="Button" id="CE.fillDown">
   <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fillDown"/><Description resid="L_desc_fillDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillDown.16"/><bt:Image size="32" resid="Icon.fillDown.32"/><bt:Image size="80" resid="Icon.fillDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillDown</FunctionName></Action>
+</Control>
+<Control xsi:type="Button" id="CE.fillOutside">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_fillOutside"/><Description resid="L_desc_fillOutside"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.fillOutside.16"/><bt:Image size="32" resid="Icon.fillOutside.32"/><bt:Image size="80" resid="Icon.fillOutside.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillOutside</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.resizeUp">
   <Label resid="S_blank"/>
@@ -765,36 +765,36 @@
         <bt:Image id="Icon.alignLeft.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignLeft-16.png"/>
         <bt:Image id="Icon.alignLeft.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignLeft-32.png"/>
         <bt:Image id="Icon.alignLeft.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignLeft-80.png"/>
+        <bt:Image id="Icon.alignCenter.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignCenter-16.png"/>
+        <bt:Image id="Icon.alignCenter.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignCenter-32.png"/>
+        <bt:Image id="Icon.alignCenter.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignCenter-80.png"/>
         <bt:Image id="Icon.alignRight.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignRight-16.png"/>
         <bt:Image id="Icon.alignRight.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignRight-32.png"/>
         <bt:Image id="Icon.alignRight.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignRight-80.png"/>
         <bt:Image id="Icon.alignTop.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignTop-16.png"/>
         <bt:Image id="Icon.alignTop.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignTop-32.png"/>
         <bt:Image id="Icon.alignTop.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignTop-80.png"/>
-        <bt:Image id="Icon.alignBottom.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignBottom-16.png"/>
-        <bt:Image id="Icon.alignBottom.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignBottom-32.png"/>
-        <bt:Image id="Icon.alignBottom.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignBottom-80.png"/>
-        <bt:Image id="Icon.alignCenter.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignCenter-16.png"/>
-        <bt:Image id="Icon.alignCenter.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignCenter-32.png"/>
-        <bt:Image id="Icon.alignCenter.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignCenter-80.png"/>
         <bt:Image id="Icon.alignMiddle.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignMiddle-16.png"/>
         <bt:Image id="Icon.alignMiddle.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignMiddle-32.png"/>
         <bt:Image id="Icon.alignMiddle.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignMiddle-80.png"/>
-        <bt:Image id="Icon.distributeH.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeH-16.png"/>
-        <bt:Image id="Icon.distributeH.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeH-32.png"/>
-        <bt:Image id="Icon.distributeH.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeH-80.png"/>
-        <bt:Image id="Icon.distributeV.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeV-16.png"/>
-        <bt:Image id="Icon.distributeV.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeV-32.png"/>
-        <bt:Image id="Icon.distributeV.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeV-80.png"/>
+        <bt:Image id="Icon.alignBottom.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignBottom-16.png"/>
+        <bt:Image id="Icon.alignBottom.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignBottom-32.png"/>
+        <bt:Image id="Icon.alignBottom.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/alignBottom-80.png"/>
         <bt:Image id="Icon.dockLeft.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockLeft-16.png"/>
         <bt:Image id="Icon.dockLeft.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockLeft-32.png"/>
         <bt:Image id="Icon.dockLeft.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockLeft-80.png"/>
+        <bt:Image id="Icon.distributeH.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeH-16.png"/>
+        <bt:Image id="Icon.distributeH.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeH-32.png"/>
+        <bt:Image id="Icon.distributeH.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeH-80.png"/>
         <bt:Image id="Icon.dockRight.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockRight-16.png"/>
         <bt:Image id="Icon.dockRight.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockRight-32.png"/>
         <bt:Image id="Icon.dockRight.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockRight-80.png"/>
         <bt:Image id="Icon.dockUp.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockUp-16.png"/>
         <bt:Image id="Icon.dockUp.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockUp-32.png"/>
         <bt:Image id="Icon.dockUp.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockUp-80.png"/>
+        <bt:Image id="Icon.distributeV.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeV-16.png"/>
+        <bt:Image id="Icon.distributeV.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeV-32.png"/>
+        <bt:Image id="Icon.distributeV.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/distributeV-80.png"/>
         <bt:Image id="Icon.dockDown.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockDown-16.png"/>
         <bt:Image id="Icon.dockDown.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockDown-32.png"/>
         <bt:Image id="Icon.dockDown.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/dockDown-80.png"/>
@@ -828,45 +828,45 @@
         <bt:Image id="Icon.nudgeDown.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/nudgeDown-16.png"/>
         <bt:Image id="Icon.nudgeDown.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/nudgeDown-32.png"/>
         <bt:Image id="Icon.nudgeDown.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/nudgeDown-80.png"/>
-        <bt:Image id="Icon.matchWidth.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchWidth-16.png"/>
-        <bt:Image id="Icon.matchWidth.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchWidth-32.png"/>
-        <bt:Image id="Icon.matchWidth.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchWidth-80.png"/>
-        <bt:Image id="Icon.matchHeight.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchHeight-16.png"/>
-        <bt:Image id="Icon.matchHeight.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchHeight-32.png"/>
-        <bt:Image id="Icon.matchHeight.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchHeight-80.png"/>
-        <bt:Image id="Icon.matchBoth.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchBoth-16.png"/>
-        <bt:Image id="Icon.matchBoth.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchBoth-32.png"/>
-        <bt:Image id="Icon.matchBoth.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchBoth-80.png"/>
-        <bt:Image id="Icon.fitInside.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fitInside-16.png"/>
-        <bt:Image id="Icon.fitInside.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fitInside-32.png"/>
-        <bt:Image id="Icon.fitInside.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fitInside-80.png"/>
-        <bt:Image id="Icon.fillOutside.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillOutside-16.png"/>
-        <bt:Image id="Icon.fillOutside.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillOutside-32.png"/>
-        <bt:Image id="Icon.fillOutside.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillOutside-80.png"/>
         <bt:Image id="Icon.stretchLeft.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchLeft-16.png"/>
         <bt:Image id="Icon.stretchLeft.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchLeft-32.png"/>
         <bt:Image id="Icon.stretchLeft.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchLeft-80.png"/>
+        <bt:Image id="Icon.matchWidth.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchWidth-16.png"/>
+        <bt:Image id="Icon.matchWidth.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchWidth-32.png"/>
+        <bt:Image id="Icon.matchWidth.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchWidth-80.png"/>
         <bt:Image id="Icon.stretchRight.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchRight-16.png"/>
         <bt:Image id="Icon.stretchRight.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchRight-32.png"/>
         <bt:Image id="Icon.stretchRight.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchRight-80.png"/>
         <bt:Image id="Icon.stretchUp.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchUp-16.png"/>
         <bt:Image id="Icon.stretchUp.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchUp-32.png"/>
         <bt:Image id="Icon.stretchUp.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchUp-80.png"/>
+        <bt:Image id="Icon.matchHeight.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchHeight-16.png"/>
+        <bt:Image id="Icon.matchHeight.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchHeight-32.png"/>
+        <bt:Image id="Icon.matchHeight.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchHeight-80.png"/>
         <bt:Image id="Icon.stretchDown.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchDown-16.png"/>
         <bt:Image id="Icon.stretchDown.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchDown-32.png"/>
         <bt:Image id="Icon.stretchDown.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/stretchDown-80.png"/>
         <bt:Image id="Icon.fillLeft.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillLeft-16.png"/>
         <bt:Image id="Icon.fillLeft.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillLeft-32.png"/>
         <bt:Image id="Icon.fillLeft.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillLeft-80.png"/>
+        <bt:Image id="Icon.matchBoth.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchBoth-16.png"/>
+        <bt:Image id="Icon.matchBoth.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchBoth-32.png"/>
+        <bt:Image id="Icon.matchBoth.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/matchBoth-80.png"/>
         <bt:Image id="Icon.fillRight.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillRight-16.png"/>
         <bt:Image id="Icon.fillRight.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillRight-32.png"/>
         <bt:Image id="Icon.fillRight.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillRight-80.png"/>
         <bt:Image id="Icon.fillUp.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillUp-16.png"/>
         <bt:Image id="Icon.fillUp.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillUp-32.png"/>
         <bt:Image id="Icon.fillUp.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillUp-80.png"/>
+        <bt:Image id="Icon.fitInside.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fitInside-16.png"/>
+        <bt:Image id="Icon.fitInside.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fitInside-32.png"/>
+        <bt:Image id="Icon.fitInside.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fitInside-80.png"/>
         <bt:Image id="Icon.fillDown.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillDown-16.png"/>
         <bt:Image id="Icon.fillDown.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillDown-32.png"/>
         <bt:Image id="Icon.fillDown.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillDown-80.png"/>
+        <bt:Image id="Icon.fillOutside.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillOutside-16.png"/>
+        <bt:Image id="Icon.fillOutside.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillOutside-32.png"/>
+        <bt:Image id="Icon.fillOutside.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/fillOutside-80.png"/>
         <bt:Image id="Icon.resizeUp.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/resizeUp-16.png"/>
         <bt:Image id="Icon.resizeUp.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/resizeUp-32.png"/>
         <bt:Image id="Icon.resizeUp.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/resizeUp-80.png"/>
@@ -970,16 +970,16 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="S_lbl_alignLeft" DefaultValue="Left"/>
+        <bt:String id="S_lbl_alignCenter" DefaultValue="Centre"/>
         <bt:String id="S_lbl_alignRight" DefaultValue="Right"/>
         <bt:String id="S_lbl_alignTop" DefaultValue="Top"/>
-        <bt:String id="S_lbl_alignBottom" DefaultValue="Bottom"/>
-        <bt:String id="S_lbl_alignCenter" DefaultValue="Centre"/>
         <bt:String id="S_lbl_alignMiddle" DefaultValue="Middle"/>
-        <bt:String id="S_lbl_distributeH" DefaultValue="Distr. H"/>
-        <bt:String id="S_lbl_distributeV" DefaultValue="Distr. V"/>
+        <bt:String id="S_lbl_alignBottom" DefaultValue="Bottom"/>
         <bt:String id="S_lbl_dockLeft" DefaultValue="Dock L"/>
+        <bt:String id="S_lbl_distributeH" DefaultValue="Distr. H"/>
         <bt:String id="S_lbl_dockRight" DefaultValue="Dock R"/>
         <bt:String id="S_lbl_dockUp" DefaultValue="Dock U"/>
+        <bt:String id="S_lbl_distributeV" DefaultValue="Distr. V"/>
         <bt:String id="S_lbl_dockDown" DefaultValue="Dock D"/>
         <bt:String id="S_lbl_stackH" DefaultValue="Stack H"/>
         <bt:String id="S_lbl_stackV" DefaultValue="Stack V"/>
@@ -993,19 +993,19 @@
         <bt:String id="S_lbl_nudgeDown" DefaultValue="Down"/>
         <bt:String id="S_menu_nudge" DefaultValue="Nudge"/>
         <bt:String id="S_group_Position" DefaultValue="Position"/>
-        <bt:String id="S_lbl_matchWidth" DefaultValue="Width"/>
-        <bt:String id="S_lbl_matchHeight" DefaultValue="Height"/>
-        <bt:String id="S_lbl_matchBoth" DefaultValue="Both"/>
-        <bt:String id="S_lbl_fitInside" DefaultValue="Fit inside"/>
-        <bt:String id="S_lbl_fillOutside" DefaultValue="Fill ref"/>
         <bt:String id="S_lbl_stretchLeft" DefaultValue="Stretch L"/>
+        <bt:String id="S_lbl_matchWidth" DefaultValue="Width"/>
         <bt:String id="S_lbl_stretchRight" DefaultValue="Stretch R"/>
         <bt:String id="S_lbl_stretchUp" DefaultValue="Stretch U"/>
+        <bt:String id="S_lbl_matchHeight" DefaultValue="Height"/>
         <bt:String id="S_lbl_stretchDown" DefaultValue="Stretch D"/>
         <bt:String id="S_lbl_fillLeft" DefaultValue="Gap L"/>
+        <bt:String id="S_lbl_matchBoth" DefaultValue="Both"/>
         <bt:String id="S_lbl_fillRight" DefaultValue="Gap R"/>
         <bt:String id="S_lbl_fillUp" DefaultValue="Gap U"/>
+        <bt:String id="S_lbl_fitInside" DefaultValue="Fit inside"/>
         <bt:String id="S_lbl_fillDown" DefaultValue="Gap D"/>
+        <bt:String id="S_lbl_fillOutside" DefaultValue="Fill ref"/>
         <bt:String id="S_lbl_resizeUp" DefaultValue="Bigger"/>
         <bt:String id="S_lbl_resizeDown" DefaultValue="Smaller"/>
         <bt:String id="S_lbl_slice" DefaultValue="Slice / multiply"/>
@@ -1093,16 +1093,16 @@
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="L_desc_alignLeft" DefaultValue="Left edges to the reference; single shape → slide"/>
+        <bt:String id="L_desc_alignCenter" DefaultValue="Horizontal centres to the reference"/>
         <bt:String id="L_desc_alignRight" DefaultValue="Right edges to the reference"/>
         <bt:String id="L_desc_alignTop" DefaultValue="Top edges to the reference"/>
-        <bt:String id="L_desc_alignBottom" DefaultValue="Bottom edges to the reference"/>
-        <bt:String id="L_desc_alignCenter" DefaultValue="Horizontal centres to the reference"/>
         <bt:String id="L_desc_alignMiddle" DefaultValue="Vertical centres to the reference"/>
-        <bt:String id="L_desc_distributeH" DefaultValue="Distribute horizontally: outer two stay, gaps evened"/>
-        <bt:String id="L_desc_distributeV" DefaultValue="Distribute vertically: outer two stay, gaps evened"/>
+        <bt:String id="L_desc_alignBottom" DefaultValue="Bottom edges to the reference"/>
         <bt:String id="L_desc_dockLeft" DefaultValue="Move left until touching the reference"/>
+        <bt:String id="L_desc_distributeH" DefaultValue="Distribute horizontally: outer two stay, gaps evened"/>
         <bt:String id="L_desc_dockRight" DefaultValue="Move right until touching the reference"/>
         <bt:String id="L_desc_dockUp" DefaultValue="Move up until touching the reference"/>
+        <bt:String id="L_desc_distributeV" DefaultValue="Distribute vertically: outer two stay, gaps evened"/>
         <bt:String id="L_desc_dockDown" DefaultValue="Move down until touching the reference"/>
         <bt:String id="L_desc_stackH" DefaultValue="Butt together left to right, in selection order"/>
         <bt:String id="L_desc_stackV" DefaultValue="Butt together top to bottom, in selection order"/>
@@ -1115,19 +1115,19 @@
         <bt:String id="L_desc_nudgeUp" DefaultValue="Move by the nudge amount"/>
         <bt:String id="L_desc_nudgeDown" DefaultValue="Move by the nudge amount"/>
         <bt:String id="L_menu_desc_nudge" DefaultValue="Nudge by the amount set in the pane"/>
-        <bt:String id="L_desc_matchWidth" DefaultValue="Target width := reference width"/>
-        <bt:String id="L_desc_matchHeight" DefaultValue="Target height := reference height"/>
-        <bt:String id="L_desc_matchBoth" DefaultValue="Both dimensions, non-proportional"/>
-        <bt:String id="L_desc_fitInside" DefaultValue="Scale proportionally to fit within the reference"/>
-        <bt:String id="L_desc_fillOutside" DefaultValue="Scale proportionally to cover the reference"/>
         <bt:String id="L_desc_stretchLeft" DefaultValue="Extend to the reference's far-left edge"/>
+        <bt:String id="L_desc_matchWidth" DefaultValue="Target width := reference width"/>
         <bt:String id="L_desc_stretchRight" DefaultValue="Extend to the reference's far-right edge"/>
         <bt:String id="L_desc_stretchUp" DefaultValue="Extend to the reference's top edge"/>
+        <bt:String id="L_desc_matchHeight" DefaultValue="Target height := reference height"/>
         <bt:String id="L_desc_stretchDown" DefaultValue="Extend to the reference's bottom edge"/>
         <bt:String id="L_desc_fillLeft" DefaultValue="Grow left to touch the reference"/>
+        <bt:String id="L_desc_matchBoth" DefaultValue="Both dimensions, non-proportional"/>
         <bt:String id="L_desc_fillRight" DefaultValue="Grow right to touch the reference"/>
         <bt:String id="L_desc_fillUp" DefaultValue="Grow up to touch the reference"/>
+        <bt:String id="L_desc_fitInside" DefaultValue="Scale proportionally to fit within the reference"/>
         <bt:String id="L_desc_fillDown" DefaultValue="Grow down to touch the reference"/>
+        <bt:String id="L_desc_fillOutside" DefaultValue="Scale proportionally to cover the reference"/>
         <bt:String id="L_desc_resizeUp" DefaultValue="Magic Resizer: scale by the factor in the pane"/>
         <bt:String id="L_desc_resizeDown" DefaultValue="Magic Resizer: scale by 1 / factor"/>
         <bt:String id="L_desc_slice" DefaultValue="Split one shape into rows x cols"/>
