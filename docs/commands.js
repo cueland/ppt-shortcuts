@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-15.8";
+const BUILD = "2026-09-15.9";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -173,14 +173,23 @@ async function applyToTargets(actionId, compute) {
 //     cursor left on the empty next line so you just start typing.
 //     Geometry and styling copied from the sample deck (sample stickie.pptx): 143pt wide,
 //     top-right with 24pt/54pt margins, 2.25pt thin-thick outline in the theme's dark blue,
-//     12pt bold, shape auto-fits its text. (The sample's drop shadow has no JS API.)
+//     12pt bold. Height is the sample's 80pt × 1.25, fixed (no auto-fit).
+//
+//     Shadow: the sample has a real soft drop shadow. PowerPoint's JS API exposes no shape
+//     effects at all (shadow, glow, reflection, soft edges — verified against the preview
+//     API 2026-09-15), OOXML injection is Word-only, and images are not acceptable. The only
+//     all-native option is a second shape behind the note (SHADOW.mode = "shape"): a dark,
+//     semi-transparent rectangle offset by SHADOW.distance, grouped with the note. Hard-edged.
+//     Default is "none" — a single clean text box.
 // ---------------------------------------------------------------------------
 const STICKY = {
   WIDTH: 143,
+  HEIGHT: 100,
   MARGIN: { top: 24, right: 54 },
   CASCADE: 18,          // each additional sticky on a slide steps down-left by this much
   FONT_SIZE: 12,
   LINE: { color: "#0E2841", weight: 2.25, style: "ThinThick" },
+  SHADOW: { mode: "none", distance: 3, color: "#000000", transparency: 0.6 }, // mode: "none" | "shape"
   SLIDE: { width: 960, height: 540 }, // 16:9 default; the JS API exposes no slide size
   // Highlighter palette. Names become command ids (sticky_yellow …), so keep them stable.
   COLORS: [
@@ -193,9 +202,9 @@ const STICKY = {
   ],
 };
 
-// User settings (initials, default colour) — persisted like the keymap.
+// User settings (initials, default colour, shadow) — persisted like the keymap.
 const SETTINGS_STORAGE_KEY = "ppt-shortcuts.settings.v1";
-const DEFAULT_SETTINGS = { initials: "CU", stickyColor: "Yellow" };
+const DEFAULT_SETTINGS = { initials: "CU", stickyColor: "Yellow", stickyShadow: STICKY.SHADOW.mode };
 let settings = { ...DEFAULT_SETTINGS };
 async function loadSettings() {
   try {
@@ -223,6 +232,10 @@ function stickyColorHex(name) {
 /** Add a sticky to the current slide and leave the cursor on its empty second line. */
 async function addSticky(colorName) {
   const hex = stickyColorHex(colorName || settings.stickyColor);
+  const { WIDTH: w, HEIGHT: h } = STICKY;
+  const header = `${settings.initials} ${stickyStamp()}:`;
+  const wantShadow = settings.stickyShadow === "shape";
+
   return PowerPoint.run(async (context) => {
     const slide = context.presentation.getSelectedSlides().getItemAt(0);
     const shapes = slide.shapes;
@@ -231,22 +244,47 @@ async function addSticky(colorName) {
 
     // Cascade below any stickies already on the slide so they don't stack exactly on top.
     const existing = shapes.items.filter((s) => /^Sticky\b/.test(s.name)).length;
-    const left = STICKY.SLIDE.width - STICKY.MARGIN.right - STICKY.WIDTH - existing * STICKY.CASCADE;
+    const n = existing + 1;
+    const left = STICKY.SLIDE.width - STICKY.MARGIN.right - w - existing * STICKY.CASCADE;
     const top = STICKY.MARGIN.top + existing * STICKY.CASCADE;
 
-    const header = `${settings.initials} ${stickyStamp()}:`;
-    const box = shapes.addTextBox(header + "\n", { left, top, width: STICKY.WIDTH, height: 40 });
-    box.name = `Sticky ${existing + 1}`;
+    // Optional native "shadow": a dark translucent rectangle behind the note, added first so
+    // it sits underneath. Then grouped so the two move as one.
+    let shadow = null;
+    if (wantShadow) {
+      const d = STICKY.SHADOW.distance;
+      shadow = shapes.addGeometricShape(PowerPoint.GeometricShapeType.rectangle, { left: left + d, top: top + d, width: w, height: h });
+      shadow.name = `Sticky ${n} shadow`;
+      shadow.fill.setSolidColor(STICKY.SHADOW.color);
+      shadow.fill.transparency = STICKY.SHADOW.transparency;
+      shadow.lineFormat.visible = false;
+      shadow.load("id");
+    }
+
+    const box = shapes.addTextBox(header + "\n", { left, top, width: w, height: h });
+    box.name = `Sticky ${n}`;
     box.fill.setSolidColor(hex);
     box.lineFormat.color = STICKY.LINE.color;
     box.lineFormat.weight = STICKY.LINE.weight;
     box.lineFormat.style = STICKY.LINE.style;
     const tf = box.textFrame;
     tf.wordWrap = true;
-    tf.autoSizeSetting = "AutoSizeShapeToFitText";
+    tf.autoSizeSetting = "AutoSizeNone";
     tf.textRange.font.size = STICKY.FONT_SIZE;
     tf.textRange.font.bold = true;
+    box.load("id");
     await context.sync();
+
+    if (shadow) {
+      try {
+        const group = shapes.addGroup([shadow.id, box.id]);
+        group.name = `Sticky ${n}`;
+        box.name = `Sticky ${n} note`;
+        await context.sync();
+      } catch (err) {
+        log("sticky: grouping skipped — " + (err.message || err));
+      }
+    }
 
     // Put the insertion point at the start of the (empty) second line.
     try {
@@ -255,13 +293,11 @@ async function addSticky(colorName) {
       tf.textRange.getSubstring(tf.textRange.text.length, 0).setSelected();
       await context.sync();
     } catch (err) {
-      log("sticky: could not place the cursor (" + (err.message || err) + "); selecting the shape instead");
-      box.load("id");
-      await context.sync();
+      log("sticky: could not place the cursor (" + (err.message || err) + "); selecting the note instead");
       slide.setSelectedShapes([box.id]);
       await context.sync();
     }
-    log(`sticky: "${header}" ${hex} at (${left}, ${top})`);
+    log(`sticky ${n}: "${header}" ${hex} ${w}×${h} at (${left}, ${top})${shadow ? " + shape shadow" : ""}`);
   });
 }
 
@@ -735,6 +771,7 @@ function wireTaskPane() {
   on("btn-dump", "click", () => dumpSelection().catch((e) => log("dumpSelection FAILED: " + e.message)));
   on("btn-probe-shapes", "click", () => createProbeShapes().catch((e) => log("createProbeShapes FAILED: " + e.message)));
   on("btn-acceptance-shapes", "click", () => createAcceptanceShapes().catch((e) => log("createAcceptanceShapes FAILED: " + e.message)));
+  on("btn-shape-api", "click", () => dumpShapeApi().catch((e) => log("dumpShapeApi FAILED: " + e.message)));
   on("btn-clear-log", "click", () => { logBuffer.length = 0; log("log cleared"); });
 
   for (const key of ["RECENTER_ON_REF", "KEEP_CENTER"]) {
@@ -765,6 +802,15 @@ function wireTaskPane() {
     log(`sticky colour = ${settings.stickyColor}`);
   });
   on("btn-add-sticky", "click", () => runCommand("addSticky"));
+  const shadowBox = el("sticky-shadow");
+  if (shadowBox) {
+    shadowBox.checked = settings.stickyShadow === "shape";
+    shadowBox.addEventListener("change", async () => {
+      settings.stickyShadow = shadowBox.checked ? "shape" : "none";
+      await saveSettings();
+      log(`sticky shadow = ${settings.stickyShadow}`);
+    });
+  }
 
   renderDiagnostics();
   renderStickySwatches();
@@ -812,6 +858,27 @@ async function createProbeShapes() {
       await context.sync();
     }
     log("Created probe shapes A, B, C (A brought to front).");
+  });
+}
+
+/**
+ * Ask the host what a Shape really supports: every member the runtime defines on the
+ * proxy's prototype chain. Definitive answer to "is there a shadow property on this build?"
+ */
+async function dumpShapeApi() {
+  await PowerPoint.run(async (context) => {
+    const shapes = context.presentation.getSelectedShapes();
+    shapes.load("items/name");
+    await context.sync();
+    const shape = shapes.items[0] || context.presentation.getSelectedSlides().getItemAt(0).shapes.getItemAt(0);
+    const members = new Set();
+    for (let proto = Object.getPrototypeOf(shape); proto && proto !== Object.prototype; proto = Object.getPrototypeOf(proto)) {
+      for (const k of Object.getOwnPropertyNames(proto)) if (!k.startsWith("_") && k !== "constructor") members.add(k);
+    }
+    const list = [...members].sort();
+    const effects = list.filter((k) => /shadow|glow|reflect|soft|effect|bevel|3d/i.test(k));
+    renderTable("probe-output", list.map((k) => ({ member: k, type: typeof shape[k] === "function" ? "method" : "property" })));
+    log(`Shape API on this host: ${list.length} members. Effect-related: ${effects.length ? effects.join(", ") : "none"}.`);
   });
 }
 

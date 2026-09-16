@@ -31,14 +31,21 @@ Behaviour switches live in `CONFIG` at the top of [docs/commands.js](docs/comman
 
 ## Sticky notes
 
-`⌃⇧⌥S` drops a BCG-style reviewer note on the current slide: a bright text box with
+`⌃⇧⌥S` drops a BCG-style reviewer note on the current slide: a bright 143×100pt text box with
 `CU 15 Sep 26 - 8:28p:` as its first line and the cursor waiting on the second, so you just
 type. Initials and the default colour are set in the pane (Sticky notes section) and remembered.
 Each palette colour is also its own command (`Add sticky — Pink` etc.) if you want a key per
 colour; the palette itself is `STICKY.COLORS` in `commands.js`. Additional stickies on the same
-slide cascade down-left so they don't stack. Styling copies the sample deck (143pt wide,
-top-right, thin-thick dark-blue outline, 12pt bold, auto-fit) minus the drop shadow, which the
-JS API can't set.
+slide cascade down-left so they don't stack. Styling copies the sample deck (top-right,
+thin-thick dark-blue outline, 12pt bold).
+
+**Shadow.** The sample has a real soft drop shadow. PowerPoint's JS API has no shape-effects
+surface — no shadow, glow, reflection or soft edges on `Shape`, verified against the preview
+API (the VBA object model's `Shape.Shadow` has no JS counterpart). OOXML injection is
+Word-only and image insertion produces pictures. The one all-native option is the pane's
+**Shape shadow** toggle: a dark translucent rectangle grouped behind the note. It's hard-edged.
+Off by default. **Test helpers › Dump Shape API** lists every member the host's runtime really
+implements on a shape, so you can check for yourself on any future build.
 
 ## Assigning keys
 

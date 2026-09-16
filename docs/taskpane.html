@@ -103,6 +103,10 @@
     <button id="btn-add-sticky">Add sticky</button>
     <span class="muted">default key <kbd>⌃⇧⌥S</kbd></span>
   </div>
+  <div class="row">
+    <label><input type="checkbox" id="sticky-shadow"> Shape shadow</label>
+    <span class="muted">a dark translucent rectangle grouped behind the note — the only all-native option; PowerPoint's API has no real shadow effect</span>
+  </div>
   <div id="sticky-colors" class="swatches"></div>
   <p class="muted">Click a colour to make it the default. Each colour is also its own command above, if you want a key per colour.</p>
 
@@ -119,6 +123,7 @@
       <button id="btn-probe-shapes">Create probe shapes</button>
       <button id="btn-dump">Dump selection</button>
       <button id="btn-acceptance-shapes">Create acceptance shapes</button>
+      <button id="btn-shape-api">Dump Shape API (select a shape first)</button>
     </div>
     <div id="probe-output"></div>
   </details>
@@ -127,7 +132,7 @@
   <pre id="log"></pre>
 
   <!-- ?b= is a cache-buster; bump it with BUILD in commands.js so a fresh page always gets fresh scripts. -->
-  <script src="native-shortcuts.js?b=8"></script>
-  <script src="commands.js?b=8"></script>
+  <script src="native-shortcuts.js?b=9"></script>
+  <script src="commands.js?b=9"></script>
 </body>
 </html>
