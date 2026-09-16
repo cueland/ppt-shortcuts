@@ -4,8 +4,9 @@ Personal Office.js add-in that binds keyboard shortcuts to shape commands in Pow
 for macOS. Modeled on Efficient Elements; built and owned locally. Repo slug and Pages URL
 stay `ppt-shortcuts`; the product name is ChristiantialElements.
 
-**Status: Phase 1 passed** (five sizing commands fire from real keystrokes). Now adding
-commands from the operation inventory in priority order, with in-pane key assignment.
+**Status: P1 build shipped** — 103 commands (position, size, colour, text, format, tools,
+stickies) in an icon toolbar pane with an *Assign keys* mode. See the private inventory for
+what's built and what's next.
 
 ## How to use it
 
@@ -46,11 +47,22 @@ counterpart; OOXML injection is Word-only). **Test helpers › Dump Shape API** 
 member the host really implements on a shape and tries `load`/`set` on the plausible effect
 names, so any future build that adds one will show up.
 
+## The pane
+
+Press `⌃⇧⌥K` (or Home › ChristiantialElements › Open). The pane is an icon toolbar grouped like
+EE's (Position, Size, Colour, Text, Format, Tools, Sticky). In **Run** mode clicking an icon runs
+it. Each group's parameters (nudge distance, resize factor, slice rows/cols, margins, palette,
+agenda items…) sit under its icons and are remembered.
+
 ## Assigning keys
 
-Press `⌃⇧⌥K` (or Home › ChristiantialElements › Open) to open the pane. Click a command, then press the key
+Switch the pane to **Assign keys** (or right-click any icon). Click an icon, then press the key
 you want — or click a key in the map. Esc cancels; Delete removes the command's key. The change
 is live immediately; nothing to redeploy.
+
+**Startup.** Office doesn't start a shared-runtime add-in until you launch it once. The add-in
+calls `Office.addin.setStartupBehavior("load")` so that documents you've used it in start it
+automatically next time; a brand-new deck may still need one click per PowerPoint session.
 
 Rules the pane enforces:
 

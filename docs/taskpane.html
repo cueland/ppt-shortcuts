@@ -9,47 +9,73 @@
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
   <style>
     :root { color-scheme: light dark; --accent: #1e40af; --line: rgba(127,127,127,.3); --soft: rgba(127,127,127,.12); }
-    body { font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 12px; }
-    h1 { font-size: 15px; margin: 0 0 4px; }
+    body { font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 10px 12px 24px; }
+    h1 { font-size: 15px; margin: 0; }
     h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; opacity: .7; margin: 18px 0 6px; }
     .muted { opacity: .65; font-size: 12px; }
     .row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; align-items: center; }
-    button { font: inherit; padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(127,127,127,.5); background: var(--soft); cursor: pointer; }
+    button { font: inherit; padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(127,127,127,.5); background: var(--soft); cursor: pointer; color: inherit; }
     button:hover { background: rgba(127,127,127,.25); }
     table { border-collapse: collapse; width: 100%; font-size: 12px; margin-top: 6px; }
     th, td { text-align: left; padding: 3px 6px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
     th { opacity: .7; font-weight: 600; }
-    pre#log { font: 11px/1.45 ui-monospace, Menlo, monospace; background: var(--soft); padding: 8px; border-radius: 6px; max-height: 220px; overflow: auto; white-space: pre-wrap; margin: 6px 0 0; }
-    label { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; }
-    kbd { font: 12px ui-monospace, Menlo, monospace; padding: 1px 6px; border: 1px solid rgba(127,127,127,.5); border-radius: 4px; background: var(--soft); white-space: nowrap; }
-    kbd.empty { opacity: .45; border-style: dashed; }
-    textarea { width: 100%; box-sizing: border-box; font: 11px/1.4 ui-monospace, Menlo, monospace; min-height: 120px; }
+    pre#log { font: 11px/1.45 ui-monospace, Menlo, monospace; background: var(--soft); padding: 8px; border-radius: 6px; max-height: 200px; overflow: auto; white-space: pre-wrap; margin: 6px 0 0; }
+    label { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; }
+    kbd { font: 11px ui-monospace, Menlo, monospace; padding: 0 4px; border: 1px solid rgba(127,127,127,.5); border-radius: 4px; background: var(--soft); white-space: nowrap; }
+    kbd.empty { opacity: .35; border-style: dashed; }
+    textarea { width: 100%; box-sizing: border-box; font: 11px/1.4 ui-monospace, Menlo, monospace; min-height: 90px; }
+    input[type=text], input[type=number] { font: inherit; font-size: 12px; padding: 2px 5px; border-radius: 5px; border: 1px solid rgba(127,127,127,.5); background: transparent; color: inherit; width: 4.2em; }
+    input[type=text].wide { width: 100%; }
+    input#sticky-initials, input#p-mlabel { width: 8em; }
+    input#myformat-name { width: 100%; }
+    .sep { display: inline-block; width: 100%; height: 0; }
+    .block { display: block; }
+    .block textarea { min-height: 60px; margin-top: 2px; }
 
-    /* command list */
-    #cmd-list .group { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; opacity: .6; margin: 10px 0 2px; }
-    #cmd-list .cmd { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
-    #cmd-list .cmd:hover { background: var(--soft); }
-    #cmd-list .cmd.active { border-color: var(--accent); background: rgba(30,64,175,.12); }
-    #cmd-list .cmd.active kbd { border-color: var(--accent); color: var(--accent); }
-    #cmd-list .cmd-actions { display: inline-flex; align-items: center; gap: 4px; }
-    #cmd-list button.run, #cmd-list button.x { padding: 0 6px; font-size: 11px; line-height: 20px; opacity: .6; }
-    #cmd-list button.run:hover, #cmd-list button.x:hover { opacity: 1; }
+    /* header */
+    #head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .seg { display: inline-flex; border: 1px solid rgba(127,127,127,.5); border-radius: 7px; overflow: hidden; }
+    .seg button { border: 0; border-radius: 0; background: transparent; padding: 4px 10px; font-weight: 600; font-size: 12px; }
+    .seg button.on { background: var(--accent); color: #fff; }
+    body.assign .seg button.on { background: #b45309; }
 
-    /* status line */
-    .status { margin: 8px 0; padding: 6px 8px; border-radius: 6px; font-size: 12px; min-height: 1.4em; }
-    .status.info { background: rgba(30,64,175,.12); }
+    /* toolbar */
+    details.grp { margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 0 8px 6px; }
+    details.grp summary { cursor: pointer; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; opacity: .75; padding: 6px 0; list-style: none; display: flex; align-items: center; gap: 6px; }
+    details.grp summary::-webkit-details-marker { display: none; }
+    details.grp summary .count { opacity: .6; font-weight: 400; }
+    .tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); gap: 4px; }
+    .tool { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 5px 2px 4px; border-radius: 7px; border: 1px solid transparent; background: transparent; min-height: 66px; }
+    .tool:hover { background: var(--soft); border-color: var(--line); }
+    .tool .ic { position: relative; width: 26px; height: 26px; }
+    .tool .ic svg { width: 26px; height: 26px; display: block; }
+    .tool .ic .badge { position: absolute; right: -6px; bottom: -4px; font-size: 9px; background: var(--accent); color: #fff; border-radius: 8px; padding: 0 4px; line-height: 13px; }
+    .tool .lbl { font-size: 10px; line-height: 1.15; text-align: center; opacity: .85; max-width: 100%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .tool kbd { font-size: 9px; padding: 0 3px; margin-top: 1px; }
+    body.assign .tool { border-color: rgba(180,83,9,.35); }
+    body.assign .tool:hover { background: rgba(217,119,6,.15); }
+    .tool.active { outline: 2px solid #b45309; outline-offset: -1px; background: rgba(217,119,6,.18); }
+    .params { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); font-size: 12px; }
+    .params label { gap: 3px; }
+    .dims { width: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    #export-output img { max-width: 100%; border: 1px solid var(--line); margin-top: 6px; background: #fff; }
+    ol.myformats { margin: 4px 0 0; padding-left: 18px; font-size: 12px; }
+    ol.myformats li { margin: 2px 0; }
+    ol.myformats button { padding: 1px 6px; font-size: 11px; }
+
+    /* status */
+    .status { margin: 8px 0 0; padding: 6px 8px; border-radius: 6px; font-size: 12px; min-height: 1.4em; }
+    .status.info { background: rgba(217,119,6,.15); }
     .status.ok { background: rgba(22,163,74,.15); }
-    .status.warn { background: rgba(217,119,6,.18); }
+    .status.warn { background: rgba(217,119,6,.25); }
     .status.muted { opacity: .65; }
 
-    /* key map — a QWERTY keyboard per modifier set */
+    /* key map */
     #keymap-grid .mods { font: 600 12px ui-monospace, Menlo, monospace; margin: 12px 0 4px; }
     #keymap-grid .keyboard { display: flex; flex-direction: column; gap: 3px; }
     #keymap-grid .krow { display: flex; gap: 3px; }
-    #keymap-grid .krow.r1 { padding-left: 4%; }
-    #keymap-grid .krow.r2 { padding-left: 8%; }
-    #keymap-grid .krow.r3 { padding-left: 14%; }
-    #keymap-grid .cell { flex: 1 1 0; min-width: 0; padding: 3px 1px 2px; border-radius: 5px; border: 1px solid var(--line); background: transparent; display: flex; flex-direction: column; align-items: center; min-height: 34px; overflow: hidden; cursor: pointer; }
+    #keymap-grid .krow.r1 { padding-left: 4%; } #keymap-grid .krow.r2 { padding-left: 8%; } #keymap-grid .krow.r3 { padding-left: 14%; }
+    #keymap-grid .cell { flex: 1 1 0; min-width: 0; padding: 3px 1px 2px; border-radius: 5px; border: 1px solid var(--line); background: transparent; display: flex; flex-direction: column; align-items: center; min-height: 34px; overflow: hidden; }
     #keymap-grid .cell b { font: 600 12px ui-monospace, Menlo, monospace; }
     #keymap-grid .cell i { font-style: normal; font-size: 9px; line-height: 1.1; opacity: .85; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; min-height: 10px; }
     #keymap-grid .cell.free { opacity: .6; }
@@ -58,35 +84,38 @@
     #keymap-grid .cell.conflict { background: rgba(217,119,6,.16); border-color: rgba(217,119,6,.55); }
     #keymap-grid .cell.conflict i { color: #b45309; }
     @media (prefers-color-scheme: dark) { #keymap-grid .cell.conflict i { color: #f59e0b; } }
-    #keymap-grid .cell.active { outline: 2px solid var(--accent); outline-offset: -1px; }
+    #keymap-grid .cell.active { outline: 2px solid #b45309; outline-offset: -1px; }
     #keytip { position: absolute; z-index: 10; max-width: 240px; padding: 6px 8px; border-radius: 6px; font-size: 11px; line-height: 1.35; background: Canvas; color: CanvasText; border: 1px solid var(--line); box-shadow: 0 4px 14px rgba(0,0,0,.25); pointer-events: none; }
     .legend { display: flex; gap: 12px; font-size: 11px; opacity: .8; margin-top: 8px; flex-wrap: wrap; }
     .legend span::before { content: ""; display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; border: 1px solid var(--line); }
     .legend .l-assigned::before { background: rgba(30,64,175,.4); border-color: rgba(30,64,175,.6); }
     .legend .l-conflict::before { background: rgba(217,119,6,.35); border-color: rgba(217,119,6,.55); }
-    details summary { cursor: pointer; font-size: 12px; opacity: .8; }
-    input[type=text] { font: inherit; padding: 3px 6px; border-radius: 5px; border: 1px solid rgba(127,127,127,.5); background: transparent; color: inherit; width: 4.5em; }
-    .swatches { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
-    .swatch { width: 62px; height: 34px; border-radius: 6px; border: 2px solid rgba(0,0,0,.25); padding: 0; display: flex; align-items: flex-end; justify-content: center; }
-    .swatch span { font-size: 10px; font-weight: 600; color: #000; opacity: .75; padding-bottom: 2px; }
+    details.plain summary { cursor: pointer; font-size: 12px; opacity: .8; margin-top: 12px; }
+    .swatches { display: inline-flex; gap: 4px; }
+    .swatch { width: 22px; height: 22px; border-radius: 5px; border: 2px solid rgba(0,0,0,.25); padding: 0; }
     .swatch.selected { border-color: #000; box-shadow: 0 0 0 2px var(--accent); }
     @media (prefers-color-scheme: dark) { .swatch.selected { border-color: #fff; } }
   </style>
 </head>
 <body>
-  <h1>ChristiantialElements</h1>
+  <div id="head">
+    <h1>ChristiantialElements</h1>
+    <span class="seg"><button id="mode-run" class="on">Run</button><button id="mode-assign">Assign keys</button></span>
+  </div>
   <div id="diagnostics" class="muted">Loading Office.js…</div>
-  <p class="muted">Select the shapes to change, then ⇧-click the shape to copy from <b>last</b>. Press a key.</p>
-
-  <h2>Shortcuts</h2>
-  <p class="muted">Click a command, then press the key you want — or click a key in the map. Esc cancels, Delete removes. Only the keys in the map can be bound.</p>
-  <div id="cmd-list"></div>
+  <p class="muted" style="margin:6px 0 0">Select the shapes to change, then ⇧-click the reference <b>last</b>. In <b>Assign keys</b>, clicking an icon records a key for it (or right-click any icon). Esc cancels, Delete removes.</p>
   <div id="recorder-status" class="status muted"></div>
-  <div id="keymap-grid"></div>
-  <div id="keytip" hidden></div>
-  <div class="legend"><span class="l-free">available</span><span class="l-assigned">assigned</span><span class="l-conflict">used by another app — hover to see which; press twice to override</span></div>
 
-  <details>
+  <div id="toolbar"></div>
+
+  <details id="keymap-section" class="plain">
+    <summary>Key map — what's assigned, what's free</summary>
+    <div id="keymap-grid"></div>
+    <div id="keytip" hidden></div>
+    <div class="legend"><span class="l-free">available</span><span class="l-assigned">assigned</span><span class="l-conflict">used by another app — hover to see which; press twice to override</span></div>
+  </details>
+
+  <details class="plain">
     <summary>Backup / restore keymap</summary>
     <textarea id="keymap-json" spellcheck="false"></textarea>
     <div class="row">
@@ -94,26 +123,20 @@
       <button id="btn-apply-json">Apply</button>
       <button id="btn-reset-json">Reset to defaults</button>
     </div>
-    <p class="muted">Paste into <code>DEFAULT_KEYMAP</code> in commands.js to make it the shipped default.</p>
   </details>
 
-  <h2>Sticky notes</h2>
-  <div class="row">
-    <label>Initials <input type="text" id="sticky-initials" size="4" maxlength="6"></label>
-    <button id="btn-add-sticky">Add sticky</button>
-    <span class="muted">default key <kbd>⌃⇧⌥S</kbd></span>
-  </div>
-  <div id="sticky-colors" class="swatches"></div>
-  <p class="muted">Click a colour to make it the default. Each colour is also its own command above, if you want a key per colour.</p>
+  <details class="plain">
+    <summary>Behaviour</summary>
+    <div class="row">
+      <label><input type="checkbox" id="cfg-RECENTER_ON_REF"> RECENTER_ON_REF</label>
+      <label><input type="checkbox" id="cfg-KEEP_CENTER"> KEEP_CENTER</label>
+      <label><input type="checkbox" id="cfg-SWAP_ZORDER"> SWAP_ZORDER</label>
+      <label><input type="checkbox" id="cfg-SWAP_SIZE"> SWAP_SIZE</label>
+    </div>
+    <p class="muted">RECENTER_ON_REF: fit/fill land on the reference's centre. KEEP_CENTER: match commands resize around the shape's own centre instead of its top-left. Runtime only; defaults in <code>CONFIG</code>.</p>
+  </details>
 
-  <h2>Behaviour</h2>
-  <div class="row">
-    <label><input type="checkbox" id="cfg-RECENTER_ON_REF"> RECENTER_ON_REF</label>
-    <label><input type="checkbox" id="cfg-KEEP_CENTER"> KEEP_CENTER</label>
-    <span class="muted">runtime overrides; defaults live in <code>CONFIG</code></span>
-  </div>
-
-  <details>
+  <details class="plain">
     <summary>Test helpers</summary>
     <div class="row">
       <button id="btn-probe-shapes">Create probe shapes</button>
@@ -128,7 +151,7 @@
   <pre id="log"></pre>
 
   <!-- ?b= is a cache-buster; bump it with BUILD in commands.js so a fresh page always gets fresh scripts. -->
-  <script src="native-shortcuts.js?b=11"></script>
-  <script src="commands.js?b=11"></script>
+  <script src="native-shortcuts.js?b=12"></script>
+  <script src="commands.js?b=12"></script>
 </body>
 </html>
