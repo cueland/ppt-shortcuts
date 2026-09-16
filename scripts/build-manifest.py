@@ -15,7 +15,7 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.1.0"
+VERSION = "0.3.2.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 
 B = lambda cid, label, icon, desc: {"id": cid, "label": label, "icon": icon, "desc": desc}
@@ -130,8 +130,11 @@ def lid(key, text):
 def button_xml(b, as_item=False):
     tag = "Item" if as_item else 'Control xsi:type="Button"'
     close = "Item" if as_item else "Control"
+    # Top-level buttons show only their icon (label = non-breaking space; the schema requires
+    # a Label). Menu items keep their text. The tooltip still carries the real name.
+    label_resid = sid('lbl.' + b['id'], b['label']) if as_item else "S.blank"
     return f'''<{tag} id="CE.{b["id"]}">
-  <Label resid="{sid('lbl.' + b['id'], b['label'])}"/>
+  <Label resid="{label_resid}"/>
   <Supertip><Title resid="{sid('lbl.' + b['id'], b['label'])}"/><Description resid="{lid('desc.' + b['id'], b['desc'])}"/></Supertip>
   {img(b["icon"])}
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_{b["id"]}</FunctionName></Action>
@@ -165,6 +168,7 @@ def strings(d, tag):
 def image_res():
     return "\n".join(f'        <bt:Image id="{k}" DefaultValue="{v}"/>' for k, v in images.items())
 
+short["S.blank"] = "\u00a0"
 sid("tab", "ChristiantialElements")
 sid("home.group", "ChristiantialElements"); sid("home.open", "Open"); lid("home.open.desc", "Open the ChristiantialElements pane: icons, key assignment, settings, log.")
 sid("gs.title", "ChristiantialElements loaded"); lid("gs.desc", "Shortcuts are registered. Press Ctrl+Shift+Option+K or use the ChristiantialElements tab.")

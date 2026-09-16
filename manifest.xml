@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
   <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
-  <Version>0.3.1.0</Version>
+  <Version>0.3.2.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ChristiantialElements"/>
@@ -64,97 +64,97 @@
   <Label resid="S_group_Position"/>
   <Icon><bt:Image size="16" resid="Icon.alignLeft.16"/><bt:Image size="32" resid="Icon.alignLeft.32"/><bt:Image size="80" resid="Icon.alignLeft.80"/></Icon>
 <Control xsi:type="Button" id="CE.alignLeft">
-  <Label resid="S_lbl_alignLeft"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignLeft"/><Description resid="L_desc_alignLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignLeft.16"/><bt:Image size="32" resid="Icon.alignLeft.32"/><bt:Image size="80" resid="Icon.alignLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignLeft</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.alignRight">
-  <Label resid="S_lbl_alignRight"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignRight"/><Description resid="L_desc_alignRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignRight.16"/><bt:Image size="32" resid="Icon.alignRight.32"/><bt:Image size="80" resid="Icon.alignRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignRight</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.alignTop">
-  <Label resid="S_lbl_alignTop"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignTop"/><Description resid="L_desc_alignTop"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignTop.16"/><bt:Image size="32" resid="Icon.alignTop.32"/><bt:Image size="80" resid="Icon.alignTop.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignTop</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.alignBottom">
-  <Label resid="S_lbl_alignBottom"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignBottom"/><Description resid="L_desc_alignBottom"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignBottom.16"/><bt:Image size="32" resid="Icon.alignBottom.32"/><bt:Image size="80" resid="Icon.alignBottom.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignBottom</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.alignCenter">
-  <Label resid="S_lbl_alignCenter"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignCenter"/><Description resid="L_desc_alignCenter"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignCenter.16"/><bt:Image size="32" resid="Icon.alignCenter.32"/><bt:Image size="80" resid="Icon.alignCenter.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignCenter</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.alignMiddle">
-  <Label resid="S_lbl_alignMiddle"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignMiddle"/><Description resid="L_desc_alignMiddle"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.alignMiddle.16"/><bt:Image size="32" resid="Icon.alignMiddle.32"/><bt:Image size="80" resid="Icon.alignMiddle.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignMiddle</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.distributeH">
-  <Label resid="S_lbl_distributeH"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_distributeH"/><Description resid="L_desc_distributeH"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.distributeH.16"/><bt:Image size="32" resid="Icon.distributeH.32"/><bt:Image size="80" resid="Icon.distributeH.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeH</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.distributeV">
-  <Label resid="S_lbl_distributeV"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_distributeV"/><Description resid="L_desc_distributeV"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.distributeV.16"/><bt:Image size="32" resid="Icon.distributeV.32"/><bt:Image size="80" resid="Icon.distributeV.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_distributeV</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.dockLeft">
-  <Label resid="S_lbl_dockLeft"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_dockLeft"/><Description resid="L_desc_dockLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockLeft.16"/><bt:Image size="32" resid="Icon.dockLeft.32"/><bt:Image size="80" resid="Icon.dockLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockLeft</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.dockRight">
-  <Label resid="S_lbl_dockRight"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_dockRight"/><Description resid="L_desc_dockRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockRight.16"/><bt:Image size="32" resid="Icon.dockRight.32"/><bt:Image size="80" resid="Icon.dockRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockRight</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.dockUp">
-  <Label resid="S_lbl_dockUp"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_dockUp"/><Description resid="L_desc_dockUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockUp.16"/><bt:Image size="32" resid="Icon.dockUp.32"/><bt:Image size="80" resid="Icon.dockUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockUp</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.dockDown">
-  <Label resid="S_lbl_dockDown"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_dockDown"/><Description resid="L_desc_dockDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.dockDown.16"/><bt:Image size="32" resid="Icon.dockDown.32"/><bt:Image size="80" resid="Icon.dockDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_dockDown</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.stackH">
-  <Label resid="S_lbl_stackH"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stackH"/><Description resid="L_desc_stackH"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stackH.16"/><bt:Image size="32" resid="Icon.stackH.32"/><bt:Image size="80" resid="Icon.stackH.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stackH</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.stackV">
-  <Label resid="S_lbl_stackV"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stackV"/><Description resid="L_desc_stackV"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stackV.16"/><bt:Image size="32" resid="Icon.stackV.32"/><bt:Image size="80" resid="Icon.stackV.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stackV</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.swap">
-  <Label resid="S_lbl_swap"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_swap"/><Description resid="L_desc_swap"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.swap.16"/><bt:Image size="32" resid="Icon.swap.32"/><bt:Image size="80" resid="Icon.swap.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_swap</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.alignInTable">
-  <Label resid="S_lbl_alignInTable"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_alignInTable"/><Description resid="L_desc_alignInTable"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.table.16"/><bt:Image size="32" resid="Icon.table.32"/><bt:Image size="80" resid="Icon.table.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignInTable</FunctionName></Action>
@@ -214,79 +214,79 @@
   <Label resid="S_group_Size"/>
   <Icon><bt:Image size="16" resid="Icon.matchWidth.16"/><bt:Image size="32" resid="Icon.matchWidth.32"/><bt:Image size="80" resid="Icon.matchWidth.80"/></Icon>
 <Control xsi:type="Button" id="CE.matchWidth">
-  <Label resid="S_lbl_matchWidth"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_matchWidth"/><Description resid="L_desc_matchWidth"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matchWidth.16"/><bt:Image size="32" resid="Icon.matchWidth.32"/><bt:Image size="80" resid="Icon.matchWidth.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchWidth</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.matchHeight">
-  <Label resid="S_lbl_matchHeight"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_matchHeight"/><Description resid="L_desc_matchHeight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matchHeight.16"/><bt:Image size="32" resid="Icon.matchHeight.32"/><bt:Image size="80" resid="Icon.matchHeight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchHeight</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.matchBoth">
-  <Label resid="S_lbl_matchBoth"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_matchBoth"/><Description resid="L_desc_matchBoth"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matchBoth.16"/><bt:Image size="32" resid="Icon.matchBoth.32"/><bt:Image size="80" resid="Icon.matchBoth.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matchBoth</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fitInside">
-  <Label resid="S_lbl_fitInside"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fitInside"/><Description resid="L_desc_fitInside"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fitInside.16"/><bt:Image size="32" resid="Icon.fitInside.32"/><bt:Image size="80" resid="Icon.fitInside.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fitInside</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fillOutside">
-  <Label resid="S_lbl_fillOutside"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fillOutside"/><Description resid="L_desc_fillOutside"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillOutside.16"/><bt:Image size="32" resid="Icon.fillOutside.32"/><bt:Image size="80" resid="Icon.fillOutside.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillOutside</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.stretchLeft">
-  <Label resid="S_lbl_stretchLeft"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stretchLeft"/><Description resid="L_desc_stretchLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchLeft.16"/><bt:Image size="32" resid="Icon.stretchLeft.32"/><bt:Image size="80" resid="Icon.stretchLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchLeft</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.stretchRight">
-  <Label resid="S_lbl_stretchRight"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stretchRight"/><Description resid="L_desc_stretchRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchRight.16"/><bt:Image size="32" resid="Icon.stretchRight.32"/><bt:Image size="80" resid="Icon.stretchRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchRight</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.stretchUp">
-  <Label resid="S_lbl_stretchUp"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stretchUp"/><Description resid="L_desc_stretchUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchUp.16"/><bt:Image size="32" resid="Icon.stretchUp.32"/><bt:Image size="80" resid="Icon.stretchUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchUp</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.stretchDown">
-  <Label resid="S_lbl_stretchDown"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_stretchDown"/><Description resid="L_desc_stretchDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.stretchDown.16"/><bt:Image size="32" resid="Icon.stretchDown.32"/><bt:Image size="80" resid="Icon.stretchDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_stretchDown</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fillLeft">
-  <Label resid="S_lbl_fillLeft"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fillLeft"/><Description resid="L_desc_fillLeft"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillLeft.16"/><bt:Image size="32" resid="Icon.fillLeft.32"/><bt:Image size="80" resid="Icon.fillLeft.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillLeft</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fillRight">
-  <Label resid="S_lbl_fillRight"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fillRight"/><Description resid="L_desc_fillRight"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillRight.16"/><bt:Image size="32" resid="Icon.fillRight.32"/><bt:Image size="80" resid="Icon.fillRight.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillRight</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fillUp">
-  <Label resid="S_lbl_fillUp"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fillUp"/><Description resid="L_desc_fillUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillUp.16"/><bt:Image size="32" resid="Icon.fillUp.32"/><bt:Image size="80" resid="Icon.fillUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillUp</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fillDown">
-  <Label resid="S_lbl_fillDown"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fillDown"/><Description resid="L_desc_fillDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fillDown.16"/><bt:Image size="32" resid="Icon.fillDown.32"/><bt:Image size="80" resid="Icon.fillDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillDown</FunctionName></Action>
@@ -526,49 +526,49 @@
   <Label resid="S_group_Text"/>
   <Icon><bt:Image size="16" resid="Icon.margins.16"/><bt:Image size="32" resid="Icon.margins.32"/><bt:Image size="80" resid="Icon.margins.80"/></Icon>
 <Control xsi:type="Button" id="CE.setMargins">
-  <Label resid="S_lbl_setMargins"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_setMargins"/><Description resid="L_desc_setMargins"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.margins.16"/><bt:Image size="32" resid="Icon.margins.32"/><bt:Image size="80" resid="Icon.margins.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_setMargins</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.marginsZero">
-  <Label resid="S_lbl_marginsZero"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_marginsZero"/><Description resid="L_desc_marginsZero"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.marginsZero.16"/><bt:Image size="32" resid="Icon.marginsZero.32"/><bt:Image size="80" resid="Icon.marginsZero.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_marginsZero</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.fitFormToText">
-  <Label resid="S_lbl_fitFormToText"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_fitFormToText"/><Description resid="L_desc_fitFormToText"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fitText.16"/><bt:Image size="32" resid="Icon.fitText.32"/><bt:Image size="80" resid="Icon.fitText.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fitFormToText</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.wrapToggle">
-  <Label resid="S_lbl_wrapToggle"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_wrapToggle"/><Description resid="L_desc_wrapToggle"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.wrap.16"/><bt:Image size="32" resid="Icon.wrap.32"/><bt:Image size="80" resid="Icon.wrap.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_wrapToggle</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.splitTextBox">
-  <Label resid="S_lbl_splitTextBox"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_splitTextBox"/><Description resid="L_desc_splitTextBox"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.split.16"/><bt:Image size="32" resid="Icon.split.32"/><bt:Image size="80" resid="Icon.split.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_splitTextBox</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.mergeTextBoxes">
-  <Label resid="S_lbl_mergeTextBoxes"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_mergeTextBoxes"/><Description resid="L_desc_mergeTextBoxes"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.merge.16"/><bt:Image size="32" resid="Icon.merge.32"/><bt:Image size="80" resid="Icon.merge.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_mergeTextBoxes</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.bulletsToggle">
-  <Label resid="S_lbl_bulletsToggle"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_bulletsToggle"/><Description resid="L_desc_bulletsToggle"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.bullets.16"/><bt:Image size="32" resid="Icon.bullets.32"/><bt:Image size="80" resid="Icon.bullets.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_bulletsToggle</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.setFontSize">
-  <Label resid="S_lbl_setFontSize"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_setFontSize"/><Description resid="L_desc_setFontSize"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.fontSize.16"/><bt:Image size="32" resid="Icon.fontSize.32"/><bt:Image size="80" resid="Icon.fontSize.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_setFontSize</FunctionName></Action>
@@ -578,31 +578,31 @@
   <Label resid="S_group_Format"/>
   <Icon><bt:Image size="16" resid="Icon.pickup.16"/><bt:Image size="32" resid="Icon.pickup.32"/><bt:Image size="80" resid="Icon.pickup.80"/></Icon>
 <Control xsi:type="Button" id="CE.formatPickup">
-  <Label resid="S_lbl_formatPickup"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_formatPickup"/><Description resid="L_desc_formatPickup"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.pickup.16"/><bt:Image size="32" resid="Icon.pickup.32"/><bt:Image size="80" resid="Icon.pickup.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_formatPickup</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.formatApply">
-  <Label resid="S_lbl_formatApply"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_formatApply"/><Description resid="L_desc_formatApply"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.apply.16"/><bt:Image size="32" resid="Icon.apply.32"/><bt:Image size="80" resid="Icon.apply.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_formatApply</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.formatPainter">
-  <Label resid="S_lbl_formatPainter"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_formatPainter"/><Description resid="L_desc_formatPainter"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.painter.16"/><bt:Image size="32" resid="Icon.painter.32"/><bt:Image size="80" resid="Icon.painter.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_formatPainter</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.saveMyFormat">
-  <Label resid="S_lbl_saveMyFormat"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_saveMyFormat"/><Description resid="L_desc_saveMyFormat"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.star.16"/><bt:Image size="32" resid="Icon.star.32"/><bt:Image size="80" resid="Icon.star.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_saveMyFormat</FunctionName></Action>
 </Control>
 <Control xsi:type="Button" id="CE.myFormat1">
-  <Label resid="S_lbl_myFormat1"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_myFormat1"/><Description resid="L_desc_myFormat1"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.preset.16"/><bt:Image size="32" resid="Icon.preset.32"/><bt:Image size="80" resid="Icon.preset.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_myFormat1</FunctionName></Action>
@@ -710,7 +710,7 @@
   </Items>
 </Control>
 <Control xsi:type="Button" id="CE.addSticky">
-  <Label resid="S_lbl_addSticky"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_addSticky"/><Description resid="L_desc_addSticky"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.sticky.16"/><bt:Image size="32" resid="Icon.sticky.32"/><bt:Image size="80" resid="Icon.sticky.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_addSticky</FunctionName></Action>
@@ -759,7 +759,7 @@
   </Items>
 </Control>
 <Control xsi:type="Button" id="CE.togglePane">
-  <Label resid="S_lbl_togglePane"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_togglePane"/><Description resid="L_desc_togglePane"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.pane.16"/><bt:Image size="32" resid="Icon.pane.32"/><bt:Image size="80" resid="Icon.pane.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_togglePane</FunctionName></Action>
@@ -1101,6 +1101,7 @@
         <bt:String id="S_menu_stickyc" DefaultValue="Colour"/>
         <bt:String id="S_lbl_togglePane" DefaultValue="Pane"/>
         <bt:String id="S_group_Tools" DefaultValue="Tools"/>
+        <bt:String id="S_blank" DefaultValue=" "/>
         <bt:String id="S_tab" DefaultValue="ChristiantialElements"/>
         <bt:String id="S_home_group" DefaultValue="ChristiantialElements"/>
         <bt:String id="S_home_open" DefaultValue="Open"/>
