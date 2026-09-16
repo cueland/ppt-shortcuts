@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-15.12";
+const BUILD = "2026-09-16.14";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -36,7 +36,7 @@ const BUILD = "2026-09-15.12";
 // The key bank. scripts/build-shortcuts.py parses these two lines to generate
 // docs/shortcuts.json — keep them single-line JSON arrays. After changing them: run the
 // script, bump ?v= on ExtendedOverrides in manifest.xml, push, re-sideload.
-const KEY_BANK_MODIFIER_SETS = ["Ctrl+Shift+Alt", "Ctrl+Alt"];
+const KEY_BANK_MODIFIER_SETS = ["Ctrl+Shift+Alt", "Ctrl+Alt", "Ctrl+Shift", "Shift+Alt"];
 const KEY_BANK_KEYS = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"];
 const KEY_BANK = KEY_BANK_MODIFIER_SETS.flatMap((mods) => KEY_BANK_KEYS.map((k) => `${mods}+${k}`));
 /** Office action id for a bank combo — must equal what build-shortcuts.py writes. */
@@ -1033,7 +1033,7 @@ const BANK_SET = new Set(KEY_BANK);
 const NATIVE_BY_COMBO = (() => {
   const m = {};
   const list = typeof NATIVE_SHORTCUTS !== "undefined" ? NATIVE_SHORTCUTS : [];
-  for (const [combo, what, source] of list) { const c = canonicalCombo(combo); (m[c] = m[c] || []).push({ what, source }); }
+  for (const row of list) { if (!Array.isArray(row) || row.length < 3) continue; const c = canonicalCombo(row[0]); if (c) (m[c] = m[c] || []).push({ what: row[1], source: row[2] }); }
   return m;
 })();
 
@@ -1164,7 +1164,6 @@ const recorder = {
     this.active = true; this.commandId = commandId; this.pendingConfirm = null;
     renderToolbar(); renderKeyGrid();
     setStatus(`Press the key for “${COMMAND_BY_ID[commandId].label}” — or click a key in the map. Esc cancels, Delete removes.`, "info");
-    const grid = el("keymap-grid"); if (grid) grid.scrollIntoView({ block: "nearest" });
   },
   stop() { this.active = false; this.commandId = null; this.pendingConfirm = null; renderToolbar(); renderKeyGrid(); },
   async capture(combo, source) {
@@ -1207,6 +1206,14 @@ function onKeyDown(e) {
 
 // ---- rendering ----
 let assignMode = false;
+let compact = false;
+try { compact = localStorage.getItem("ce-compact") === "1"; } catch (_) { /* ignore */ }
+function setCompact(on) {
+  compact = on;
+  document.body.classList.toggle("compact", on);
+  const b = el("btn-compact"); if (b) b.classList.toggle("on", on);
+  try { localStorage.setItem("ce-compact", on ? "1" : "0"); } catch (_) { /* ignore */ }
+}
 
 function setStatus(text, kind) { const s = el("recorder-status"); if (!s) return; s.textContent = text; s.className = "status " + (kind || ""); }
 const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -1222,7 +1229,7 @@ function renderToolbar() {
       const active = recorder.active && recorder.commandId === c.id;
       const sw = c.color || (c.kind ? palette[c.slot - 1] || "transparent" : null);
       const style = sw ? ` style="--sw:${sw}"` : "";
-      return `<button class="tool${active ? " active" : ""}${combo ? " bound" : ""}" data-id="${c.id}" title="${esc(c.label)} — ${esc(c.desc)}${combo ? " (" + displayCombo(combo) + ")" : ""}"${style}>
+      return `<button class="tool${active ? " active" : ""}${combo ? " bound" : ""}" data-id="${c.id}" title="${esc(c.label)}${combo ? "  " + displayCombo(combo) : ""} — ${esc(c.desc)}"${style}>
         <span class="ic">${ICONS[c.icon] || ICONS.preset}${c.badge ? `<b class="badge">${c.badge}</b>` : ""}</span>
         <span class="lbl">${esc(c.label)}</span>
         <kbd class="${combo ? "" : "empty"}">${combo ? displayCombo(combo) : "·"}</kbd>
@@ -1363,6 +1370,8 @@ function wireTaskPane() {
   on("toolbar", "contextmenu", (e) => { const t = e.target.closest(".tool"); if (!t) return; e.preventDefault(); setMode(true); recorder.start(t.dataset.id); });
   on("mode-run", "click", () => setMode(false));
   on("mode-assign", "click", () => setMode(true));
+  on("btn-compact", "click", () => setCompact(!compact));
+  setCompact(compact);
 
   on("keymap-grid", "click", (e) => {
     const cell = e.target.closest("[data-combo]"); if (!cell) return;
@@ -1506,6 +1515,16 @@ function renderTable(elementId, rows) {
 Office.onReady(async (info) => {
   if (Office.actions && typeof Office.actions.associate === "function") {
     for (const combo of KEY_BANK) Office.actions.associate(slotId(combo), () => onSlot(combo));
+    // Ribbon buttons (manifest FunctionName = "ribbon_<command id>"). In Assign mode a ribbon
+    // click records a key for that command instead of running it.
+    for (const c of COMMANDS) {
+      Office.actions.associate("ribbon_" + c.id, async (event) => {
+        try {
+          if (assignMode && paneLooksVisible()) recorder.start(c.id);
+          else await runCommand(c.id);
+        } finally { if (event && event.completed) event.completed(); }
+      });
+    }
   } else {
     log("Office.actions.associate unavailable — not running inside an Office shared runtime.");
   }

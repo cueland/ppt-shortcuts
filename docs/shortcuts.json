@@ -359,6 +359,366 @@
       "id": "k_Ctrl_Alt_9",
       "type": "ExecuteFunction",
       "name": "ChristiantialElements-Ctrl+Alt+9"
+    },
+    {
+      "id": "k_Ctrl_Shift_A",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+A"
+    },
+    {
+      "id": "k_Ctrl_Shift_B",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+B"
+    },
+    {
+      "id": "k_Ctrl_Shift_C",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+C"
+    },
+    {
+      "id": "k_Ctrl_Shift_D",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+D"
+    },
+    {
+      "id": "k_Ctrl_Shift_E",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+E"
+    },
+    {
+      "id": "k_Ctrl_Shift_F",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+F"
+    },
+    {
+      "id": "k_Ctrl_Shift_G",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+G"
+    },
+    {
+      "id": "k_Ctrl_Shift_H",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+H"
+    },
+    {
+      "id": "k_Ctrl_Shift_I",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+I"
+    },
+    {
+      "id": "k_Ctrl_Shift_J",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+J"
+    },
+    {
+      "id": "k_Ctrl_Shift_K",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+K"
+    },
+    {
+      "id": "k_Ctrl_Shift_L",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+L"
+    },
+    {
+      "id": "k_Ctrl_Shift_M",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+M"
+    },
+    {
+      "id": "k_Ctrl_Shift_N",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+N"
+    },
+    {
+      "id": "k_Ctrl_Shift_O",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+O"
+    },
+    {
+      "id": "k_Ctrl_Shift_P",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+P"
+    },
+    {
+      "id": "k_Ctrl_Shift_Q",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+Q"
+    },
+    {
+      "id": "k_Ctrl_Shift_R",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+R"
+    },
+    {
+      "id": "k_Ctrl_Shift_S",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+S"
+    },
+    {
+      "id": "k_Ctrl_Shift_T",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+T"
+    },
+    {
+      "id": "k_Ctrl_Shift_U",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+U"
+    },
+    {
+      "id": "k_Ctrl_Shift_V",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+V"
+    },
+    {
+      "id": "k_Ctrl_Shift_W",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+W"
+    },
+    {
+      "id": "k_Ctrl_Shift_X",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+X"
+    },
+    {
+      "id": "k_Ctrl_Shift_Y",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+Y"
+    },
+    {
+      "id": "k_Ctrl_Shift_Z",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+Z"
+    },
+    {
+      "id": "k_Ctrl_Shift_0",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+0"
+    },
+    {
+      "id": "k_Ctrl_Shift_1",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+1"
+    },
+    {
+      "id": "k_Ctrl_Shift_2",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+2"
+    },
+    {
+      "id": "k_Ctrl_Shift_3",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+3"
+    },
+    {
+      "id": "k_Ctrl_Shift_4",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+4"
+    },
+    {
+      "id": "k_Ctrl_Shift_5",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+5"
+    },
+    {
+      "id": "k_Ctrl_Shift_6",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+6"
+    },
+    {
+      "id": "k_Ctrl_Shift_7",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+7"
+    },
+    {
+      "id": "k_Ctrl_Shift_8",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+8"
+    },
+    {
+      "id": "k_Ctrl_Shift_9",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Ctrl+Shift+9"
+    },
+    {
+      "id": "k_Shift_Alt_A",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+A"
+    },
+    {
+      "id": "k_Shift_Alt_B",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+B"
+    },
+    {
+      "id": "k_Shift_Alt_C",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+C"
+    },
+    {
+      "id": "k_Shift_Alt_D",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+D"
+    },
+    {
+      "id": "k_Shift_Alt_E",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+E"
+    },
+    {
+      "id": "k_Shift_Alt_F",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+F"
+    },
+    {
+      "id": "k_Shift_Alt_G",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+G"
+    },
+    {
+      "id": "k_Shift_Alt_H",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+H"
+    },
+    {
+      "id": "k_Shift_Alt_I",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+I"
+    },
+    {
+      "id": "k_Shift_Alt_J",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+J"
+    },
+    {
+      "id": "k_Shift_Alt_K",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+K"
+    },
+    {
+      "id": "k_Shift_Alt_L",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+L"
+    },
+    {
+      "id": "k_Shift_Alt_M",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+M"
+    },
+    {
+      "id": "k_Shift_Alt_N",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+N"
+    },
+    {
+      "id": "k_Shift_Alt_O",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+O"
+    },
+    {
+      "id": "k_Shift_Alt_P",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+P"
+    },
+    {
+      "id": "k_Shift_Alt_Q",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+Q"
+    },
+    {
+      "id": "k_Shift_Alt_R",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+R"
+    },
+    {
+      "id": "k_Shift_Alt_S",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+S"
+    },
+    {
+      "id": "k_Shift_Alt_T",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+T"
+    },
+    {
+      "id": "k_Shift_Alt_U",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+U"
+    },
+    {
+      "id": "k_Shift_Alt_V",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+V"
+    },
+    {
+      "id": "k_Shift_Alt_W",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+W"
+    },
+    {
+      "id": "k_Shift_Alt_X",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+X"
+    },
+    {
+      "id": "k_Shift_Alt_Y",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+Y"
+    },
+    {
+      "id": "k_Shift_Alt_Z",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+Z"
+    },
+    {
+      "id": "k_Shift_Alt_0",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+0"
+    },
+    {
+      "id": "k_Shift_Alt_1",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+1"
+    },
+    {
+      "id": "k_Shift_Alt_2",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+2"
+    },
+    {
+      "id": "k_Shift_Alt_3",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+3"
+    },
+    {
+      "id": "k_Shift_Alt_4",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+4"
+    },
+    {
+      "id": "k_Shift_Alt_5",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+5"
+    },
+    {
+      "id": "k_Shift_Alt_6",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+6"
+    },
+    {
+      "id": "k_Shift_Alt_7",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+7"
+    },
+    {
+      "id": "k_Shift_Alt_8",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+8"
+    },
+    {
+      "id": "k_Shift_Alt_9",
+      "type": "ExecuteFunction",
+      "name": "ChristiantialElements-Shift+Alt+9"
     }
   ],
   "shortcuts": [
@@ -864,6 +1224,510 @@
       "key": {
         "default": "Ctrl+Alt+9",
         "mac": "Ctrl+Alt+9"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_A",
+      "key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Ctrl+Shift+A"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_B",
+      "key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Ctrl+Shift+B"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_C",
+      "key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "Ctrl+Shift+C"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_D",
+      "key": {
+        "default": "Ctrl+Shift+D",
+        "mac": "Ctrl+Shift+D"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_E",
+      "key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Ctrl+Shift+E"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_F",
+      "key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Ctrl+Shift+F"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_G",
+      "key": {
+        "default": "Ctrl+Shift+G",
+        "mac": "Ctrl+Shift+G"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_H",
+      "key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "Ctrl+Shift+H"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_I",
+      "key": {
+        "default": "Ctrl+Shift+I",
+        "mac": "Ctrl+Shift+I"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_J",
+      "key": {
+        "default": "Ctrl+Shift+J",
+        "mac": "Ctrl+Shift+J"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_K",
+      "key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Ctrl+Shift+K"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_L",
+      "key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Ctrl+Shift+L"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_M",
+      "key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "Ctrl+Shift+M"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_N",
+      "key": {
+        "default": "Ctrl+Shift+N",
+        "mac": "Ctrl+Shift+N"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_O",
+      "key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Ctrl+Shift+O"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_P",
+      "key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Ctrl+Shift+P"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Q",
+      "key": {
+        "default": "Ctrl+Shift+Q",
+        "mac": "Ctrl+Shift+Q"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_R",
+      "key": {
+        "default": "Ctrl+Shift+R",
+        "mac": "Ctrl+Shift+R"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_S",
+      "key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Ctrl+Shift+S"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_T",
+      "key": {
+        "default": "Ctrl+Shift+T",
+        "mac": "Ctrl+Shift+T"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_U",
+      "key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Ctrl+Shift+U"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_V",
+      "key": {
+        "default": "Ctrl+Shift+V",
+        "mac": "Ctrl+Shift+V"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_W",
+      "key": {
+        "default": "Ctrl+Shift+W",
+        "mac": "Ctrl+Shift+W"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_X",
+      "key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Ctrl+Shift+X"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Y",
+      "key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Ctrl+Shift+Y"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Z",
+      "key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Ctrl+Shift+Z"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_0",
+      "key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Ctrl+Shift+0"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_1",
+      "key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Ctrl+Shift+1"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_2",
+      "key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "Ctrl+Shift+2"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_3",
+      "key": {
+        "default": "Ctrl+Shift+3",
+        "mac": "Ctrl+Shift+3"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_4",
+      "key": {
+        "default": "Ctrl+Shift+4",
+        "mac": "Ctrl+Shift+4"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_5",
+      "key": {
+        "default": "Ctrl+Shift+5",
+        "mac": "Ctrl+Shift+5"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_6",
+      "key": {
+        "default": "Ctrl+Shift+6",
+        "mac": "Ctrl+Shift+6"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_7",
+      "key": {
+        "default": "Ctrl+Shift+7",
+        "mac": "Ctrl+Shift+7"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_8",
+      "key": {
+        "default": "Ctrl+Shift+8",
+        "mac": "Ctrl+Shift+8"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_9",
+      "key": {
+        "default": "Ctrl+Shift+9",
+        "mac": "Ctrl+Shift+9"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_A",
+      "key": {
+        "default": "Shift+Alt+A",
+        "mac": "Shift+Alt+A"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_B",
+      "key": {
+        "default": "Shift+Alt+B",
+        "mac": "Shift+Alt+B"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_C",
+      "key": {
+        "default": "Shift+Alt+C",
+        "mac": "Shift+Alt+C"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_D",
+      "key": {
+        "default": "Shift+Alt+D",
+        "mac": "Shift+Alt+D"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_E",
+      "key": {
+        "default": "Shift+Alt+E",
+        "mac": "Shift+Alt+E"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_F",
+      "key": {
+        "default": "Shift+Alt+F",
+        "mac": "Shift+Alt+F"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_G",
+      "key": {
+        "default": "Shift+Alt+G",
+        "mac": "Shift+Alt+G"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_H",
+      "key": {
+        "default": "Shift+Alt+H",
+        "mac": "Shift+Alt+H"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_I",
+      "key": {
+        "default": "Shift+Alt+I",
+        "mac": "Shift+Alt+I"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_J",
+      "key": {
+        "default": "Shift+Alt+J",
+        "mac": "Shift+Alt+J"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_K",
+      "key": {
+        "default": "Shift+Alt+K",
+        "mac": "Shift+Alt+K"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_L",
+      "key": {
+        "default": "Shift+Alt+L",
+        "mac": "Shift+Alt+L"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_M",
+      "key": {
+        "default": "Shift+Alt+M",
+        "mac": "Shift+Alt+M"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_N",
+      "key": {
+        "default": "Shift+Alt+N",
+        "mac": "Shift+Alt+N"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_O",
+      "key": {
+        "default": "Shift+Alt+O",
+        "mac": "Shift+Alt+O"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_P",
+      "key": {
+        "default": "Shift+Alt+P",
+        "mac": "Shift+Alt+P"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_Q",
+      "key": {
+        "default": "Shift+Alt+Q",
+        "mac": "Shift+Alt+Q"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_R",
+      "key": {
+        "default": "Shift+Alt+R",
+        "mac": "Shift+Alt+R"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_S",
+      "key": {
+        "default": "Shift+Alt+S",
+        "mac": "Shift+Alt+S"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_T",
+      "key": {
+        "default": "Shift+Alt+T",
+        "mac": "Shift+Alt+T"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_U",
+      "key": {
+        "default": "Shift+Alt+U",
+        "mac": "Shift+Alt+U"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_V",
+      "key": {
+        "default": "Shift+Alt+V",
+        "mac": "Shift+Alt+V"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_W",
+      "key": {
+        "default": "Shift+Alt+W",
+        "mac": "Shift+Alt+W"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_X",
+      "key": {
+        "default": "Shift+Alt+X",
+        "mac": "Shift+Alt+X"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_Y",
+      "key": {
+        "default": "Shift+Alt+Y",
+        "mac": "Shift+Alt+Y"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_Z",
+      "key": {
+        "default": "Shift+Alt+Z",
+        "mac": "Shift+Alt+Z"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_0",
+      "key": {
+        "default": "Shift+Alt+0",
+        "mac": "Shift+Alt+0"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_1",
+      "key": {
+        "default": "Shift+Alt+1",
+        "mac": "Shift+Alt+1"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_2",
+      "key": {
+        "default": "Shift+Alt+2",
+        "mac": "Shift+Alt+2"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_3",
+      "key": {
+        "default": "Shift+Alt+3",
+        "mac": "Shift+Alt+3"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_4",
+      "key": {
+        "default": "Shift+Alt+4",
+        "mac": "Shift+Alt+4"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_5",
+      "key": {
+        "default": "Shift+Alt+5",
+        "mac": "Shift+Alt+5"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_6",
+      "key": {
+        "default": "Shift+Alt+6",
+        "mac": "Shift+Alt+6"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_7",
+      "key": {
+        "default": "Shift+Alt+7",
+        "mac": "Shift+Alt+7"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_8",
+      "key": {
+        "default": "Shift+Alt+8",
+        "mac": "Shift+Alt+8"
+      }
+    },
+    {
+      "action": "k_Shift_Alt_9",
+      "key": {
+        "default": "Shift+Alt+9",
+        "mac": "Shift+Alt+9"
       }
     }
   ]

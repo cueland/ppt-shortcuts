@@ -63,8 +63,19 @@
     ol.myformats li { margin: 2px 0; }
     ol.myformats button { padding: 1px 6px; font-size: 11px; }
 
-    /* status */
+    /* status — sticky so the notice is visible wherever you've scrolled */
     .status { margin: 8px 0 0; padding: 6px 8px; border-radius: 6px; font-size: 12px; min-height: 1.4em; }
+    .status.sticky { position: sticky; top: 0; z-index: 4; background: Canvas; box-shadow: 0 0 0 1px var(--line); }
+    .status.sticky.info { background: #fff3e0; } .status.sticky.ok { background: #e6f6ea; } .status.sticky.warn { background: #ffe4c2; }
+    @media (prefers-color-scheme: dark) { .status.sticky.info { background: #3a2a10; } .status.sticky.ok { background: #143a20; } .status.sticky.warn { background: #4a2e08; } }
+    .status.sticky:empty { display: none; }
+    button.tog { font-size: 12px; padding: 4px 9px; }
+    button.tog.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+    /* compact: icons only */
+    body.compact .tools { grid-template-columns: repeat(auto-fill, minmax(34px, 1fr)); gap: 2px; }
+    body.compact .tool { min-height: 34px; padding: 4px 2px; }
+    body.compact .tool .lbl, body.compact .tool kbd { display: none; }
+    body.compact .tool.bound .ic::after { content: ""; position: absolute; right: -3px; top: -3px; width: 6px; height: 6px; border-radius: 3px; background: var(--accent); }
     .status.info { background: rgba(217,119,6,.15); }
     .status.ok { background: rgba(22,163,74,.15); }
     .status.warn { background: rgba(217,119,6,.25); }
@@ -100,11 +111,11 @@
 <body>
   <div id="head">
     <h1>ChristiantialElements</h1>
-    <span class="seg"><button id="mode-run" class="on">Run</button><button id="mode-assign">Assign keys</button></span>
+    <span class="row" style="margin:0"><button id="btn-compact" class="tog" title="Icons only, more per row">Compact</button><span class="seg"><button id="mode-run" class="on">Run</button><button id="mode-assign">Assign keys</button></span></span>
   </div>
   <div id="diagnostics" class="muted">Loading Office.js…</div>
   <p class="muted" style="margin:6px 0 0">Select the shapes to change, then ⇧-click the reference <b>last</b>. In <b>Assign keys</b>, clicking an icon records a key for it (or right-click any icon). Esc cancels, Delete removes.</p>
-  <div id="recorder-status" class="status muted"></div>
+  <div id="recorder-status" class="status muted sticky"></div>
 
   <div id="toolbar"></div>
 
@@ -151,7 +162,7 @@
   <pre id="log"></pre>
 
   <!-- ?b= is a cache-buster; bump it with BUILD in commands.js so a fresh page always gets fresh scripts. -->
-  <script src="native-shortcuts.js?b=12"></script>
-  <script src="commands.js?b=12"></script>
+  <script src="native-shortcuts.js?b=14"></script>
+  <script src="commands.js?b=14"></script>
 </body>
 </html>
