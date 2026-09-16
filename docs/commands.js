@@ -1,6 +1,6 @@
 /* global Office, OfficeRuntime, PowerPoint, KEY_BANK, KEY_BANK_MODIFIER_SETS, KEY_BANK_KEYS, slotId, NATIVE_SHORTCUTS */
 /*
- * ppt-shortcuts — keyboard-bound shape commands for PowerPoint on macOS.
+ * ChristiantialElements — keyboard-bound shape commands for PowerPoint on macOS.
  *
  * Runs in the add-in's shared runtime (lifetime="long"), so the same JS context serves
  * both the keyboard-shortcut actions and the task pane. That's why command handlers can
@@ -619,7 +619,7 @@ function log(message) {
   const line = `${new Date().toLocaleTimeString()}  ${message}`;
   logBuffer.push(line);
   if (logBuffer.length > 200) logBuffer.shift();
-  console.log("[ppt-shortcuts] " + message);
+  console.log("[ChristiantialElements] " + message);
   const l = el("log");
   if (l) { l.textContent = logBuffer.join("\n"); l.scrollTop = l.scrollHeight; }
 }

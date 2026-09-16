@@ -7,8 +7,9 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 WEF="$HOME/Library/Containers/com.microsoft.Powerpoint/Data/Documents/wef"
 
 mkdir -p "$WEF"
-cp "$ROOT/manifest.xml" "$WEF/ppt-shortcuts.manifest.xml"
-echo "Copied manifest to $WEF/ppt-shortcuts.manifest.xml"
+rm -f "$WEF/ppt-shortcuts.manifest.xml"
+cp "$ROOT/manifest.xml" "$WEF/christiantial-elements.manifest.xml"
+echo "Copied manifest to $WEF/christiantial-elements.manifest.xml"
 
 if pgrep -xq "Microsoft PowerPoint"; then
   echo "Quitting PowerPoint…"
@@ -19,4 +20,4 @@ fi
 
 echo "Starting PowerPoint…"
 open -a "Microsoft PowerPoint"
-echo "Done. Open a presentation; the add-in appears under Home › Shortcuts."
+echo "Done. Open a presentation; the add-in appears under Home › ChristiantialElements."

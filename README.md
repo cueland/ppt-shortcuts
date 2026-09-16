@@ -1,7 +1,8 @@
-# ppt-shortcuts
+# ChristiantialElements
 
-Personal Office.js add-in that binds keyboard shortcuts to shape-sizing commands in
-PowerPoint for macOS. Modeled on Efficient Elements; built and owned locally.
+Personal Office.js add-in that binds keyboard shortcuts to shape commands in PowerPoint
+for macOS. Modeled on Efficient Elements; built and owned locally. Repo slug and Pages URL
+stay `ppt-shortcuts`; the product name is ChristiantialElements.
 
 **Status: Phase 1 passed** (five sizing commands fire from real keystrokes). Now adding
 commands from the operation inventory in priority order, with in-pane key assignment.
@@ -29,7 +30,7 @@ Behaviour switches live in `CONFIG` at the top of [docs/commands.js](docs/comman
 
 ## Assigning keys
 
-Press `⌃⇧⌥K` (or Home › ppt-shortcuts) to open the pane. Click a command, then press the key
+Press `⌃⇧⌥K` (or Home › ChristiantialElements › Open) to open the pane. Click a command, then press the key
 you want — or click a key in the map. Esc cancels; Delete removes the command's key. The change
 is live immediately; nothing to redeploy.
 
@@ -90,7 +91,7 @@ bump `?v=` on `ExtendedOverrides` in `manifest.xml`, push, re-sideload.
    ```
    This copies `manifest.xml` to `~/Library/Containers/com.microsoft.Powerpoint/Data/Documents/wef/`
    (note the lowercase `p` in `Powerpoint`) and restarts PowerPoint.
-4. Open any presentation. A **Shortcuts › ppt-shortcuts** button appears on the Home tab.
+4. Open any presentation. A **ChristiantialElements › Open** button appears on the Home tab.
    The diagnostics line at the top of the pane reports `Office.context.diagnostics.version`
    and which requirement sets the host supports.
 

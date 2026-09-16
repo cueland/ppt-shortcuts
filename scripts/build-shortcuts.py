@@ -32,7 +32,7 @@ def main():
 
     shortcuts = {
         "actions": [
-            {"id": slot_id(c), "type": "ExecuteFunction", "name": f"ppt-shortcuts slot {c}"}
+            {"id": slot_id(c), "type": "ExecuteFunction", "name": f"ChristiantialElements {c}"}
             for c in bank
         ],
         "shortcuts": [

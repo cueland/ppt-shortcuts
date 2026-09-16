@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!--
-  ppt-shortcuts add-in-only manifest. Sideloaded locally (scripts/sideload.sh), NOT served.
+  ChristiantialElements add-in-only manifest. Sideloaded locally (scripts/sideload.sh), NOT served.
 
   Two things that fail SILENTLY if wrong (build brief §7):
     1. SharedRuntime 1.1 in <Requirements> AND a <Runtime lifetime="long"> directly after <Host>.
@@ -16,8 +16,8 @@
   <Version>0.1.0.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="ppt-shortcuts"/>
-  <Description DefaultValue="Keyboard-bound shape sizing commands for PowerPoint on macOS."/>
+  <DisplayName DefaultValue="ChristiantialElements"/>
+  <Description DefaultValue="ChristiantialElements: keyboard-driven shape tools for PowerPoint on macOS."/>
   <IconUrl DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icon-80.png"/>
   <SupportUrl DefaultValue="https://github.com/cueland/ppt-shortcuts"/>
@@ -92,17 +92,17 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://cueland.github.io/ppt-shortcuts/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="ppt-shortcuts loaded"/>
-        <bt:String id="Group.Label" DefaultValue="Shortcuts"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="ppt-shortcuts"/>
+        <bt:String id="GetStarted.Title" DefaultValue="ChristiantialElements loaded"/>
+        <bt:String id="Group.Label" DefaultValue="ChristiantialElements"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Open"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Shape-sizing shortcuts are registered. Open the task pane from Home › Shortcuts to run the Phase 0 probe."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open the ppt-shortcuts probe and debug pane."/>
+        <bt:String id="GetStarted.Description" DefaultValue="Shortcuts are registered. Press Ctrl+Shift+Option+K or use Home › ChristiantialElements to assign keys."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open ChristiantialElements: assign keys, run commands, see the log."/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
 
   <!-- Bump ?v= when shortcuts.json changes; Office caches this file aggressively (brief §9). -->
-  <ExtendedOverrides Url="https://cueland.github.io/ppt-shortcuts/shortcuts.json?v=3"></ExtendedOverrides>
+  <ExtendedOverrides Url="https://cueland.github.io/ppt-shortcuts/shortcuts.json?v=4"></ExtendedOverrides>
 </OfficeApp>
