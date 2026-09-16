@@ -189,10 +189,24 @@ async function runCommand(id) {
   }
 }
 
-let paneVisible = false;
+// Tracked from Office.addin.onVisibilityModeChanged, with document.visibilityState as a
+// cross-check (the shared-runtime page is what the pane displays, so when the pane is
+// closed the page usually reports "hidden").
+let paneVisible = null; // null = no event yet
+function paneLooksVisible() {
+  if (paneVisible !== null) return paneVisible;
+  return document.visibilityState === "visible";
+}
 async function togglePane() {
-  if (paneVisible) await Office.addin.hide();
-  else await Office.addin.showAsTaskpane();
+  if (!Office.addin || !Office.addin.showAsTaskpane) throw new Error("Office.addin.showAsTaskpane unavailable (needs SharedRuntime 1.1).");
+  const before = `event=${paneVisible} doc=${document.visibilityState}`;
+  if (paneLooksVisible()) {
+    log(`togglePane: hiding (${before})`);
+    await Office.addin.hide();
+  } else {
+    log(`togglePane: showing (${before})`);
+    await Office.addin.showAsTaskpane();
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -657,8 +671,11 @@ Office.onReady(async (info) => {
   }
   if (Office.addin && Office.addin.onVisibilityModeChanged) {
     try {
-      Office.addin.onVisibilityModeChanged((args) => { paneVisible = args.visibilityMode === "Taskpane"; });
-    } catch (_) { /* older hosts */ }
+      await Office.addin.onVisibilityModeChanged((args) => {
+        paneVisible = args.visibilityMode === "Taskpane";
+        log(`pane visibility → ${args.visibilityMode}`);
+      });
+    } catch (err) { log("onVisibilityModeChanged unavailable: " + (err.message || err)); }
   }
 
   await loadKeymap();
