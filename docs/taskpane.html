@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ppt-shortcuts</title>
+  <!-- Office.js must load before commands.js; the CDN URL is the only supported source. -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 12px; }
+    h1 { font-size: 15px; margin: 0 0 4px; }
+    h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; opacity: .7; margin: 18px 0 6px; }
+    .muted { opacity: .65; font-size: 12px; }
+    .row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+    button { font: inherit; padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(127,127,127,.5); background: rgba(127,127,127,.12); cursor: pointer; }
+    button:hover { background: rgba(127,127,127,.25); }
+    button.primary { background: #1e40af; color: #fff; border-color: #1e40af; }
+    table { border-collapse: collapse; width: 100%; font-size: 12px; margin-top: 6px; }
+    th, td { text-align: left; padding: 3px 6px; border-bottom: 1px solid rgba(127,127,127,.3); font-variant-numeric: tabular-nums; }
+    th { opacity: .7; font-weight: 600; }
+    pre#log { font: 11px/1.45 ui-monospace, Menlo, monospace; background: rgba(127,127,127,.12); padding: 8px; border-radius: 6px; max-height: 260px; overflow: auto; white-space: pre-wrap; margin: 6px 0 0; }
+    label { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; }
+    select { font: inherit; }
+    kbd { font: 11px ui-monospace, Menlo, monospace; padding: 1px 4px; border: 1px solid rgba(127,127,127,.5); border-radius: 4px; }
+    ol { padding-left: 18px; margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <h1>ppt-shortcuts</h1>
+  <div id="diagnostics" class="muted">Loading Office.js…</div>
+
+  <h2>Phase 0 — selection-order probe</h2>
+  <ol class="muted">
+    <li>Click <b>Create probe shapes</b> (A, B, C; A is brought to front).</li>
+    <li>Click on the slide, then ⇧-click to select in order <b>C → A → B</b>.</li>
+    <li>Click <b>Dump selection</b>. Array order C, A, B → selection order preserved → keep <code>lastSelected</code>. Order tracks <code>zOrderPosition</code> → switch to <code>pickup</code>.</li>
+  </ol>
+  <div class="row">
+    <button id="btn-probe-shapes">Create probe shapes</button>
+    <button id="btn-dump" class="primary">Dump selection</button>
+  </div>
+  <div id="probe-output"></div>
+
+  <h2>Reference model</h2>
+  <div class="row">
+    <label>REFERENCE_MODE
+      <select id="reference-mode">
+        <option value="lastSelected">lastSelected (EE model)</option>
+        <option value="pickup">pickup (explicit)</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="cfg-RECENTER_ON_REF"> RECENTER_ON_REF</label>
+    <label><input type="checkbox" id="cfg-KEEP_CENTER"> KEEP_CENTER</label>
+  </div>
+  <div id="reference-status" class="muted"></div>
+  <p class="muted">Runtime overrides only — defaults live in <code>CONFIG</code> in commands.js.</p>
+
+  <h2>Commands (same handlers the shortcuts call)</h2>
+  <div class="row">
+    <button id="btn-matchWidth">matchWidth <kbd>⌃⇧⌥W</kbd></button>
+    <button id="btn-matchHeight">matchHeight <kbd>⌃⇧⌥H</kbd></button>
+    <button id="btn-matchBoth">matchBoth <kbd>⌃⇧⌥B</kbd></button>
+    <button id="btn-fitInside">fitInside <kbd>⌃⇧⌥I</kbd></button>
+    <button id="btn-fillOutside">fillOutside <kbd>⌃⇧⌥O</kbd></button>
+    <button id="btn-pickupReference">pickupReference <kbd>⌃⇧⌥P</kbd></button>
+  </div>
+  <div class="row">
+    <button id="btn-acceptance-shapes">Create acceptance shapes (100×200 + 300×150)</button>
+    <button id="btn-shortcuts">Show registered shortcuts</button>
+  </div>
+  <div id="shortcuts-output"></div>
+
+  <h2>Log <button id="btn-clear-log" style="font-size:11px;padding:2px 6px">clear</button></h2>
+  <pre id="log"></pre>
+
+  <script src="commands.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ppt-shortcuts add-in-only manifest. Sideloaded locally (scripts/sideload.sh), NOT served.
+
+  Two things that fail SILENTLY if wrong (build brief §7):
+    1. SharedRuntime 1.1 in <Requirements> AND a <Runtime lifetime="long"> directly after <Host>.
+    2. <ExtendedOverrides Url="…shortcuts.json"> placed after </VersionOverrides>, not inside it.
+  Every resid that points at the runtime page must be the same one ("Taskpane.Url").
+-->
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+  xsi:type="TaskPaneApp">
+  <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
+  <Version>0.1.0.0</Version>
+  <ProviderName>Christian Ueland</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="ppt-shortcuts"/>
+  <Description DefaultValue="Keyboard-bound shape sizing commands for PowerPoint on macOS."/>
+  <IconUrl DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://github.com/cueland/ppt-shortcuts"/>
+  <AppDomains>
+    <AppDomain>https://cueland.github.io</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Presentation"/>
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="SharedRuntime" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://cueland.github.io/ppt-shortcuts/taskpane.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Presentation">
+        <Runtimes>
+          <Runtime resid="Taskpane.Url" lifetime="long"/>
+        </Runtimes>
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title"/>
+            <Description resid="GetStarted.Description"/>
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
+          </GetStarted>
+          <FunctionFile resid="Taskpane.Url"/>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="PptShortcuts.Group">
+                <Label resid="Group.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                <Control xsi:type="Button" id="PptShortcuts.TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label"/>
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <Description resid="TaskpaneButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>PptShortcuts.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://github.com/cueland/ppt-shortcuts"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://cueland.github.io/ppt-shortcuts/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GetStarted.Title" DefaultValue="ppt-shortcuts loaded"/>
+        <bt:String id="Group.Label" DefaultValue="Shortcuts"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="ppt-shortcuts"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="Shape-sizing shortcuts are registered. Open the task pane from Home › Shortcuts to run the Phase 0 probe."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open the ppt-shortcuts probe and debug pane."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+
+  <!-- Bump ?v= when shortcuts.json changes; Office caches this file aggressively (brief §9). -->
+  <ExtendedOverrides Url="https://cueland.github.io/ppt-shortcuts/shortcuts.json?v=1"></ExtendedOverrides>
+</OfficeApp>
