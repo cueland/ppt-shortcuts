@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-15.6";
+const BUILD = "2026-09-15.7";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -481,21 +481,60 @@ function renderCommandList() {
   ).join("");
 }
 
+// Physical layout for the key map: number row on top, then the three QWERTY rows.
+// Any bank key not listed here is appended in a final row.
+const KEY_ROWS = [
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+  ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+  ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+  ["Z", "X", "C", "V", "B", "N", "M"],
+];
+
+/** What a bank combo is used for: {kind: "assigned"|"conflict"|"free", label, detail}. */
+function describeCombo(combo) {
+  const id = keymap[combo];
+  const native = NATIVE_BY_COMBO[combo] || [];
+  if (id) return { kind: "assigned", label: COMMAND_BY_ID[id].label, detail: native.map((n) => `also ${n.source}: ${n.what}`) };
+  if (native.length) return { kind: "conflict", label: native[0].source, detail: native.map((n) => `${n.source}: ${n.what}`) };
+  return { kind: "free", label: "", detail: ["available"] };
+}
+
 function renderKeyGrid() {
   const root = el("keymap-grid");
   if (!root) return;
+  const inRows = new Set(KEY_ROWS.flat());
+  const extra = KEY_BANK_KEYS.filter((k) => !inRows.has(k));
+  const rows = extra.length ? [...KEY_ROWS, extra] : KEY_ROWS;
   root.innerHTML = KEY_BANK_MODIFIER_SETS.map((mods) => {
-    const cells = KEY_BANK_KEYS.map((k) => {
-      const combo = `${mods}+${k}`;
-      const id = keymap[combo];
-      const native = NATIVE_BY_COMBO[combo];
-      const cls = ["cell", id ? "assigned" : "free", native ? "native" : "", recorder.active && recorder.commandId === id ? "active" : ""].join(" ");
-      const title = id ? COMMAND_BY_ID[id].label : native ? native.map((n) => `${n.source}: ${n.what}`).join("; ") : "available";
-      return `<button class="${cls}" data-combo="${combo}" title="${displayCombo(combo)} — ${title}"><b>${k}</b>${id ? `<i>${COMMAND_BY_ID[id].label}</i>` : ""}</button>`;
-    }).join("");
-    return `<div class="mods">${displayCombo(mods + "+")}</div><div class="cells">${cells}</div>`;
+    const html = rows.map((row, r) =>
+      `<div class="krow r${r}">` + row.filter((k) => KEY_BANK_KEYS.includes(k)).map((k) => {
+        const combo = `${mods}+${k}`;
+        const d = describeCombo(combo);
+        const active = recorder.active && keymap[combo] && recorder.commandId === keymap[combo];
+        const cls = ["cell", d.kind, active ? "active" : ""].join(" ");
+        return `<button class="${cls}" data-combo="${combo}" aria-label="${displayCombo(combo)}: ${d.detail.join("; ")}"><b>${k}</b><i>${d.label}</i></button>`;
+      }).join("") + "</div>"
+    ).join("");
+    return `<div class="mods">${displayCombo(mods + "+")}</div><div class="keyboard">${html}</div>`;
   }).join("");
 }
+
+// Custom hover card (the webview's native title tooltips are slow and easy to miss).
+function showTip(cell) {
+  const tip = el("keytip");
+  if (!tip || !cell) return;
+  const combo = cell.dataset.combo;
+  const d = describeCombo(combo);
+  tip.innerHTML = `<b>${displayCombo(combo)}</b> ${d.kind === "assigned" ? "→ " + d.label : ""}<br>` +
+    (d.kind === "free" ? "<span class='muted'>available</span>" : d.detail.map((t) => `<span>${t}</span>`).join("<br>"));
+  tip.hidden = false;
+  const r = cell.getBoundingClientRect();
+  const w = tip.offsetWidth;
+  const left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left + r.width / 2 - w / 2));
+  tip.style.left = left + window.scrollX + "px";
+  tip.style.top = r.bottom + 6 + window.scrollY + "px";
+}
+function hideTip() { const tip = el("keytip"); if (tip) tip.hidden = true; }
 
 function renderExport() {
   const ta = el("keymap-json");
@@ -541,10 +580,15 @@ function wireTaskPane() {
     const cell = e.target.closest("[data-combo]");
     if (!cell) return;
     const combo = cell.dataset.combo;
-    if (recorder.active) recorder.capture(combo, "grid");
-    else if (keymap[combo]) recorder.start(keymap[combo]);
-    else setStatus("Pick a command above first, then click a key.", "muted");
+    if (recorder.active) { recorder.capture(combo, "grid"); return; }
+    if (keymap[combo]) { recorder.start(keymap[combo]); return; }
+    const d = describeCombo(combo);
+    setStatus(`${displayCombo(combo)} — ${d.detail.join("; ")}. Pick a command above first, then click a key.`, "muted");
   });
+  on("keymap-grid", "mouseover", (e) => showTip(e.target.closest("[data-combo]")));
+  on("keymap-grid", "mouseout", (e) => { if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest("[data-combo]")) hideTip(); });
+  on("keymap-grid", "focusin", (e) => showTip(e.target.closest("[data-combo]")));
+  on("keymap-grid", "focusout", hideTip);
 
   document.addEventListener("keydown", onKeyDown, true);
 
