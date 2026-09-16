@@ -15,8 +15,9 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.4.0"
+VERSION = "0.3.5.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
+ICON_V = "2"        # bump when any icon PNG changes (Office caches by URL)
 
 B = lambda cid, label, icon, desc: {"id": cid, "label": label, "icon": icon, "desc": desc}
 M = lambda mid, label, icon, items, desc="", nolabel=False: {"menu": mid, "label": label, "icon": icon, "items": items, "desc": desc or label, "nolabel": nolabel}
@@ -112,7 +113,7 @@ RIBBON = [
 images, short, long_ = {}, {}, {}
 def img(icon):
     for s in (16, 32, 80):
-        images[f"Icon.{icon}.{s}"] = f"{BASE}/assets/icons/{icon}-{s}.png"
+        images[f"Icon.{icon}.{s}"] = f"{BASE}/assets/icons/{icon}-{s}.png?v={ICON_V}"
     return f'<Icon><bt:Image size="16" resid="Icon.{icon}.16"/><bt:Image size="32" resid="Icon.{icon}.32"/><bt:Image size="80" resid="Icon.{icon}.80"/></Icon>'
 def sid(key, text):
     rid = "S." + re.sub(r"[^A-Za-z0-9]", "_", key)
@@ -270,7 +271,7 @@ manifest = re.sub(r'<bt:String id="L\.', '<bt:String id="L_', manifest)
 out = os.path.join(ROOT, "manifest.xml")
 with open(out, "w", encoding="utf-8") as f:
     f.write(manifest)
-missing = [k for k, v in images.items() if not os.path.exists(os.path.join(ROOT, "docs", "assets", "icons", os.path.basename(v)))]
+missing = [k for k, v in images.items() if not os.path.exists(os.path.join(ROOT, "docs", "assets", "icons", os.path.basename(v).split("?")[0]))]
 print(f"wrote manifest.xml: {sum(len(c) for _, _, c in RIBBON)} ribbon controls, {len(images)} image refs, {len(short)} short + {len(long_)} long strings")
 if missing:
     print("MISSING ICONS:", missing)

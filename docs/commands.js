@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-16.15";
+const BUILD = "2026-09-16.16";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -1103,8 +1103,10 @@ const ICON_BASE = {
   dist: '<rect x="3" y="7" width="4" height="10"/><rect x="10" y="7" width="4" height="10"/><rect x="17" y="7" width="4" height="10"/>',
   dock: '<line x1="20" y1="3" x2="20" y2="21"/><rect x="3" y="8" width="8" height="8"/><path d="M12 12h5m-2-2 2 2-2 2"/>',
   stackI: '<rect x="3" y="7" width="8" height="10"/><rect x="11" y="7" width="8" height="10"/><path d="M21 3v18" opacity=".35"/>',
-  stretch: '<rect x="3" y="8" width="8" height="8"/><line x1="17" y1="3" x2="17" y2="21"/><path d="M11 12h10m-2-2 2 2-2 2" stroke-dasharray="2 2"/>',
-  fillg: '<rect x="3" y="8" width="8" height="8"/><line x1="18" y1="3" x2="18" y2="21"/><path d="M11 12h6m-2-2 2 2-2 2" stroke-dasharray="2 2"/>',
+  // EE-style: target on the left, reference on the right, an arrow from the target to the
+  // reference's NEAR edge (gap) or through it to its FAR edge (stretch). Rotated for U/D/L.
+  stretch: '<rect x="2" y="8" width="7" height="8"/><rect x="15" y="5" width="7" height="14" fill="currentColor" opacity=".25" stroke="none"/><rect x="15" y="5" width="7" height="14"/><path d="M9 12h12.5M19 9.5l2.5 2.5-2.5 2.5"/>',
+  fillg: '<rect x="2" y="8" width="7" height="8"/><rect x="15" y="5" width="7" height="14" fill="currentColor" opacity=".25" stroke="none"/><rect x="15" y="5" width="7" height="14"/><path d="M9 12h5.5M12 9.5l2.5 2.5-2.5 2.5"/>',
   nudge: '<rect x="8" y="8" width="8" height="8"/><path d="M4 12h2m-1-2-1 2 1 2" /><path d="M3 12h3"/>',
 };
 const ICONS = {
