@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
   <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
-  <Version>0.3.2.0</Version>
+  <Version>0.3.3.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ChristiantialElements"/>
@@ -159,27 +159,20 @@
   <Icon><bt:Image size="16" resid="Icon.table.16"/><bt:Image size="32" resid="Icon.table.32"/><bt:Image size="80" resid="Icon.table.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_alignInTable</FunctionName></Action>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.more">
-  <Label resid="S_menu_more"/>
-  <Supertip><Title resid="S_menu_more"/><Description resid="L_menu_desc_more"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.matrix.16"/><bt:Image size="32" resid="Icon.matrix.32"/><bt:Image size="80" resid="Icon.matrix.80"/></Icon>
-  <Items>
-<Item id="CE.matrix">
-  <Label resid="S_lbl_matrix"/>
+<Control xsi:type="Button" id="CE.matrix">
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_matrix"/><Description resid="L_desc_matrix"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.matrix.16"/><bt:Image size="32" resid="Icon.matrix.32"/><bt:Image size="80" resid="Icon.matrix.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_matrix</FunctionName></Action>
-</Item>
-<Item id="CE.goldenCanon">
-  <Label resid="S_lbl_goldenCanon"/>
+</Control>
+<Control xsi:type="Button" id="CE.goldenCanon">
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_goldenCanon"/><Description resid="L_desc_goldenCanon"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.golden.16"/><bt:Image size="32" resid="Icon.golden.32"/><bt:Image size="80" resid="Icon.golden.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_goldenCanon</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
 <Control xsi:type="Menu" id="CE.menu.nudge">
-  <Label resid="S_menu_nudge"/>
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_menu_nudge"/><Description resid="L_menu_desc_nudge"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.nudgeRight.16"/><bt:Image size="32" resid="Icon.nudgeRight.32"/><bt:Image size="80" resid="Icon.nudgeRight.80"/></Icon>
   <Items>
@@ -291,30 +284,23 @@
   <Icon><bt:Image size="16" resid="Icon.fillDown.16"/><bt:Image size="32" resid="Icon.fillDown.32"/><bt:Image size="80" resid="Icon.fillDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_fillDown</FunctionName></Action>
 </Control>
-<Control xsi:type="Menu" id="CE.menu.resize">
-  <Label resid="S_menu_resize"/>
-  <Supertip><Title resid="S_menu_resize"/><Description resid="L_menu_desc_resize"/></Supertip>
-  <Icon><bt:Image size="16" resid="Icon.resizeUp.16"/><bt:Image size="32" resid="Icon.resizeUp.32"/><bt:Image size="80" resid="Icon.resizeUp.80"/></Icon>
-  <Items>
-<Item id="CE.resizeUp">
-  <Label resid="S_lbl_resizeUp"/>
+<Control xsi:type="Button" id="CE.resizeUp">
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_resizeUp"/><Description resid="L_desc_resizeUp"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.resizeUp.16"/><bt:Image size="32" resid="Icon.resizeUp.32"/><bt:Image size="80" resid="Icon.resizeUp.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_resizeUp</FunctionName></Action>
-</Item>
-<Item id="CE.resizeDown">
-  <Label resid="S_lbl_resizeDown"/>
+</Control>
+<Control xsi:type="Button" id="CE.resizeDown">
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_resizeDown"/><Description resid="L_desc_resizeDown"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.resizeDown.16"/><bt:Image size="32" resid="Icon.resizeDown.32"/><bt:Image size="80" resid="Icon.resizeDown.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_resizeDown</FunctionName></Action>
-</Item>
-<Item id="CE.slice">
-  <Label resid="S_lbl_slice"/>
+</Control>
+<Control xsi:type="Button" id="CE.slice">
+  <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_slice"/><Description resid="L_desc_slice"/></Supertip>
   <Icon><bt:Image size="16" resid="Icon.slice.16"/><bt:Image size="32" resid="Icon.slice.32"/><bt:Image size="80" resid="Icon.slice.80"/></Icon>
   <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_slice</FunctionName></Action>
-</Item>
-  </Items>
 </Control>
 </Group>
 <Group id="CE.group.Colour">
@@ -1001,7 +987,6 @@
         <bt:String id="S_lbl_alignInTable" DefaultValue="In table"/>
         <bt:String id="S_lbl_matrix" DefaultValue="Align in matrix"/>
         <bt:String id="S_lbl_goldenCanon" DefaultValue="Golden canon"/>
-        <bt:String id="S_menu_more" DefaultValue="More"/>
         <bt:String id="S_lbl_nudgeLeft" DefaultValue="Left"/>
         <bt:String id="S_lbl_nudgeRight" DefaultValue="Right"/>
         <bt:String id="S_lbl_nudgeUp" DefaultValue="Up"/>
@@ -1024,7 +1009,6 @@
         <bt:String id="S_lbl_resizeUp" DefaultValue="Bigger"/>
         <bt:String id="S_lbl_resizeDown" DefaultValue="Smaller"/>
         <bt:String id="S_lbl_slice" DefaultValue="Slice / multiply"/>
-        <bt:String id="S_menu_resize" DefaultValue="Resize"/>
         <bt:String id="S_group_Size" DefaultValue="Size"/>
         <bt:String id="S_lbl_fill1" DefaultValue="Slot 1"/>
         <bt:String id="S_lbl_fill2" DefaultValue="Slot 2"/>
@@ -1126,12 +1110,11 @@
         <bt:String id="L_desc_alignInTable" DefaultValue="Snap loose shapes into the table cells they overlap"/>
         <bt:String id="L_desc_matrix" DefaultValue="Rows x cols from the pane settings"/>
         <bt:String id="L_desc_goldenCanon" DefaultValue="Inside the reference, bottom margin = 2x top"/>
-        <bt:String id="L_menu_desc_more" DefaultValue="More"/>
         <bt:String id="L_desc_nudgeLeft" DefaultValue="Move by the nudge amount"/>
         <bt:String id="L_desc_nudgeRight" DefaultValue="Move by the nudge amount"/>
         <bt:String id="L_desc_nudgeUp" DefaultValue="Move by the nudge amount"/>
         <bt:String id="L_desc_nudgeDown" DefaultValue="Move by the nudge amount"/>
-        <bt:String id="L_menu_desc_nudge" DefaultValue="Nudge"/>
+        <bt:String id="L_menu_desc_nudge" DefaultValue="Nudge by the amount set in the pane"/>
         <bt:String id="L_desc_matchWidth" DefaultValue="Target width := reference width"/>
         <bt:String id="L_desc_matchHeight" DefaultValue="Target height := reference height"/>
         <bt:String id="L_desc_matchBoth" DefaultValue="Both dimensions, non-proportional"/>
@@ -1148,7 +1131,6 @@
         <bt:String id="L_desc_resizeUp" DefaultValue="Magic Resizer: scale by the factor in the pane"/>
         <bt:String id="L_desc_resizeDown" DefaultValue="Magic Resizer: scale by 1 / factor"/>
         <bt:String id="L_desc_slice" DefaultValue="Split one shape into rows x cols"/>
-        <bt:String id="L_menu_desc_resize" DefaultValue="Resize"/>
         <bt:String id="L_desc_fill1" DefaultValue="Fill colour = palette slot 1"/>
         <bt:String id="L_desc_fill2" DefaultValue="Fill colour = palette slot 2"/>
         <bt:String id="L_desc_fill3" DefaultValue="Fill colour = palette slot 3"/>

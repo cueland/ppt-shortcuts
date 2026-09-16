@@ -15,11 +15,11 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.2.0"
+VERSION = "0.3.3.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 
 B = lambda cid, label, icon, desc: {"id": cid, "label": label, "icon": icon, "desc": desc}
-M = lambda mid, label, icon, items, desc="": {"menu": mid, "label": label, "icon": icon, "items": items, "desc": desc or label}
+M = lambda mid, label, icon, items, desc="", nolabel=False: {"menu": mid, "label": label, "icon": icon, "items": items, "desc": desc or label, "nolabel": nolabel}
 
 RIBBON = [
     ("Position", "alignLeft", [
@@ -39,16 +39,14 @@ RIBBON = [
         B("stackV", "Stack V", "stackV", "Butt together top to bottom, in selection order"),
         B("swap", "Swap", "swap", "Exchange two shapes' positions and layer order"),
         B("alignInTable", "In table", "table", "Snap loose shapes into the table cells they overlap"),
-        M("more", "More", "matrix", [
-            B("matrix", "Align in matrix", "matrix", "Rows x cols from the pane settings"),
-            B("goldenCanon", "Golden canon", "golden", "Inside the reference, bottom margin = 2x top"),
-        ]),
+        B("matrix", "Align in matrix", "matrix", "Rows x cols from the pane settings"),
+        B("goldenCanon", "Golden canon", "golden", "Inside the reference, bottom margin = 2x top"),
         M("nudge", "Nudge", "nudgeRight", [
             B("nudgeLeft", "Left", "nudgeLeft", "Move by the nudge amount"),
             B("nudgeRight", "Right", "nudgeRight", "Move by the nudge amount"),
             B("nudgeUp", "Up", "nudgeUp", "Move by the nudge amount"),
             B("nudgeDown", "Down", "nudgeDown", "Move by the nudge amount"),
-        ]),
+        ], "Nudge by the amount set in the pane", nolabel=True),
     ]),
     ("Size", "matchWidth", [
         B("matchWidth", "Width", "matchWidth", "Target width := reference width"),
@@ -64,11 +62,9 @@ RIBBON = [
         B("fillRight", "Gap R", "fillRight", "Grow right to touch the reference"),
         B("fillUp", "Gap U", "fillUp", "Grow up to touch the reference"),
         B("fillDown", "Gap D", "fillDown", "Grow down to touch the reference"),
-        M("resize", "Resize", "resizeUp", [
-            B("resizeUp", "Bigger", "resizeUp", "Magic Resizer: scale by the factor in the pane"),
-            B("resizeDown", "Smaller", "resizeDown", "Magic Resizer: scale by 1 / factor"),
-            B("slice", "Slice / multiply", "slice", "Split one shape into rows x cols"),
-        ]),
+        B("resizeUp", "Bigger", "resizeUp", "Magic Resizer: scale by the factor in the pane"),
+        B("resizeDown", "Smaller", "resizeDown", "Magic Resizer: scale by 1 / factor"),
+        B("slice", "Slice / multiply", "slice", "Split one shape into rows x cols"),
     ]),
     ("Colour", "fill", [
         M("fillc", "Fill", "fill", [B(f"fill{i}", f"Slot {i}", "fill", f"Fill colour = palette slot {i}") for i in range(1, 11)], "Fill colour from the palette"),
@@ -142,8 +138,9 @@ def button_xml(b, as_item=False):
 
 def menu_xml(m):
     items = "\n".join(button_xml(b, as_item=True) for b in m["items"])
+    label_resid = "S.blank" if m.get("nolabel") else sid('menu.' + m['menu'], m['label'])
     return f'''<Control xsi:type="Menu" id="CE.menu.{m["menu"]}">
-  <Label resid="{sid('menu.' + m['menu'], m['label'])}"/>
+  <Label resid="{label_resid}"/>
   <Supertip><Title resid="{sid('menu.' + m['menu'], m['label'])}"/><Description resid="{lid('menu.desc.' + m['menu'], m['desc'])}"/></Supertip>
   {img(m["icon"])}
   <Items>
