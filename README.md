@@ -21,12 +21,24 @@ Default keys (change them in the pane):
 | `⌃⇧⌥B` | Match width and height |
 | `⌃⇧⌥I` | Fit inside reference (proportional contain) |
 | `⌃⇧⌥O` | Fill reference (proportional cover) |
+| `⌃⇧⌥S` | Add sticky note (initials + timestamp, cursor on the next line) |
 | `⌃⇧⌥K` | Show / hide the pane |
 
 Behaviour switches live in `CONFIG` at the top of [docs/commands.js](docs/commands.js):
 
 - `RECENTER_ON_REF` (default `true`) — fit/fill land on the reference's centre.
 - `KEEP_CENTER` (default `true`) — match commands grow around the target's own centre.
+
+## Sticky notes
+
+`⌃⇧⌥S` drops a BCG-style reviewer note on the current slide: a bright text box with
+`CU 15 Sep 26 - 8:28p:` as its first line and the cursor waiting on the second, so you just
+type. Initials and the default colour are set in the pane (Sticky notes section) and remembered.
+Each palette colour is also its own command (`Add sticky — Pink` etc.) if you want a key per
+colour; the palette itself is `STICKY.COLORS` in `commands.js`. Additional stickies on the same
+slide cascade down-left so they don't stack. Styling copies the sample deck (143pt wide,
+top-right, thin-thick dark-blue outline, 12pt bold, auto-fit) minus the drop shadow, which the
+JS API can't set.
 
 ## Assigning keys
 

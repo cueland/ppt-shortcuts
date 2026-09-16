@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-15.7";
+const BUILD = "2026-09-15.8";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -60,6 +60,7 @@ const DEFAULT_KEYMAP = {
   "Ctrl+Shift+Alt+I": "fitInside",
   "Ctrl+Shift+Alt+O": "fillOutside",
   "Ctrl+Shift+Alt+K": "togglePane",
+  "Ctrl+Shift+Alt+S": "addSticky",
 };
 
 // ---------------------------------------------------------------------------
@@ -168,6 +169,103 @@ async function applyToTargets(actionId, compute) {
 }
 
 // ---------------------------------------------------------------------------
+// 3b. Sticky notes — BCG-style reviewer notes: bright box, "initials date - time:" header,
+//     cursor left on the empty next line so you just start typing.
+//     Geometry and styling copied from the sample deck (sample stickie.pptx): 143pt wide,
+//     top-right with 24pt/54pt margins, 2.25pt thin-thick outline in the theme's dark blue,
+//     12pt bold, shape auto-fits its text. (The sample's drop shadow has no JS API.)
+// ---------------------------------------------------------------------------
+const STICKY = {
+  WIDTH: 143,
+  MARGIN: { top: 24, right: 54 },
+  CASCADE: 18,          // each additional sticky on a slide steps down-left by this much
+  FONT_SIZE: 12,
+  LINE: { color: "#0E2841", weight: 2.25, style: "ThinThick" },
+  SLIDE: { width: 960, height: 540 }, // 16:9 default; the JS API exposes no slide size
+  // Highlighter palette. Names become command ids (sticky_yellow …), so keep them stable.
+  COLORS: [
+    { name: "Yellow", hex: "#FFFF00" },
+    { name: "Green",  hex: "#66FF33" },
+    { name: "Pink",   hex: "#FF66CC" },
+    { name: "Orange", hex: "#FFA500" },
+    { name: "Blue",   hex: "#33CCFF" },
+    { name: "Purple", hex: "#CC99FF" },
+  ],
+};
+
+// User settings (initials, default colour) — persisted like the keymap.
+const SETTINGS_STORAGE_KEY = "ppt-shortcuts.settings.v1";
+const DEFAULT_SETTINGS = { initials: "CU", stickyColor: "Yellow" };
+let settings = { ...DEFAULT_SETTINGS };
+async function loadSettings() {
+  try {
+    const raw = await store.get(SETTINGS_STORAGE_KEY);
+    if (raw) settings = { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+  } catch (err) { log("settings unreadable, using defaults: " + err.message); }
+}
+async function saveSettings() { await store.set(SETTINGS_STORAGE_KEY, JSON.stringify(settings)); }
+
+/** "15 Sep 26 - 8:28p" — the sample's format. */
+function stickyStamp(d = new Date()) {
+  const mon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.getMonth()];
+  const yy = String(d.getFullYear()).slice(-2);
+  const h24 = d.getHours();
+  const h = h24 % 12 || 12;
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  return `${d.getDate()} ${mon} ${yy} - ${h}:${mm}${h24 >= 12 ? "p" : "a"}`;
+}
+
+function stickyColorHex(name) {
+  const c = STICKY.COLORS.find((x) => x.name === name) || STICKY.COLORS[0];
+  return c.hex;
+}
+
+/** Add a sticky to the current slide and leave the cursor on its empty second line. */
+async function addSticky(colorName) {
+  const hex = stickyColorHex(colorName || settings.stickyColor);
+  return PowerPoint.run(async (context) => {
+    const slide = context.presentation.getSelectedSlides().getItemAt(0);
+    const shapes = slide.shapes;
+    shapes.load("items/name");
+    await context.sync();
+
+    // Cascade below any stickies already on the slide so they don't stack exactly on top.
+    const existing = shapes.items.filter((s) => /^Sticky\b/.test(s.name)).length;
+    const left = STICKY.SLIDE.width - STICKY.MARGIN.right - STICKY.WIDTH - existing * STICKY.CASCADE;
+    const top = STICKY.MARGIN.top + existing * STICKY.CASCADE;
+
+    const header = `${settings.initials} ${stickyStamp()}:`;
+    const box = shapes.addTextBox(header + "\n", { left, top, width: STICKY.WIDTH, height: 40 });
+    box.name = `Sticky ${existing + 1}`;
+    box.fill.setSolidColor(hex);
+    box.lineFormat.color = STICKY.LINE.color;
+    box.lineFormat.weight = STICKY.LINE.weight;
+    box.lineFormat.style = STICKY.LINE.style;
+    const tf = box.textFrame;
+    tf.wordWrap = true;
+    tf.autoSizeSetting = "AutoSizeShapeToFitText";
+    tf.textRange.font.size = STICKY.FONT_SIZE;
+    tf.textRange.font.bold = true;
+    await context.sync();
+
+    // Put the insertion point at the start of the (empty) second line.
+    try {
+      tf.textRange.load("text");
+      await context.sync();
+      tf.textRange.getSubstring(tf.textRange.text.length, 0).setSelected();
+      await context.sync();
+    } catch (err) {
+      log("sticky: could not place the cursor (" + (err.message || err) + "); selecting the shape instead");
+      box.load("id");
+      await context.sync();
+      slide.setSelectedShapes([box.id]);
+      await context.sync();
+    }
+    log(`sticky: "${header}" ${hex} at (${left}, ${top})`);
+  });
+}
+
+// ---------------------------------------------------------------------------
 // 4. COMMANDS — the registry. Adding a command = adding one entry here.
 //    id: stable, used in the keymap. group/label/desc: shown in the pane.
 // ---------------------------------------------------------------------------
@@ -187,6 +285,11 @@ const COMMANDS = [
   { id: "fillOutside", group: "Size", label: "Fill reference",
     desc: "Scale proportionally so the target covers the reference.",
     run: () => applyToTargets("fillOutside", (t, r) => geometry.scale(t, r, "cover")) },
+  { id: "addSticky", group: "Sticky", label: "Add sticky (default colour)",
+    desc: "Reviewer note with your initials and a timestamp; cursor lands on the next line.",
+    run: () => addSticky() },
+  ...STICKY.COLORS.map((c) => ({ id: "sticky_" + c.name.toLowerCase(), group: "Sticky", label: `Add sticky — ${c.name}`,
+    desc: `Sticky in ${c.name} (${c.hex}).`, run: () => addSticky(c.name) })),
   { id: "togglePane", group: "Add-in", label: "Show / hide this pane",
     desc: "Open the pane to assign keys; press again to hide it.",
     run: () => togglePane() },
@@ -328,6 +431,13 @@ async function loadKeymap() {
     const { clean, dropped } = sanitizeKeymap(JSON.parse(raw));
     keymap = clean;
     if (dropped.length) log(`keymap: ignored ${dropped.length} stale entr${dropped.length === 1 ? "y" : "ies"}: ${dropped.join("; ")}`);
+    // New shipped defaults (a command added since the map was saved) join the map when both
+    // the key and the command are still free — never overriding a choice you made.
+    const added = [];
+    for (const [combo, id] of Object.entries(DEFAULT_KEYMAP)) {
+      if (!keymap[combo] && !comboForCommand(id) && COMMAND_BY_ID[id]) { keymap[combo] = id; added.push(`${displayCombo(combo)} → ${COMMAND_BY_ID[id].label}`); }
+    }
+    if (added.length) { await saveKeymap(); log("keymap: added new default(s): " + added.join(", ")); }
   } catch (err) {
     log("keymap: stored value unreadable, using defaults (" + err.message + ")");
     keymap = { ...DEFAULT_KEYMAP };
@@ -547,6 +657,14 @@ function renderPane() {
   renderExport();
 }
 
+function renderStickySwatches() {
+  const root = el("sticky-colors");
+  if (!root) return;
+  root.innerHTML = STICKY.COLORS.map((c) =>
+    `<button class="swatch${c.name === settings.stickyColor ? " selected" : ""}" data-color="${c.name}" style="background:${c.hex}" title="${c.name} ${c.hex}"><span>${c.name}</span></button>`
+  ).join("");
+}
+
 function renderDiagnostics() {
   const d = el("diagnostics");
   if (!d) return;
@@ -627,7 +745,29 @@ function wireTaskPane() {
     }
   }
 
+  // Sticky settings
+  const initials = el("sticky-initials");
+  if (initials) {
+    initials.value = settings.initials;
+    initials.addEventListener("change", async () => {
+      settings.initials = initials.value.trim().toUpperCase() || DEFAULT_SETTINGS.initials;
+      initials.value = settings.initials;
+      await saveSettings();
+      log(`initials = ${settings.initials}`);
+    });
+  }
+  on("sticky-colors", "click", async (e) => {
+    const sw = e.target.closest("[data-color]");
+    if (!sw) return;
+    settings.stickyColor = sw.dataset.color;
+    await saveSettings();
+    renderStickySwatches();
+    log(`sticky colour = ${settings.stickyColor}`);
+  });
+  on("btn-add-sticky", "click", () => runCommand("addSticky"));
+
   renderDiagnostics();
+  renderStickySwatches();
   renderPane();
   const l = el("log");
   if (l) l.textContent = logBuffer.join("\n");
@@ -743,6 +883,7 @@ Office.onReady(async (info) => {
   }
 
   await loadKeymap();
+  await loadSettings();
   log(`ready: build ${BUILD} · host=${info.host} platform=${info.platform} version=${(Office.context.diagnostics || {}).version} · ${KEY_BANK.length} slots · ${Object.keys(keymap).length} bound`);
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wireTaskPane);
