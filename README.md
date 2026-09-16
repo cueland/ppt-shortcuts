@@ -39,13 +39,12 @@ colour; the palette itself is `STICKY.COLORS` in `commands.js`. Additional stick
 slide cascade down-left so they don't stack. Styling copies the sample deck (top-right,
 thin-thick dark-blue outline, 12pt bold).
 
-**Shadow.** The sample has a real soft drop shadow. PowerPoint's JS API has no shape-effects
-surface — no shadow, glow, reflection or soft edges on `Shape`, verified against the preview
-API (the VBA object model's `Shape.Shadow` has no JS counterpart). OOXML injection is
-Word-only and image insertion produces pictures. The one all-native option is the pane's
-**Shape shadow** toggle: a dark translucent rectangle grouped behind the note. It's hard-edged.
-Off by default. **Test helpers › Dump Shape API** lists every member the host's runtime really
-implements on a shape, so you can check for yourself on any future build.
+**No shadow.** The sample has a real soft drop shadow, but PowerPoint's JS API has no
+shape-effects surface — no shadow, glow, reflection or soft edges on `Shape`, verified against
+the preview API and by probing the live runtime (the VBA object model's `Shape.Shadow` has no JS
+counterpart; OOXML injection is Word-only). **Test helpers › Dump Shape API** lists every
+member the host really implements on a shape and tries `load`/`set` on the plausible effect
+names, so any future build that adds one will show up.
 
 ## Assigning keys
 

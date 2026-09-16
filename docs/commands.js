@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-15.10";
+const BUILD = "2026-09-15.11";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -175,12 +175,9 @@ async function applyToTargets(actionId, compute) {
 //     top-right with 24pt/54pt margins, 2.25pt thin-thick outline in the theme's dark blue,
 //     12pt bold. Height is the sample's 80pt × 1.25, fixed (no auto-fit).
 //
-//     Shadow: the sample has a real soft drop shadow. PowerPoint's JS API exposes no shape
-//     effects at all (shadow, glow, reflection, soft edges — verified against the preview
-//     API 2026-09-15), OOXML injection is Word-only, and images are not acceptable. The only
-//     all-native option is a second shape behind the note (SHADOW.mode = "shape"): a dark,
-//     semi-transparent rectangle offset by SHADOW.distance, grouped with the note. Hard-edged.
-//     Default is "none" — a single clean text box.
+//     No shadow: the sample has a real soft drop shadow, but PowerPoint's JS API exposes no
+//     shape effects at all (shadow, glow, reflection, soft edges — verified against the preview
+//     API and via the Dump Shape API probe, 2026-09-15). OOXML injection is Word-only.
 // ---------------------------------------------------------------------------
 const STICKY = {
   WIDTH: 143,
@@ -189,7 +186,6 @@ const STICKY = {
   CASCADE: 18,          // each additional sticky on a slide steps down-left by this much
   FONT_SIZE: 12,
   LINE: { color: "#0E2841", weight: 2.25, style: "ThinThick" },
-  SHADOW: { mode: "none", distance: 3, color: "#000000", transparency: 0.6 }, // mode: "none" | "shape"
   SLIDE: { width: 960, height: 540 }, // 16:9 default; the JS API exposes no slide size
   // Highlighter palette. Names become command ids (sticky_yellow …), so keep them stable.
   COLORS: [
@@ -202,9 +198,9 @@ const STICKY = {
   ],
 };
 
-// User settings (initials, default colour, shadow) — persisted like the keymap.
+// User settings (initials, default colour) — persisted like the keymap.
 const SETTINGS_STORAGE_KEY = "ppt-shortcuts.settings.v1";
-const DEFAULT_SETTINGS = { initials: "CU", stickyColor: "Yellow", stickyShadow: STICKY.SHADOW.mode };
+const DEFAULT_SETTINGS = { initials: "CU", stickyColor: "Yellow" };
 let settings = { ...DEFAULT_SETTINGS };
 async function loadSettings() {
   try {
@@ -234,7 +230,6 @@ async function addSticky(colorName) {
   const hex = stickyColorHex(colorName || settings.stickyColor);
   const { WIDTH: w, HEIGHT: h } = STICKY;
   const header = `${settings.initials} ${stickyStamp()}:`;
-  const wantShadow = settings.stickyShadow === "shape";
 
   return PowerPoint.run(async (context) => {
     const slide = context.presentation.getSelectedSlides().getItemAt(0);
@@ -247,19 +242,6 @@ async function addSticky(colorName) {
     const n = existing + 1;
     const left = STICKY.SLIDE.width - STICKY.MARGIN.right - w - existing * STICKY.CASCADE;
     const top = STICKY.MARGIN.top + existing * STICKY.CASCADE;
-
-    // Optional native "shadow": a dark translucent rectangle behind the note, added first so
-    // it sits underneath. Then grouped so the two move as one.
-    let shadow = null;
-    if (wantShadow) {
-      const d = STICKY.SHADOW.distance;
-      shadow = shapes.addGeometricShape(PowerPoint.GeometricShapeType.rectangle, { left: left + d, top: top + d, width: w, height: h });
-      shadow.name = `Sticky ${n} shadow`;
-      shadow.fill.setSolidColor(STICKY.SHADOW.color);
-      shadow.fill.transparency = STICKY.SHADOW.transparency;
-      shadow.lineFormat.visible = false;
-      shadow.load("id");
-    }
 
     const box = shapes.addTextBox(header + "\n", { left, top, width: w, height: h });
     box.name = `Sticky ${n}`;
@@ -275,17 +257,6 @@ async function addSticky(colorName) {
     box.load("id");
     await context.sync();
 
-    if (shadow) {
-      try {
-        const group = shapes.addGroup([shadow.id, box.id]);
-        group.name = `Sticky ${n}`;
-        box.name = `Sticky ${n} note`;
-        await context.sync();
-      } catch (err) {
-        log("sticky: grouping skipped — " + (err.message || err));
-      }
-    }
-
     // Put the insertion point at the start of the (empty) second line.
     try {
       tf.textRange.load("text");
@@ -297,7 +268,7 @@ async function addSticky(colorName) {
       slide.setSelectedShapes([box.id]);
       await context.sync();
     }
-    log(`sticky ${n}: "${header}" ${hex} ${w}×${h} at (${left}, ${top})${shadow ? " + shape shadow" : ""}`);
+    log(`sticky ${n}: "${header}" ${hex} ${w}×${h} at (${left}, ${top})`);
   });
 }
 
@@ -802,15 +773,6 @@ function wireTaskPane() {
     log(`sticky colour = ${settings.stickyColor}`);
   });
   on("btn-add-sticky", "click", () => runCommand("addSticky"));
-  const shadowBox = el("sticky-shadow");
-  if (shadowBox) {
-    shadowBox.checked = settings.stickyShadow === "shape";
-    shadowBox.addEventListener("change", async () => {
-      settings.stickyShadow = shadowBox.checked ? "shape" : "none";
-      await saveSettings();
-      log(`sticky shadow = ${settings.stickyShadow}`);
-    });
-  }
 
   renderDiagnostics();
   renderStickySwatches();
