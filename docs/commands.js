@@ -1,4 +1,4 @@
-/* global Office, OfficeRuntime, PowerPoint, KEY_BANK, KEY_BANK_MODIFIER_SETS, KEY_BANK_KEYS, slotId, NATIVE_SHORTCUTS */
+/* global Office, OfficeRuntime, PowerPoint, NATIVE_SHORTCUTS */
 /*
  * ChristiantialElements — keyboard-bound shape commands for PowerPoint on macOS.
  *
@@ -6,12 +6,17 @@
  * both the keyboard-shortcut actions and the task pane. That's why command handlers can
  * write straight into the task pane's #log element when the pane happens to be open.
  *
- * Key model: shortcuts.json registers a fixed BANK of key combos (see keybank.js), each as
- * a generic "slot" action. A KEYMAP {combo → command id}, stored in the add-in, decides what
- * each slot runs. Assigning a key is therefore instant — no redeploy, no cache clearing.
+ * Key model: shortcuts.json registers a fixed BANK of key combos, each as a generic "slot"
+ * action. A KEYMAP {combo → command id}, stored in the add-in, decides what each slot runs.
+ * Assigning a key is therefore instant — no redeploy, no cache clearing.
+ *
+ * This file is deliberately self-contained (the bank is defined HERE and shortcuts.json is
+ * generated from it by scripts/build-shortcuts.py). Office caches add-in files one by one,
+ * so a page that depends on two scripts staying in step can end up with a mismatched pair
+ * and die on load — taking every shortcut with it.
  *
  * Layout of this file:
- *   1. CONFIG            — behaviour switches from the build brief (§5)
+ *   1. CONFIG + KEY BANK — behaviour switches; the registered key combos
  *   2. geometry          — pure functions, no Office API (unit-testable in any JS runtime)
  *   3. selection         — loadSelection / resolveReference (last selected = reference)
  *   4. COMMANDS          — the registry: one entry per command, the only place to add one
@@ -21,9 +26,22 @@
  */
 "use strict";
 
+// Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
+const BUILD = "2026-09-15.6";
+
 // ---------------------------------------------------------------------------
-// 1. CONFIG
+// 1. CONFIG + KEY BANK
 // ---------------------------------------------------------------------------
+
+// The key bank. scripts/build-shortcuts.py parses these two lines to generate
+// docs/shortcuts.json — keep them single-line JSON arrays. After changing them: run the
+// script, bump ?v= on ExtendedOverrides in manifest.xml, push, re-sideload.
+const KEY_BANK_MODIFIER_SETS = ["Ctrl+Shift+Alt", "Ctrl+Alt"];
+const KEY_BANK_KEYS = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"];
+const KEY_BANK = KEY_BANK_MODIFIER_SETS.flatMap((mods) => KEY_BANK_KEYS.map((k) => `${mods}+${k}`));
+/** Office action id for a bank combo — must equal what build-shortcuts.py writes. */
+function slotId(combo) { return "k_" + combo.replace(/\+/g, "_"); }
+
 const CONFIG = {
   // fitInside / fillOutside: move the result onto the reference's centre (true) or
   // scale in place around the target's own centre (false).
@@ -262,7 +280,9 @@ function comboFromEvent(e) {
 const BANK_SET = new Set(KEY_BANK);
 const NATIVE_BY_COMBO = (() => {
   const m = {};
-  for (const [combo, what, source] of NATIVE_SHORTCUTS) {
+  // native-shortcuts.js is optional: without it you just lose the conflict warnings.
+  const list = typeof NATIVE_SHORTCUTS !== "undefined" ? NATIVE_SHORTCUTS : [];
+  for (const [combo, what, source] of list) {
     const c = canonicalCombo(combo);
     (m[c] = m[c] || []).push({ what, source });
   }
@@ -495,7 +515,7 @@ function renderDiagnostics() {
   const sets = ["PowerPointApi 1.4", "PowerPointApi 1.5", "PowerPointApi 1.8", "PowerPointApi 1.10", "SharedRuntime 1.1", "KeyboardShortcuts 1.1"]
     .map((s) => { const [name, ver] = s.split(" "); return `${s}: ${supports(name, ver) ? "yes" : "no"}`; });
   d.innerHTML =
-    `<div><b>Host</b> ${info.host || "?"} · <b>Platform</b> ${info.platform || "?"} · <b>Version</b> ${info.version || "?"} · <b>Bank</b> ${KEY_BANK.length} keys</div>` +
+    `<div><b>Host</b> ${info.host || "?"} · <b>Platform</b> ${info.platform || "?"} · <b>Version</b> ${info.version || "?"} · <b>Build</b> ${BUILD} · <b>Bank</b> ${KEY_BANK.length} keys</div>` +
     `<div class="muted">${sets.join(" · ")}</div>`;
 }
 
@@ -679,7 +699,7 @@ Office.onReady(async (info) => {
   }
 
   await loadKeymap();
-  log(`ready: host=${info.host} platform=${info.platform} version=${(Office.context.diagnostics || {}).version} · ${KEY_BANK.length} slots · ${Object.keys(keymap).length} bound`);
+  log(`ready: build ${BUILD} · host=${info.host} platform=${info.platform} version=${(Office.context.diagnostics || {}).version} · ${KEY_BANK.length} slots · ${Object.keys(keymap).length} bound`);
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wireTaskPane);
   else wireTaskPane();

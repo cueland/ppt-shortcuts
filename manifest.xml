@@ -104,5 +104,5 @@
   </VersionOverrides>
 
   <!-- Bump ?v= when shortcuts.json changes; Office caches this file aggressively (brief §9). -->
-  <ExtendedOverrides Url="https://cueland.github.io/ppt-shortcuts/shortcuts.json?v=4"></ExtendedOverrides>
+  <ExtendedOverrides Url="https://cueland.github.io/ppt-shortcuts/shortcuts.json?v=5"></ExtendedOverrides>
 </OfficeApp>

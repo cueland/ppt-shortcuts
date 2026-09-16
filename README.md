@@ -59,13 +59,12 @@ The keymap is stored in the add-in (`OfficeRuntime.storage`, with `localStorage`
 ppt-shortcuts/
 ├── docs/                      # served by GitHub Pages (https://cueland.github.io/ppt-shortcuts/)
 │   ├── taskpane.html          # shared-runtime host page + assignment UI
-│   ├── commands.js            # COMMANDS registry, geometry, keymap, recorder, pane
-│   ├── keybank.js             # GENERATED: the key bank (must match shortcuts.json)
-│   ├── shortcuts.json         # GENERATED: one Office action per bank key
+│   ├── commands.js            # COMMANDS registry, KEY BANK, geometry, keymap, recorder, pane
+│   ├── shortcuts.json         # GENERATED from the bank in commands.js: one Office action per key
 │   ├── native-shortcuts.js    # PowerPoint / macOS / Rectangle shortcuts for conflict warnings
 │   └── assets/                # ribbon icons
 ├── manifest.xml               # sideloaded locally — NOT served
-├── scripts/build-shortcuts.py # regenerates keybank.js + shortcuts.json from the bank definition
+├── scripts/build-shortcuts.py # regenerates shortcuts.json from the bank in commands.js (--check verifies)
 ├── scripts/sideload.sh        # copy manifest into PowerPoint's wef dir and restart PowerPoint
 └── scripts/clear-cache.sh     # nuke the add-in cache when a change refuses to show up
 ```
@@ -74,8 +73,13 @@ ppt-shortcuts/
 `label`, `desc`, `run`). It appears in the pane immediately and can be bound to any bank key.
 No manifest or JSON change.
 
-**Changing the bank** (new modifier set or keys) = edit `scripts/build-shortcuts.py`, run it,
-bump `?v=` on `ExtendedOverrides` in `manifest.xml`, push, re-sideload.
+**Changing the bank** (new modifier set or keys) = edit `KEY_BANK_MODIFIER_SETS` / `KEY_BANK_KEYS`
+in `commands.js`, run `scripts/build-shortcuts.py`, bump `?v=` on `ExtendedOverrides` in
+`manifest.xml`, push, re-sideload.
+
+**Every push that changes `commands.js`**: bump `BUILD` in it and the `?b=` on both script tags in
+`taskpane.html`. The pane's diagnostics line shows the loaded `Build`, so you can tell at a glance
+whether PowerPoint is running fresh code or a cached copy.
 
 ## One-time setup
 
