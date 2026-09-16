@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-16.16";
+const BUILD = "2026-09-16.17";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -66,6 +66,7 @@ const DEFAULT_KEYMAP = {
   "Ctrl+Shift+Alt+I": "fitInside",
   "Ctrl+Shift+Alt+O": "fillOutside",
   "Ctrl+Shift+Alt+S": "addSticky",
+  "Ctrl+Shift+Alt+D": "duplicateSlide",
   "Ctrl+Shift+Alt+K": "togglePane",
 };
 
@@ -750,6 +751,22 @@ async function setVisible(visible) {
   });
 }
 
+/** Duplicate the current slide in place: export it as a .pptx in memory, insert it right after itself. Selection stays on the original. */
+async function duplicateSlide() {
+  return PowerPoint.run(async (context) => {
+    const sel = context.presentation.getSelectedSlides();
+    sel.load("items/id");
+    await context.sync();
+    if (!sel.items.length) throw new Error("No slide selected.");
+    const slide = sel.items[0];
+    const exported = slide.exportAsBase64();
+    await context.sync();
+    context.presentation.insertSlidesFromBase64(exported.value, { formatting: "KeepSourceFormatting", targetSlideId: slide.id });
+    await context.sync();
+    log(`duplicateSlide: copy inserted after the current slide (${Math.round(exported.value.length * 0.75 / 1024)} KB)`);
+  });
+}
+
 async function goToSlide() {
   const n = Math.max(1, parseInt(settings.gotoSlide, 10) || 1);
   return PowerPoint.run(async (context) => {
@@ -784,10 +801,18 @@ async function agendaWizard() {
         box.textFrame.textRange.font.color = activeIndex === null || activeIndex === i ? "#000000" : "#9A9A9A";
       });
     };
-    const overview = await addSlide(); drawList(overview, null);
-    for (let i = 0; i < items.length; i++) { const s = await addSlide(); drawList(s, i); }
+    // Where to put them: right after the current slide (moveTo, PowerPointApi 1.8).
+    const cur = context.presentation.getSelectedSlides();
+    cur.load("items/id");
+    slides.load("items/id");
     await context.sync();
-    log(`agenda: overview + ${items.length} divider slide(s) appended at the end`);
+    let insertAt = cur.items.length ? slides.items.findIndex((x) => x.id === cur.items[0].id) + 1 : slides.items.length;
+    const overview = await addSlide(); drawList(overview, null);
+    const made = [overview];
+    for (let i = 0; i < items.length; i++) { const s = await addSlide(); drawList(s, i); made.push(s); }
+    await context.sync();
+    if (supports("PowerPointApi", "1.8")) { for (const s of made) { s.moveTo(insertAt++); await context.sync(); } }
+    log(`agenda: overview + ${items.length} divider slide(s) inserted after the current slide`);
   });
 }
 
@@ -959,6 +984,7 @@ const COMMANDS = [
   { id: "exportImage", group: "Tools", label: "Export as image", icon: "export", desc: "Render the selected shape to PNG in the pane.", run: () => exportImage() },
   { id: "hide", group: "Tools", label: "Hide selected", icon: "hide", desc: "Hide (keeps position and layer).", run: () => setVisible(false) },
   { id: "unhide", group: "Tools", label: "Unhide all", icon: "unhide", desc: "Show every hidden shape on the slide.", run: () => setVisible(true) },
+  { id: "duplicateSlide", group: "Tools", label: "Duplicate slide", icon: "duplicate", desc: "Insert an exact copy of the current slide right after it (backup before editing).", run: () => duplicateSlide() },
   { id: "goToSlide", group: "Tools", label: "Go to slide", icon: "goto", desc: "Jump to the slide number below.", run: () => goToSlide() },
   { id: "agendaWizard", group: "Tools", label: "Agenda", icon: "agenda", desc: "Agenda + divider slides from the items below (v1, appended at the end).", run: () => agendaWizard() },
   { id: "masterLabelAdd", group: "Tools", label: "Master label +", icon: "master", desc: "Add the label below to every slide layout.", run: () => masterLabel(true) },
@@ -1152,6 +1178,7 @@ const ICONS = {
   export: S('<rect x="3" y="3" width="18" height="18"/><path d="M3 17l5-5 4 4 3-3 6 6"/><circle cx="16" cy="8" r="2"/>'),
   hide: S('<path d="M3 3l18 18M10 6.5A9.7 9.7 0 0 1 12 6c5 0 9 6 9 6a15 15 0 0 1-3.2 3.5M6.5 8A15 15 0 0 0 3 12s4 6 9 6a9 9 0 0 0 3-.5"/>'),
   unhide: S('<path d="M3 12s4-6 9-6 9 6 9 6-4 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/>'),
+  duplicate: S('<rect x="3" y="7" width="13" height="10"/><path d="M8 7V4h13v10h-3"/><path d="M9.5 12h4M11.5 10v4"/>'),
   goto: S('<rect x="3" y="4" width="18" height="16"/><path d="M9 9l-1.5 6M15.5 9L14 15M7 11h10M6.5 13.5h10"/>'),
   agenda: S('<path d="M5 7h14M5 12h14M5 17h9"/><circle cx="3" cy="7" r=".8" fill="currentColor"/><circle cx="3" cy="12" r=".8" fill="currentColor"/><circle cx="3" cy="17" r=".8" fill="currentColor"/>'),
   master: S('<rect x="3" y="4" width="18" height="14"/><path d="M8 21h8M13 14h5" /><path d="M13 14h5" stroke-width="3" opacity=".4"/>'),
