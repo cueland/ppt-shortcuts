@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-15.9";
+const BUILD = "2026-09-15.10";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -862,23 +862,47 @@ async function createProbeShapes() {
 }
 
 /**
- * Ask the host what a Shape really supports: every member the runtime defines on the
- * proxy's prototype chain. Definitive answer to "is there a shadow property on this build?"
+ * Ask the host what a Shape really supports.
+ *  1. Every member the runtime defines on the proxy's prototype chain (inspected via
+ *     descriptors — touching an unloaded getter throws).
+ *  2. Then just try it: shape.load(name) and shape.set({name: …}) for every plausible
+ *     effect-property name, logging what PowerPoint answers. If any of them takes, it exists.
  */
 async function dumpShapeApi() {
+  const CANDIDATES = ["shadow", "shadowFormat", "effects", "effectFormat", "glow", "glowFormat", "reflection", "reflectionFormat", "softEdge", "softEdges", "softEdgeFormat", "threeDFormat", "style"];
   await PowerPoint.run(async (context) => {
-    const shapes = context.presentation.getSelectedShapes();
-    shapes.load("items/name");
+    const sel = context.presentation.getSelectedShapes();
+    sel.load("items/id,items/name");
     await context.sync();
-    const shape = shapes.items[0] || context.presentation.getSelectedSlides().getItemAt(0).shapes.getItemAt(0);
-    const members = new Set();
+    if (!sel.items.length) throw new Error("select a shape first");
+    const shape = sel.items[0];
+
+    // 1. prototype members
+    const members = new Map();
     for (let proto = Object.getPrototypeOf(shape); proto && proto !== Object.prototype; proto = Object.getPrototypeOf(proto)) {
-      for (const k of Object.getOwnPropertyNames(proto)) if (!k.startsWith("_") && k !== "constructor") members.add(k);
+      for (const k of Object.getOwnPropertyNames(proto)) {
+        if (k.startsWith("_") || k === "constructor" || members.has(k)) continue;
+        const d = Object.getOwnPropertyDescriptor(proto, k);
+        members.set(k, typeof d.value === "function" ? "method" : "property");
+      }
     }
-    const list = [...members].sort();
-    const effects = list.filter((k) => /shadow|glow|reflect|soft|effect|bevel|3d/i.test(k));
-    renderTable("probe-output", list.map((k) => ({ member: k, type: typeof shape[k] === "function" ? "method" : "property" })));
-    log(`Shape API on this host: ${list.length} members. Effect-related: ${effects.length ? effects.join(", ") : "none"}.`);
+    const list = [...members.keys()].sort();
+    const effectish = list.filter((k) => /shadow|glow|reflect|soft|effect|bevel|3d|style/i.test(k));
+    log(`Shape API on this host: ${list.length} members. Effect-related names: ${effectish.length ? effectish.join(", ") : "none"}.`);
+
+    // 2. try each candidate for real
+    const rows = [];
+    for (const name of CANDIDATES) {
+      const row = { name, onPrototype: members.has(name) ? "yes" : "no", load: "", set: "" };
+      try { shape.load(name); await context.sync(); row.load = "ok: " + JSON.stringify(shape[name] && shape[name].toJSON ? shape[name].toJSON() : shape[name]).slice(0, 60); }
+      catch (err) { row.load = "✗ " + (err.message || err).slice(0, 80); }
+      try { shape.set({ [name]: { visible: true } }); await context.sync(); row.set = "ok (no error)"; }
+      catch (err) { row.set = "✗ " + (err.message || err).slice(0, 80); }
+      rows.push(row);
+    }
+    renderTable("probe-output", rows);
+    for (const r of rows) log(`  ${r.name}: prototype=${r.onPrototype} · load → ${r.load} · set → ${r.set}`);
+    log("Full member list: " + list.join(", "));
   });
 }
 
