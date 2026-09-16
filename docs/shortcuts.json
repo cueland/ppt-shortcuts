@@ -1,18 +1,16 @@
 {
   "actions": [
-    { "id": "matchWidth",      "type": "ExecuteFunction", "name": "Match width of reference shape" },
-    { "id": "matchHeight",     "type": "ExecuteFunction", "name": "Match height of reference shape" },
-    { "id": "matchBoth",       "type": "ExecuteFunction", "name": "Match width and height of reference shape" },
-    { "id": "fitInside",       "type": "ExecuteFunction", "name": "Scale to fit inside reference shape" },
-    { "id": "fillOutside",     "type": "ExecuteFunction", "name": "Scale to fill reference shape" },
-    { "id": "pickupReference", "type": "ExecuteFunction", "name": "Pick up selected shape as reference" }
+    { "id": "matchWidth",  "type": "ExecuteFunction", "name": "Match width of reference shape" },
+    { "id": "matchHeight", "type": "ExecuteFunction", "name": "Match height of reference shape" },
+    { "id": "matchBoth",   "type": "ExecuteFunction", "name": "Match width and height of reference shape" },
+    { "id": "fitInside",   "type": "ExecuteFunction", "name": "Scale to fit inside reference shape" },
+    { "id": "fillOutside", "type": "ExecuteFunction", "name": "Scale to fill reference shape" }
   ],
   "shortcuts": [
-    { "action": "matchWidth",      "key": { "default": "Ctrl+Shift+Alt+W", "mac": "Ctrl+Shift+Alt+W" } },
-    { "action": "matchHeight",     "key": { "default": "Ctrl+Shift+Alt+H", "mac": "Ctrl+Shift+Alt+H" } },
-    { "action": "matchBoth",       "key": { "default": "Ctrl+Shift+Alt+B", "mac": "Ctrl+Shift+Alt+B" } },
-    { "action": "fitInside",       "key": { "default": "Ctrl+Shift+Alt+I", "mac": "Ctrl+Shift+Alt+I" } },
-    { "action": "fillOutside",     "key": { "default": "Ctrl+Shift+Alt+O", "mac": "Ctrl+Shift+Alt+O" } },
-    { "action": "pickupReference", "key": { "default": "Ctrl+Shift+Alt+P", "mac": "Ctrl+Shift+Alt+P" } }
+    { "action": "matchWidth",  "key": { "default": "Ctrl+Shift+Alt+W", "mac": "Ctrl+Shift+Alt+W" } },
+    { "action": "matchHeight", "key": { "default": "Ctrl+Shift+Alt+H", "mac": "Ctrl+Shift+Alt+H" } },
+    { "action": "matchBoth",   "key": { "default": "Ctrl+Shift+Alt+B", "mac": "Ctrl+Shift+Alt+B" } },
+    { "action": "fitInside",   "key": { "default": "Ctrl+Shift+Alt+I", "mac": "Ctrl+Shift+Alt+I" } },
+    { "action": "fillOutside", "key": { "default": "Ctrl+Shift+Alt+O", "mac": "Ctrl+Shift+Alt+O" } }
   ]
 }

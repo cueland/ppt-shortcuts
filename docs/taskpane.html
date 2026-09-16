@@ -31,31 +31,7 @@
   <h1>ppt-shortcuts</h1>
   <div id="diagnostics" class="muted">Loading Office.js…</div>
 
-  <h2>Phase 0 — selection-order probe</h2>
-  <ol class="muted">
-    <li>Click <b>Create probe shapes</b> (A, B, C; A is brought to front).</li>
-    <li>Click on the slide, then ⇧-click to select in order <b>C → A → B</b>.</li>
-    <li>Click <b>Dump selection</b>. Array order C, A, B → selection order preserved → keep <code>lastSelected</code>. Order tracks <code>zOrderPosition</code> → switch to <code>pickup</code>.</li>
-  </ol>
-  <div class="row">
-    <button id="btn-probe-shapes">Create probe shapes</button>
-    <button id="btn-dump" class="primary">Dump selection</button>
-  </div>
-  <div id="probe-output"></div>
-
-  <h2>Reference model</h2>
-  <div class="row">
-    <label>REFERENCE_MODE
-      <select id="reference-mode">
-        <option value="lastSelected">lastSelected (EE model)</option>
-        <option value="pickup">pickup (explicit)</option>
-      </select>
-    </label>
-    <label><input type="checkbox" id="cfg-RECENTER_ON_REF"> RECENTER_ON_REF</label>
-    <label><input type="checkbox" id="cfg-KEEP_CENTER"> KEEP_CENTER</label>
-  </div>
-  <div id="reference-status" class="muted"></div>
-  <p class="muted">Runtime overrides only — defaults live in <code>CONFIG</code> in commands.js.</p>
+  <p class="muted">Select the shapes to change, then ⇧-click the shape to copy from <b>last</b>. Press a key.</p>
 
   <h2>Commands (same handlers the shortcuts call)</h2>
   <div class="row">
@@ -64,8 +40,19 @@
     <button id="btn-matchBoth">matchBoth <kbd>⌃⇧⌥B</kbd></button>
     <button id="btn-fitInside">fitInside <kbd>⌃⇧⌥I</kbd></button>
     <button id="btn-fillOutside">fillOutside <kbd>⌃⇧⌥O</kbd></button>
-    <button id="btn-pickupReference">pickupReference <kbd>⌃⇧⌥P</kbd></button>
   </div>
+  <div class="row">
+    <label><input type="checkbox" id="cfg-RECENTER_ON_REF"> RECENTER_ON_REF</label>
+    <label><input type="checkbox" id="cfg-KEEP_CENTER"> KEEP_CENTER</label>
+    <span class="muted">runtime overrides; defaults live in <code>CONFIG</code></span>
+  </div>
+
+  <h2>Selection probe</h2>
+  <div class="row">
+    <button id="btn-probe-shapes">Create probe shapes</button>
+    <button id="btn-dump">Dump selection</button>
+  </div>
+  <div id="probe-output"></div>
   <div class="row">
     <button id="btn-acceptance-shapes">Create acceptance shapes (100×200 + 300×150)</button>
     <button id="btn-shortcuts">Show registered shortcuts</button>

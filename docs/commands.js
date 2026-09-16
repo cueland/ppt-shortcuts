@@ -20,13 +20,6 @@
 // 1. CONFIG
 // ---------------------------------------------------------------------------
 const CONFIG = {
-  // How the reference ("master") shape is chosen. Phase 0 decides this:
-  //   "lastSelected" — reference = last shape returned by getSelectedShapes().
-  //                    Only valid if the API returns shapes in SELECTION order.
-  //   "pickup"       — reference = shape stored by the pickupReference action.
-  //                    Required if the API returns shapes in Z-order.
-  REFERENCE_MODE: "lastSelected",
-
   // fitInside / fillOutside: move the result onto the reference's centre (true) or
   // scale in place around the target's own centre (false).
   RECENTER_ON_REF: true,
@@ -35,13 +28,6 @@ const CONFIG = {
   // (true) instead of PowerPoint's native top-left anchoring (false).
   KEEP_CENTER: true,
 };
-
-// Runtime override of REFERENCE_MODE so the task pane can flip it without a redeploy.
-let referenceMode = CONFIG.REFERENCE_MODE;
-
-// Reference picked up by the pickupReference action. Lives as long as the shared runtime.
-// { slideId, shapeId, name, left, top, width, height }
-let pickedReference = null;
 
 // ---------------------------------------------------------------------------
 // 2. Geometry — pure functions. `target` and `ref` are {left, top, width, height}.
@@ -83,7 +69,7 @@ const geometry = {
 };
 
 // ---------------------------------------------------------------------------
-// 3. Reference resolution — the only place that knows about REFERENCE_MODE.
+// 3. Reference resolution
 // ---------------------------------------------------------------------------
 
 /** Plain-object snapshot of a loaded shape proxy. */
@@ -110,48 +96,17 @@ async function loadSelection(context) {
  * Given the selected shapes (in the order the API returned them), decide which one is the
  * reference and which are the targets.
  *
+ * Phase 0 result (2026-09-15, PowerPoint for Mac 16.112.3): getSelectedShapes() returns
+ * shapes in SELECTION order, not z-order — selecting C → A → B dumps [C, A, B] with A on
+ * top. So the Efficient Elements model holds: the last shape you selected is the reference.
+ *
  * Returns { reference: snapshot, targets: [{...snapshot, proxy}] }.
- * Throws with a human-readable message if no reference can be determined.
  */
-async function resolveReference(context, selected) {
-  if (referenceMode === "lastSelected") {
-    if (selected.length < 2) {
-      throw new Error("Select at least two shapes: targets first, reference last.");
-    }
-    const reference = selected[selected.length - 1];
-    return { reference, targets: selected.slice(0, -1) };
+function resolveReference(selected) {
+  if (selected.length < 2) {
+    throw new Error("Select at least two shapes: targets first, reference last.");
   }
-
-  if (referenceMode === "pickup") {
-    if (!pickedReference) {
-      throw new Error("No reference picked up yet. Select a shape and press the pickupReference key.");
-    }
-    // Prefer the live shape (it may have been moved/resized since pickup).
-    let reference = selected.find((s) => s.id === pickedReference.shapeId);
-    if (!reference) {
-      reference = await lookupShape(context, pickedReference.slideId, pickedReference.shapeId);
-    }
-    if (!reference) {
-      log(`Reference "${pickedReference.name}" no longer found on its slide; using stored geometry.`);
-      reference = { ...pickedReference, id: pickedReference.shapeId };
-    }
-    const targets = selected.filter((s) => s.id !== reference.id);
-    if (targets.length === 0) {
-      throw new Error("Selection contains only the reference shape; select the targets.");
-    }
-    return { reference, targets };
-  }
-
-  throw new Error(`Unknown REFERENCE_MODE "${referenceMode}".`);
-}
-
-/** Find a shape by slide id + shape id. Returns a snapshot or null. */
-async function lookupShape(context, slideId, shapeId) {
-  const slide = context.presentation.slides.getItemOrNullObject(slideId);
-  const shape = slide.shapes.getItemOrNullObject(shapeId);
-  shape.load("id,name,left,top,width,height,isNullObject");
-  await context.sync();
-  return shape.isNullObject ? null : snapshot(shape);
+  return { reference: selected[selected.length - 1], targets: selected.slice(0, -1) };
 }
 
 // ---------------------------------------------------------------------------
@@ -165,7 +120,7 @@ async function lookupShape(context, slideId, shapeId) {
 async function applyToTargets(actionId, compute) {
   return PowerPoint.run(async (context) => {
     const selected = await loadSelection(context);
-    const { reference, targets } = await resolveReference(context, selected);
+    const { reference, targets } = resolveReference(selected);
 
     log(`${actionId}: reference "${reference.name}" ${fmt(reference)} → ${targets.length} target(s)`);
 
@@ -200,21 +155,6 @@ const commands = {
   matchBoth: () => applyToTargets("matchBoth", (t, r) => geometry.match(t, r, { width: true, height: true })),
   fitInside: () => applyToTargets("fitInside", (t, r) => geometry.scale(t, r, "contain")),
   fillOutside: () => applyToTargets("fillOutside", (t, r) => geometry.scale(t, r, "cover")),
-
-  /** Store the (first) selected shape as the reference for "pickup" mode. */
-  pickupReference: () =>
-    PowerPoint.run(async (context) => {
-      const selected = await loadSelection(context);
-      if (selected.length === 0) throw new Error("Select a shape to pick up as reference.");
-      const slides = context.presentation.getSelectedSlides();
-      const slide = slides.getItemAt(0);
-      slide.load("id");
-      await context.sync();
-      const s = selected[0];
-      pickedReference = { slideId: slide.id, shapeId: s.id, name: s.name, left: s.left, top: s.top, width: s.width, height: s.height };
-      log(`pickupReference: "${s.name}" ${fmt(s)} on slide ${slide.id}`);
-      renderReferenceStatus();
-    }),
 };
 
 /** Wrap a command so errors are logged instead of vanishing inside the shortcut runtime. */
@@ -356,14 +296,6 @@ function renderTable(elementId, rows) {
     "</tbody></table>";
 }
 
-function renderReferenceStatus() {
-  const el = document.getElementById("reference-status");
-  if (!el) return;
-  el.textContent = pickedReference
-    ? `Picked up: "${pickedReference.name}" ${fmt(pickedReference)}`
-    : "No reference picked up.";
-}
-
 function renderDiagnostics() {
   const el = document.getElementById("diagnostics");
   if (!el) return;
@@ -387,14 +319,6 @@ function wireTaskPane() {
   bind("btn-clear-log", () => { logBuffer.length = 0; log("log cleared"); });
   for (const actionId of Object.keys(commands)) bind("btn-" + actionId, guarded(actionId));
 
-  const modeSelect = document.getElementById("reference-mode");
-  if (modeSelect) {
-    modeSelect.value = referenceMode;
-    modeSelect.addEventListener("change", () => {
-      referenceMode = modeSelect.value;
-      log(`REFERENCE_MODE (runtime) = ${referenceMode}`);
-    });
-  }
   for (const key of ["RECENTER_ON_REF", "KEEP_CENTER"]) {
     const box = document.getElementById("cfg-" + key);
     if (box) {
@@ -404,7 +328,6 @@ function wireTaskPane() {
   }
 
   renderDiagnostics();
-  renderReferenceStatus();
   const el = document.getElementById("log");
   if (el) el.textContent = logBuffer.join("\n");
 }
@@ -421,7 +344,7 @@ Office.onReady((info) => {
   } else {
     log("Office.actions.associate unavailable — not running inside an Office shared runtime.");
   }
-  log(`ready: host=${info.host} platform=${info.platform} version=${(Office.context.diagnostics || {}).version} mode=${referenceMode}`);
+  log(`ready: host=${info.host} platform=${info.platform} version=${(Office.context.diagnostics || {}).version}`);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", wireTaskPane);

@@ -6,7 +6,10 @@ PowerPoint for macOS. Modeled on Efficient Elements; built and owned locally.
 **Status: Phase 1 feasibility spike.** Five commands, real keystrokes, end-to-end.
 Stop and report before Phase 2 (see the build brief).
 
-## Commands
+## How to use it
+
+Select the shapes you want to change, then shift-click the shape you want them to copy
+**last**. Press a key. The last-selected shape is the reference (the Efficient Elements model).
 
 | Key | Action ID | What it does |
 |---|---|---|
@@ -15,17 +18,15 @@ Stop and report before Phase 2 (see the build brief).
 | `⌃⇧⌥B` | `matchBoth` | both, non-proportional |
 | `⌃⇧⌥I` | `fitInside` | proportional contain: `k = min(refW/w, refH/h)` |
 | `⌃⇧⌥O` | `fillOutside` | proportional cover: `k = max(refW/w, refH/h)` |
-| `⌃⇧⌥P` | `pickupReference` | store the selected shape as reference (only meaningful in `pickup` mode) |
 
 `Ctrl` in the shortcuts file is the physical Control key on a Mac (`⌃`), and `Alt` is Option (`⌥`).
 
 Behaviour switches live in `CONFIG` at the top of [docs/commands.js](docs/commands.js):
 
-- `REFERENCE_MODE` — `"lastSelected"` (Efficient Elements model) or `"pickup"`. **Phase 0 decides this.**
 - `RECENTER_ON_REF` (default `true`) — fit/fill land on the reference's centre.
 - `KEEP_CENTER` (default `true`) — match commands grow around the target's own centre.
 
-The task pane exposes runtime toggles for all three so you can experiment without redeploying.
+The task pane exposes runtime toggles for both so you can experiment without redeploying.
 
 ## Layout
 
@@ -63,20 +64,17 @@ The action IDs in `shortcuts.json` (`actions[].id` and `shortcuts[].action`) and
    The diagnostics line at the top of the pane reports `Office.context.diagnostics.version`
    and which requirement sets the host supports.
 
-## Phase 0 — selection-order probe (do this first)
+## Phase 0 — selection-order probe: ANSWERED
 
-Everything Efficient-Elements-like ("the last shape you clicked is the master") depends on whether
-`getSelectedShapes()` returns shapes in **selection order** or **z-order**. VBA returns z-order.
+Whether "last shape you clicked is the master" can work depends on whether
+`getSelectedShapes()` returns shapes in **selection order** or **z-order** (VBA returns z-order).
 
-1. Open the task pane → **Create probe shapes**. Adds A, B, C and brings A to the front, so
-   z-order ≠ any natural click order.
-2. Click on the slide, then shift-click to select **C → A → B**.
-3. **Dump selection.** The table shows array index, `name`, `id`, `zOrderPosition`.
-   - Array order **C, A, B** → selection order is preserved → keep `REFERENCE_MODE = "lastSelected"`.
-   - Array order tracks `zOrderPosition` → set `REFERENCE_MODE = "pickup"` in `CONFIG`.
-     The `pickupReference` binding is already registered, so nothing else changes.
+**Result (2026-09-15, PowerPoint for Mac 16.112.3): selection order.** With A forced to the
+front, selecting C → A → B dumped `[C, A, B]`. `resolveReference()` therefore takes the last
+element, and no explicit pick-up-reference action is needed.
 
-Repeat with a different order (e.g. B → C → A) to rule out a coincidence.
+The probe is still in the task pane (**Create probe shapes** / **Dump selection**) in case a
+future PowerPoint build changes the behaviour.
 
 ## Phase 1 — acceptance
 
@@ -84,10 +82,10 @@ Work through these with the task pane open so the log shows before/after geometr
 
 1. [ ] PowerPoint version ≥ 16.105.2 (diagnostics line).
 2. [ ] Add-in loads; version reported.
-3. [ ] Phase 0 answered; `REFERENCE_MODE` set accordingly.
+3. [x] Phase 0 answered: selection order preserved; last-selected = reference.
 4. [ ] All five shortcuts fire from the keyboard **with the task pane closed**.
 5. [ ] Geometry: **Create acceptance shapes** adds a 100×200 target and a 300×150 reference.
-   Select target then reference (or pick up the reference), then:
+   Click the target, shift-click the reference, then:
    - `⌃⇧⌥I` → target becomes **75×150**
    - `⌘Z`, then `⌃⇧⌥O` → target becomes **300×600**
    The log prints a ⚠ if the read-back geometry differs from the computed value — that would
