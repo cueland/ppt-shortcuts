@@ -167,5 +167,6 @@ Budget for this — it looks exactly like a code bug the first time.
 
 ## Out of scope (no API surface)
 
-Adjustment handles, rotation, screen colour picker, email/save selected slides, animations.
+Shape effects (shadow, glow, reflection, soft edges), screen colour picker, email/save selected
+slides, animations. Adjustment handles, rotation and visibility ARE available (PowerPointApi 1.10).
 See the feasibility inventory alongside the build brief before scoping Phase 2.
