@@ -8,60 +8,103 @@
   <!-- Office.js must load before commands.js; the CDN URL is the only supported source. -->
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
   <style>
-    :root { color-scheme: light dark; }
+    :root { color-scheme: light dark; --accent: #1e40af; --line: rgba(127,127,127,.3); --soft: rgba(127,127,127,.12); }
     body { font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 12px; }
     h1 { font-size: 15px; margin: 0 0 4px; }
     h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; opacity: .7; margin: 18px 0 6px; }
     .muted { opacity: .65; font-size: 12px; }
-    .row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
-    button { font: inherit; padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(127,127,127,.5); background: rgba(127,127,127,.12); cursor: pointer; }
+    .row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; align-items: center; }
+    button { font: inherit; padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(127,127,127,.5); background: var(--soft); cursor: pointer; }
     button:hover { background: rgba(127,127,127,.25); }
-    button.primary { background: #1e40af; color: #fff; border-color: #1e40af; }
     table { border-collapse: collapse; width: 100%; font-size: 12px; margin-top: 6px; }
-    th, td { text-align: left; padding: 3px 6px; border-bottom: 1px solid rgba(127,127,127,.3); font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 3px 6px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
     th { opacity: .7; font-weight: 600; }
-    pre#log { font: 11px/1.45 ui-monospace, Menlo, monospace; background: rgba(127,127,127,.12); padding: 8px; border-radius: 6px; max-height: 260px; overflow: auto; white-space: pre-wrap; margin: 6px 0 0; }
+    pre#log { font: 11px/1.45 ui-monospace, Menlo, monospace; background: var(--soft); padding: 8px; border-radius: 6px; max-height: 220px; overflow: auto; white-space: pre-wrap; margin: 6px 0 0; }
     label { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; }
-    select { font: inherit; }
-    kbd { font: 11px ui-monospace, Menlo, monospace; padding: 1px 4px; border: 1px solid rgba(127,127,127,.5); border-radius: 4px; }
-    ol { padding-left: 18px; margin: 4px 0; }
+    kbd { font: 12px ui-monospace, Menlo, monospace; padding: 1px 6px; border: 1px solid rgba(127,127,127,.5); border-radius: 4px; background: var(--soft); white-space: nowrap; }
+    kbd.empty { opacity: .45; border-style: dashed; }
+    textarea { width: 100%; box-sizing: border-box; font: 11px/1.4 ui-monospace, Menlo, monospace; min-height: 120px; }
+
+    /* command list */
+    #cmd-list .group { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; opacity: .6; margin: 10px 0 2px; }
+    #cmd-list .cmd { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+    #cmd-list .cmd:hover { background: var(--soft); }
+    #cmd-list .cmd.active { border-color: var(--accent); background: rgba(30,64,175,.12); }
+    #cmd-list .cmd.active kbd { border-color: var(--accent); color: var(--accent); }
+    #cmd-list .cmd-actions { display: inline-flex; align-items: center; gap: 4px; }
+    #cmd-list button.run, #cmd-list button.x { padding: 0 6px; font-size: 11px; line-height: 20px; opacity: .6; }
+    #cmd-list button.run:hover, #cmd-list button.x:hover { opacity: 1; }
+
+    /* status line */
+    .status { margin: 8px 0; padding: 6px 8px; border-radius: 6px; font-size: 12px; min-height: 1.4em; }
+    .status.info { background: rgba(30,64,175,.12); }
+    .status.ok { background: rgba(22,163,74,.15); }
+    .status.warn { background: rgba(217,119,6,.18); }
+    .status.muted { opacity: .65; }
+
+    /* key grid */
+    #keymap-grid .mods { font: 600 12px ui-monospace, Menlo, monospace; margin: 10px 0 4px; }
+    #keymap-grid .cells { display: grid; grid-template-columns: repeat(9, 1fr); gap: 3px; }
+    #keymap-grid .cell { padding: 3px 2px; border-radius: 5px; border: 1px solid var(--line); background: transparent; display: flex; flex-direction: column; align-items: center; min-height: 34px; overflow: hidden; }
+    #keymap-grid .cell b { font: 600 12px ui-monospace, Menlo, monospace; }
+    #keymap-grid .cell i { font-style: normal; font-size: 9px; line-height: 1.1; opacity: .8; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    #keymap-grid .cell.free { opacity: .55; }
+    #keymap-grid .cell.free:hover { opacity: 1; background: var(--soft); }
+    #keymap-grid .cell.assigned { background: rgba(30,64,175,.15); border-color: rgba(30,64,175,.5); opacity: 1; }
+    #keymap-grid .cell.native { border-style: dashed; }
+    #keymap-grid .cell.active { outline: 2px solid var(--accent); }
+    .legend { display: flex; gap: 12px; font-size: 11px; opacity: .7; margin-top: 6px; flex-wrap: wrap; }
+    .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; border: 1px solid var(--line); }
+    .legend .l-assigned::before { background: rgba(30,64,175,.4); }
+    .legend .l-native::before { border-style: dashed; }
+    details summary { cursor: pointer; font-size: 12px; opacity: .8; }
   </style>
 </head>
 <body>
   <h1>ppt-shortcuts</h1>
   <div id="diagnostics" class="muted">Loading Office.js…</div>
-
   <p class="muted">Select the shapes to change, then ⇧-click the shape to copy from <b>last</b>. Press a key.</p>
 
-  <h2>Commands (same handlers the shortcuts call)</h2>
-  <div class="row">
-    <button id="btn-matchWidth">matchWidth <kbd>⌃⇧⌥W</kbd></button>
-    <button id="btn-matchHeight">matchHeight <kbd>⌃⇧⌥H</kbd></button>
-    <button id="btn-matchBoth">matchBoth <kbd>⌃⇧⌥B</kbd></button>
-    <button id="btn-fitInside">fitInside <kbd>⌃⇧⌥I</kbd></button>
-    <button id="btn-fillOutside">fillOutside <kbd>⌃⇧⌥O</kbd></button>
-  </div>
+  <h2>Shortcuts</h2>
+  <p class="muted">Click a command, then press the key you want — or click a key in the map. Esc cancels, Delete removes. Only the keys in the map can be bound.</p>
+  <div id="cmd-list"></div>
+  <div id="recorder-status" class="status muted"></div>
+  <div id="keymap-grid"></div>
+  <div class="legend"><span class="l-free">available</span><span class="l-assigned">assigned</span><span class="l-native">used by something else (dashed) — press twice to override</span></div>
+
+  <details>
+    <summary>Backup / restore keymap</summary>
+    <textarea id="keymap-json" spellcheck="false"></textarea>
+    <div class="row">
+      <button id="btn-copy-json">Copy</button>
+      <button id="btn-apply-json">Apply</button>
+      <button id="btn-reset-json">Reset to defaults</button>
+    </div>
+    <p class="muted">Paste into <code>DEFAULT_KEYMAP</code> in commands.js to make it the shipped default.</p>
+  </details>
+
+  <h2>Behaviour</h2>
   <div class="row">
     <label><input type="checkbox" id="cfg-RECENTER_ON_REF"> RECENTER_ON_REF</label>
     <label><input type="checkbox" id="cfg-KEEP_CENTER"> KEEP_CENTER</label>
     <span class="muted">runtime overrides; defaults live in <code>CONFIG</code></span>
   </div>
 
-  <h2>Selection probe</h2>
-  <div class="row">
-    <button id="btn-probe-shapes">Create probe shapes</button>
-    <button id="btn-dump">Dump selection</button>
-  </div>
-  <div id="probe-output"></div>
-  <div class="row">
-    <button id="btn-acceptance-shapes">Create acceptance shapes (100×200 + 300×150)</button>
-    <button id="btn-shortcuts">Show registered shortcuts</button>
-  </div>
-  <div id="shortcuts-output"></div>
+  <details>
+    <summary>Test helpers</summary>
+    <div class="row">
+      <button id="btn-probe-shapes">Create probe shapes</button>
+      <button id="btn-dump">Dump selection</button>
+      <button id="btn-acceptance-shapes">Create acceptance shapes</button>
+    </div>
+    <div id="probe-output"></div>
+  </details>
 
   <h2>Log <button id="btn-clear-log" style="font-size:11px;padding:2px 6px">clear</button></h2>
   <pre id="log"></pre>
 
+  <script src="keybank.js"></script>
+  <script src="native-shortcuts.js"></script>
   <script src="commands.js"></script>
 </body>
 </html>

@@ -3,48 +3,78 @@
 Personal Office.js add-in that binds keyboard shortcuts to shape-sizing commands in
 PowerPoint for macOS. Modeled on Efficient Elements; built and owned locally.
 
-**Status: Phase 1 feasibility spike.** Five commands, real keystrokes, end-to-end.
-Stop and report before Phase 2 (see the build brief).
+**Status: Phase 1 passed** (five sizing commands fire from real keystrokes). Now adding
+commands from the operation inventory in priority order, with in-pane key assignment.
 
 ## How to use it
 
 Select the shapes you want to change, then shift-click the shape you want them to copy
 **last**. Press a key. The last-selected shape is the reference (the Efficient Elements model).
 
-| Key | Action ID | What it does |
-|---|---|---|
-| `⌃⇧⌥W` | `matchWidth` | target width := reference width |
-| `⌃⇧⌥H` | `matchHeight` | target height := reference height |
-| `⌃⇧⌥B` | `matchBoth` | both, non-proportional |
-| `⌃⇧⌥I` | `fitInside` | proportional contain: `k = min(refW/w, refH/h)` |
-| `⌃⇧⌥O` | `fillOutside` | proportional cover: `k = max(refW/w, refH/h)` |
+Default keys (change them in the pane):
 
-`Ctrl` in the shortcuts file is the physical Control key on a Mac (`⌃`), and `Alt` is Option (`⌥`).
+| Key | Command |
+|---|---|
+| `⌃⇧⌥W` | Match width |
+| `⌃⇧⌥H` | Match height |
+| `⌃⇧⌥B` | Match width and height |
+| `⌃⇧⌥I` | Fit inside reference (proportional contain) |
+| `⌃⇧⌥O` | Fill reference (proportional cover) |
+| `⌃⇧⌥K` | Show / hide the pane |
 
 Behaviour switches live in `CONFIG` at the top of [docs/commands.js](docs/commands.js):
 
 - `RECENTER_ON_REF` (default `true`) — fit/fill land on the reference's centre.
 - `KEEP_CENTER` (default `true`) — match commands grow around the target's own centre.
 
-The task pane exposes runtime toggles for both so you can experiment without redeploying.
+## Assigning keys
+
+Press `⌃⇧⌥K` (or Home › ppt-shortcuts) to open the pane. Click a command, then press the key
+you want — or click a key in the map. Esc cancels; Delete removes the command's key. The change
+is live immediately; nothing to redeploy.
+
+Rules the pane enforces:
+
+1. **Only keys in the bank can be bound.** The manifest registers a fixed bank — `⌃⇧⌥` + A–Z/0–9
+   and `⌃⌥` + A–Z/0–9, 72 keys — and PowerPoint only ever sends us those. Anything else (say
+   `⌘B`) is refused with the reason ("PowerPoint: Bold").
+2. **Conflicts need a second press.** A bank key already bound to another command, or one a
+   known tool uses (macOS defaults, Rectangle window manager), warns first; pressing it again
+   binds anyway. Bank keys are dashed in the map when something else is known to use them.
+3. One key per command.
+
+Why a bank instead of rebinding live: the add-in-only manifest fixes shortcuts at load time,
+and this PowerPoint build reports no `KeyboardShortcuts 1.1`, so `Office.actions.replaceShortcuts`
+isn't available. Registering every plausible key up front and routing them through a keymap is
+the only way to make assignment instant.
+
+The keymap is stored in the add-in (`OfficeRuntime.storage`, with `localStorage` fallback).
+**Backup / restore** in the pane shows it as JSON; paste that into `DEFAULT_KEYMAP` in
+`commands.js` to make it the shipped default.
 
 ## Layout
 
 ```
 ppt-shortcuts/
-├── docs/                  # served by GitHub Pages (https://cueland.github.io/ppt-shortcuts/)
-│   ├── taskpane.html      # shared-runtime host page + Phase 0 probe UI
-│   ├── commands.js        # Office.actions.associate handlers, geometry, resolveReference()
-│   ├── shortcuts.json     # action IDs → key combos
-│   └── assets/            # ribbon icons
-├── manifest.xml           # sideloaded locally — NOT served
-├── scripts/sideload.sh    # copy manifest into PowerPoint's wef dir and restart PowerPoint
-└── scripts/clear-cache.sh # nuke the add-in cache when a change refuses to show up
+├── docs/                      # served by GitHub Pages (https://cueland.github.io/ppt-shortcuts/)
+│   ├── taskpane.html          # shared-runtime host page + assignment UI
+│   ├── commands.js            # COMMANDS registry, geometry, keymap, recorder, pane
+│   ├── keybank.js             # GENERATED: the key bank (must match shortcuts.json)
+│   ├── shortcuts.json         # GENERATED: one Office action per bank key
+│   ├── native-shortcuts.js    # PowerPoint / macOS / Rectangle shortcuts for conflict warnings
+│   └── assets/                # ribbon icons
+├── manifest.xml               # sideloaded locally — NOT served
+├── scripts/build-shortcuts.py # regenerates keybank.js + shortcuts.json from the bank definition
+├── scripts/sideload.sh        # copy manifest into PowerPoint's wef dir and restart PowerPoint
+└── scripts/clear-cache.sh     # nuke the add-in cache when a change refuses to show up
 ```
 
-The action IDs in `shortcuts.json` (`actions[].id` and `shortcuts[].action`) and the keys of the
-`commands` object in `commands.js` must match exactly — `Office.onReady` associates every key of
-`commands`, so adding a command means adding it in both places.
+**Adding a command** = one entry in the `COMMANDS` array in `commands.js` (`id`, `group`,
+`label`, `desc`, `run`). It appears in the pane immediately and can be bound to any bank key.
+No manifest or JSON change.
+
+**Changing the bank** (new modifier set or keys) = edit `scripts/build-shortcuts.py`, run it,
+bump `?v=` on `ExtendedOverrides` in `manifest.xml`, push, re-sideload.
 
 ## One-time setup
 
@@ -76,23 +106,26 @@ element, and no explicit pick-up-reference action is needed.
 The probe is still in the task pane (**Create probe shapes** / **Dump selection**) in case a
 future PowerPoint build changes the behaviour.
 
-## Phase 1 — acceptance
+## Phase 1 — acceptance: PASSED (2026-09-15, PowerPoint 16.112.909.4)
 
-Work through these with the task pane open so the log shows before/after geometry:
-
-1. [ ] PowerPoint version ≥ 16.105.2 (diagnostics line).
-2. [ ] Add-in loads; version reported.
+1. [x] PowerPoint version ≥ 16.105.2.
+2. [x] Add-in loads; version reported.
 3. [x] Phase 0 answered: selection order preserved; last-selected = reference.
-4. [ ] All five shortcuts fire from the keyboard **with the task pane closed**.
-5. [ ] Geometry: **Create acceptance shapes** adds a 100×200 target and a 300×150 reference.
-   Click the target, shift-click the reference, then:
-   - `⌃⇧⌥I` → target becomes **75×150**
-   - `⌘Z`, then `⌃⇧⌥O` → target becomes **300×600**
-   The log prints a ⚠ if the read-back geometry differs from the computed value — that would
-   indicate PowerPoint is honouring "lock aspect ratio" on `width`/`height` writes, which we'd
-   need to work around.
-6. [ ] **Show registered shortcuts** reports no conflicts, and pressing each combo shows no
-   chooser dialog.
+4. [x] All five shortcuts fire from the keyboard with the task pane closed.
+5. [x] Geometry verified; read-back matched computed values exactly, so PowerPoint does **not**
+   apply lock-aspect-ratio to `width`/`height` writes. (`fitInside` 364.87×207.13 → 237.01×134.55,
+   ratio preserved to 4 s.f.)
+6. [x] No chooser dialogs on `⌃⇧⌥` combos.
+
+Not yet verified: whether the `⌃⌥` half of the bank fires (first `⌃⇧⌥` half does). Bind
+something to a `⌃⌥` key and press it; if nothing happens, that set can be dropped from
+`scripts/build-shortcuts.py`.
+
+`KeyboardShortcuts 1.1` reports unsupported on this build. That set only gates the
+customisation APIs (`getShortcuts`, `replaceShortcuts`, `areShortcutsInUse`); shortcuts
+themselves work without it.
+
+**Test helpers** in the pane still provide the probe shapes and the 100×200 / 300×150 pair.
 
 ## Iteration loop
 

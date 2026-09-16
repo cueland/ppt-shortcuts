@@ -1,16 +1,870 @@
 {
   "actions": [
-    { "id": "matchWidth",  "type": "ExecuteFunction", "name": "Match width of reference shape" },
-    { "id": "matchHeight", "type": "ExecuteFunction", "name": "Match height of reference shape" },
-    { "id": "matchBoth",   "type": "ExecuteFunction", "name": "Match width and height of reference shape" },
-    { "id": "fitInside",   "type": "ExecuteFunction", "name": "Scale to fit inside reference shape" },
-    { "id": "fillOutside", "type": "ExecuteFunction", "name": "Scale to fill reference shape" }
+    {
+      "id": "k_Ctrl_Shift_Alt_A",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+A"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_B",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+B"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_C",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+C"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_D",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+D"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_E",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+E"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_F",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+F"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_G",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+G"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_H",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+H"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_I",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+I"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_J",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+J"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_K",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+K"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_L",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+L"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_M",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+M"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_N",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+N"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_O",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+O"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_P",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+P"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_Q",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+Q"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_R",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+R"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_S",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+S"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_T",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+T"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_U",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+U"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_V",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+V"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_W",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+W"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_X",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+X"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_Y",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+Y"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_Z",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+Z"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_0",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+0"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_1",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+1"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_2",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+2"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_3",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+3"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_4",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+4"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_5",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+5"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_6",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+6"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_7",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+7"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_8",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+8"
+    },
+    {
+      "id": "k_Ctrl_Shift_Alt_9",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Shift+Alt+9"
+    },
+    {
+      "id": "k_Ctrl_Alt_A",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+A"
+    },
+    {
+      "id": "k_Ctrl_Alt_B",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+B"
+    },
+    {
+      "id": "k_Ctrl_Alt_C",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+C"
+    },
+    {
+      "id": "k_Ctrl_Alt_D",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+D"
+    },
+    {
+      "id": "k_Ctrl_Alt_E",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+E"
+    },
+    {
+      "id": "k_Ctrl_Alt_F",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+F"
+    },
+    {
+      "id": "k_Ctrl_Alt_G",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+G"
+    },
+    {
+      "id": "k_Ctrl_Alt_H",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+H"
+    },
+    {
+      "id": "k_Ctrl_Alt_I",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+I"
+    },
+    {
+      "id": "k_Ctrl_Alt_J",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+J"
+    },
+    {
+      "id": "k_Ctrl_Alt_K",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+K"
+    },
+    {
+      "id": "k_Ctrl_Alt_L",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+L"
+    },
+    {
+      "id": "k_Ctrl_Alt_M",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+M"
+    },
+    {
+      "id": "k_Ctrl_Alt_N",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+N"
+    },
+    {
+      "id": "k_Ctrl_Alt_O",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+O"
+    },
+    {
+      "id": "k_Ctrl_Alt_P",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+P"
+    },
+    {
+      "id": "k_Ctrl_Alt_Q",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+Q"
+    },
+    {
+      "id": "k_Ctrl_Alt_R",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+R"
+    },
+    {
+      "id": "k_Ctrl_Alt_S",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+S"
+    },
+    {
+      "id": "k_Ctrl_Alt_T",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+T"
+    },
+    {
+      "id": "k_Ctrl_Alt_U",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+U"
+    },
+    {
+      "id": "k_Ctrl_Alt_V",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+V"
+    },
+    {
+      "id": "k_Ctrl_Alt_W",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+W"
+    },
+    {
+      "id": "k_Ctrl_Alt_X",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+X"
+    },
+    {
+      "id": "k_Ctrl_Alt_Y",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+Y"
+    },
+    {
+      "id": "k_Ctrl_Alt_Z",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+Z"
+    },
+    {
+      "id": "k_Ctrl_Alt_0",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+0"
+    },
+    {
+      "id": "k_Ctrl_Alt_1",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+1"
+    },
+    {
+      "id": "k_Ctrl_Alt_2",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+2"
+    },
+    {
+      "id": "k_Ctrl_Alt_3",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+3"
+    },
+    {
+      "id": "k_Ctrl_Alt_4",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+4"
+    },
+    {
+      "id": "k_Ctrl_Alt_5",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+5"
+    },
+    {
+      "id": "k_Ctrl_Alt_6",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+6"
+    },
+    {
+      "id": "k_Ctrl_Alt_7",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+7"
+    },
+    {
+      "id": "k_Ctrl_Alt_8",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+8"
+    },
+    {
+      "id": "k_Ctrl_Alt_9",
+      "type": "ExecuteFunction",
+      "name": "ppt-shortcuts slot Ctrl+Alt+9"
+    }
   ],
   "shortcuts": [
-    { "action": "matchWidth",  "key": { "default": "Ctrl+Shift+Alt+W", "mac": "Ctrl+Shift+Alt+W" } },
-    { "action": "matchHeight", "key": { "default": "Ctrl+Shift+Alt+H", "mac": "Ctrl+Shift+Alt+H" } },
-    { "action": "matchBoth",   "key": { "default": "Ctrl+Shift+Alt+B", "mac": "Ctrl+Shift+Alt+B" } },
-    { "action": "fitInside",   "key": { "default": "Ctrl+Shift+Alt+I", "mac": "Ctrl+Shift+Alt+I" } },
-    { "action": "fillOutside", "key": { "default": "Ctrl+Shift+Alt+O", "mac": "Ctrl+Shift+Alt+O" } }
+    {
+      "action": "k_Ctrl_Shift_Alt_A",
+      "key": {
+        "default": "Ctrl+Shift+Alt+A",
+        "mac": "Ctrl+Shift+Alt+A"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_B",
+      "key": {
+        "default": "Ctrl+Shift+Alt+B",
+        "mac": "Ctrl+Shift+Alt+B"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_C",
+      "key": {
+        "default": "Ctrl+Shift+Alt+C",
+        "mac": "Ctrl+Shift+Alt+C"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_D",
+      "key": {
+        "default": "Ctrl+Shift+Alt+D",
+        "mac": "Ctrl+Shift+Alt+D"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_E",
+      "key": {
+        "default": "Ctrl+Shift+Alt+E",
+        "mac": "Ctrl+Shift+Alt+E"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_F",
+      "key": {
+        "default": "Ctrl+Shift+Alt+F",
+        "mac": "Ctrl+Shift+Alt+F"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_G",
+      "key": {
+        "default": "Ctrl+Shift+Alt+G",
+        "mac": "Ctrl+Shift+Alt+G"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_H",
+      "key": {
+        "default": "Ctrl+Shift+Alt+H",
+        "mac": "Ctrl+Shift+Alt+H"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_I",
+      "key": {
+        "default": "Ctrl+Shift+Alt+I",
+        "mac": "Ctrl+Shift+Alt+I"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_J",
+      "key": {
+        "default": "Ctrl+Shift+Alt+J",
+        "mac": "Ctrl+Shift+Alt+J"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_K",
+      "key": {
+        "default": "Ctrl+Shift+Alt+K",
+        "mac": "Ctrl+Shift+Alt+K"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_L",
+      "key": {
+        "default": "Ctrl+Shift+Alt+L",
+        "mac": "Ctrl+Shift+Alt+L"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_M",
+      "key": {
+        "default": "Ctrl+Shift+Alt+M",
+        "mac": "Ctrl+Shift+Alt+M"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_N",
+      "key": {
+        "default": "Ctrl+Shift+Alt+N",
+        "mac": "Ctrl+Shift+Alt+N"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_O",
+      "key": {
+        "default": "Ctrl+Shift+Alt+O",
+        "mac": "Ctrl+Shift+Alt+O"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_P",
+      "key": {
+        "default": "Ctrl+Shift+Alt+P",
+        "mac": "Ctrl+Shift+Alt+P"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_Q",
+      "key": {
+        "default": "Ctrl+Shift+Alt+Q",
+        "mac": "Ctrl+Shift+Alt+Q"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_R",
+      "key": {
+        "default": "Ctrl+Shift+Alt+R",
+        "mac": "Ctrl+Shift+Alt+R"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_S",
+      "key": {
+        "default": "Ctrl+Shift+Alt+S",
+        "mac": "Ctrl+Shift+Alt+S"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_T",
+      "key": {
+        "default": "Ctrl+Shift+Alt+T",
+        "mac": "Ctrl+Shift+Alt+T"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_U",
+      "key": {
+        "default": "Ctrl+Shift+Alt+U",
+        "mac": "Ctrl+Shift+Alt+U"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_V",
+      "key": {
+        "default": "Ctrl+Shift+Alt+V",
+        "mac": "Ctrl+Shift+Alt+V"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_W",
+      "key": {
+        "default": "Ctrl+Shift+Alt+W",
+        "mac": "Ctrl+Shift+Alt+W"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_X",
+      "key": {
+        "default": "Ctrl+Shift+Alt+X",
+        "mac": "Ctrl+Shift+Alt+X"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_Y",
+      "key": {
+        "default": "Ctrl+Shift+Alt+Y",
+        "mac": "Ctrl+Shift+Alt+Y"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_Z",
+      "key": {
+        "default": "Ctrl+Shift+Alt+Z",
+        "mac": "Ctrl+Shift+Alt+Z"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_0",
+      "key": {
+        "default": "Ctrl+Shift+Alt+0",
+        "mac": "Ctrl+Shift+Alt+0"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_1",
+      "key": {
+        "default": "Ctrl+Shift+Alt+1",
+        "mac": "Ctrl+Shift+Alt+1"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_2",
+      "key": {
+        "default": "Ctrl+Shift+Alt+2",
+        "mac": "Ctrl+Shift+Alt+2"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_3",
+      "key": {
+        "default": "Ctrl+Shift+Alt+3",
+        "mac": "Ctrl+Shift+Alt+3"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_4",
+      "key": {
+        "default": "Ctrl+Shift+Alt+4",
+        "mac": "Ctrl+Shift+Alt+4"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_5",
+      "key": {
+        "default": "Ctrl+Shift+Alt+5",
+        "mac": "Ctrl+Shift+Alt+5"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_6",
+      "key": {
+        "default": "Ctrl+Shift+Alt+6",
+        "mac": "Ctrl+Shift+Alt+6"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_7",
+      "key": {
+        "default": "Ctrl+Shift+Alt+7",
+        "mac": "Ctrl+Shift+Alt+7"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_8",
+      "key": {
+        "default": "Ctrl+Shift+Alt+8",
+        "mac": "Ctrl+Shift+Alt+8"
+      }
+    },
+    {
+      "action": "k_Ctrl_Shift_Alt_9",
+      "key": {
+        "default": "Ctrl+Shift+Alt+9",
+        "mac": "Ctrl+Shift+Alt+9"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_A",
+      "key": {
+        "default": "Ctrl+Alt+A",
+        "mac": "Ctrl+Alt+A"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_B",
+      "key": {
+        "default": "Ctrl+Alt+B",
+        "mac": "Ctrl+Alt+B"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_C",
+      "key": {
+        "default": "Ctrl+Alt+C",
+        "mac": "Ctrl+Alt+C"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_D",
+      "key": {
+        "default": "Ctrl+Alt+D",
+        "mac": "Ctrl+Alt+D"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_E",
+      "key": {
+        "default": "Ctrl+Alt+E",
+        "mac": "Ctrl+Alt+E"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_F",
+      "key": {
+        "default": "Ctrl+Alt+F",
+        "mac": "Ctrl+Alt+F"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_G",
+      "key": {
+        "default": "Ctrl+Alt+G",
+        "mac": "Ctrl+Alt+G"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_H",
+      "key": {
+        "default": "Ctrl+Alt+H",
+        "mac": "Ctrl+Alt+H"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_I",
+      "key": {
+        "default": "Ctrl+Alt+I",
+        "mac": "Ctrl+Alt+I"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_J",
+      "key": {
+        "default": "Ctrl+Alt+J",
+        "mac": "Ctrl+Alt+J"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_K",
+      "key": {
+        "default": "Ctrl+Alt+K",
+        "mac": "Ctrl+Alt+K"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_L",
+      "key": {
+        "default": "Ctrl+Alt+L",
+        "mac": "Ctrl+Alt+L"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_M",
+      "key": {
+        "default": "Ctrl+Alt+M",
+        "mac": "Ctrl+Alt+M"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_N",
+      "key": {
+        "default": "Ctrl+Alt+N",
+        "mac": "Ctrl+Alt+N"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_O",
+      "key": {
+        "default": "Ctrl+Alt+O",
+        "mac": "Ctrl+Alt+O"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_P",
+      "key": {
+        "default": "Ctrl+Alt+P",
+        "mac": "Ctrl+Alt+P"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_Q",
+      "key": {
+        "default": "Ctrl+Alt+Q",
+        "mac": "Ctrl+Alt+Q"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_R",
+      "key": {
+        "default": "Ctrl+Alt+R",
+        "mac": "Ctrl+Alt+R"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_S",
+      "key": {
+        "default": "Ctrl+Alt+S",
+        "mac": "Ctrl+Alt+S"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_T",
+      "key": {
+        "default": "Ctrl+Alt+T",
+        "mac": "Ctrl+Alt+T"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_U",
+      "key": {
+        "default": "Ctrl+Alt+U",
+        "mac": "Ctrl+Alt+U"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_V",
+      "key": {
+        "default": "Ctrl+Alt+V",
+        "mac": "Ctrl+Alt+V"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_W",
+      "key": {
+        "default": "Ctrl+Alt+W",
+        "mac": "Ctrl+Alt+W"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_X",
+      "key": {
+        "default": "Ctrl+Alt+X",
+        "mac": "Ctrl+Alt+X"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_Y",
+      "key": {
+        "default": "Ctrl+Alt+Y",
+        "mac": "Ctrl+Alt+Y"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_Z",
+      "key": {
+        "default": "Ctrl+Alt+Z",
+        "mac": "Ctrl+Alt+Z"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_0",
+      "key": {
+        "default": "Ctrl+Alt+0",
+        "mac": "Ctrl+Alt+0"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_1",
+      "key": {
+        "default": "Ctrl+Alt+1",
+        "mac": "Ctrl+Alt+1"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_2",
+      "key": {
+        "default": "Ctrl+Alt+2",
+        "mac": "Ctrl+Alt+2"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_3",
+      "key": {
+        "default": "Ctrl+Alt+3",
+        "mac": "Ctrl+Alt+3"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_4",
+      "key": {
+        "default": "Ctrl+Alt+4",
+        "mac": "Ctrl+Alt+4"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_5",
+      "key": {
+        "default": "Ctrl+Alt+5",
+        "mac": "Ctrl+Alt+5"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_6",
+      "key": {
+        "default": "Ctrl+Alt+6",
+        "mac": "Ctrl+Alt+6"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_7",
+      "key": {
+        "default": "Ctrl+Alt+7",
+        "mac": "Ctrl+Alt+7"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_8",
+      "key": {
+        "default": "Ctrl+Alt+8",
+        "mac": "Ctrl+Alt+8"
+      }
+    },
+    {
+      "action": "k_Ctrl_Alt_9",
+      "key": {
+        "default": "Ctrl+Alt+9",
+        "mac": "Ctrl+Alt+9"
+      }
+    }
   ]
 }
