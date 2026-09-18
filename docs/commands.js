@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-18.23";
+const BUILD = "2026-09-19.24";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -221,32 +221,32 @@ const geometry = {
   },
 };
 
-/** Stretch: extend the target to the FAR edge of the reference on that side. */
-function stretch(edge) {
+/**
+ * Move one edge of the target to a coordinate, keeping the opposite edge where it is. If the
+ * moved edge would cross the opposite edge, the interval flips: the old opposite edge becomes
+ * the moved edge and the target coordinate becomes the new opposite edge. Shrinks as readily
+ * as it grows. `targetOf(ref)` gives the coordinate (an edge of the reference).
+ */
+function moveEdge(edge, targetOf) {
   return (t, r) => {
-    let g = null;
+    const P = targetOf(r);
     switch (edge) {
-      case "right": g = { width: R.right(r) - t.left }; break;
-      case "left": g = { left: r.left, width: R.right(t) - r.left }; break;
-      case "bottom": g = { height: R.bottom(r) - t.top }; break;
-      case "top": g = { top: r.top, height: R.bottom(t) - r.top }; break;
+      case "right": return { left: Math.min(P, t.left), width: Math.abs(P - t.left) };
+      case "left": return { left: Math.min(P, R.right(t)), width: Math.abs(R.right(t) - P) };
+      case "bottom": return { top: Math.min(P, t.top), height: Math.abs(P - t.top) };
+      case "top": return { top: Math.min(P, R.bottom(t)), height: Math.abs(R.bottom(t) - P) };
     }
-    // Only stretch towards the reference; never collapse a shape that's on the other side.
-    if ((g.width != null && g.width <= t.width) || (g.height != null && g.height <= t.height)) { log(`  "${t.name}": nothing to stretch ${edge}wards`); return null; }
-    return g;
   };
 }
 
-/** Fill: grow the target to the NEAR edge of the reference (close the gap). */
+/** Stretch: the target's edge goes to the SAME edge of the reference (its far edge on that side). */
+function stretch(edge) {
+  return moveEdge(edge, { right: R.right, left: (r) => r.left, bottom: R.bottom, top: (r) => r.top }[edge]);
+}
+
+/** Fill gap: the target's edge goes to the OPPOSITE edge of the reference (its near edge). */
 function fillGap(edge) {
-  return (t, r) => {
-    switch (edge) {
-      case "right": return R.right(t) <= r.left ? { width: r.left - t.left } : null;
-      case "left": return t.left >= R.right(r) ? { left: R.right(r), width: R.right(t) - R.right(r) } : null;
-      case "bottom": return R.bottom(t) <= r.top ? { height: r.top - t.top } : null;
-      case "top": return t.top >= R.bottom(r) ? { top: R.bottom(r), height: R.bottom(t) - R.bottom(r) } : null;
-    }
-  };
+  return moveEdge(edge, { right: (r) => r.left, left: R.right, bottom: (r) => r.top, top: R.bottom }[edge]);
 }
 
 /** Magic Resizer: scale every selected shape by settings.resizeFactor around its centre, optionally font + line. */
@@ -1100,14 +1100,14 @@ const COMMANDS = [
   { id: "matchBoth", group: "Size", label: "Match both", icon: "matchBoth", desc: "Both dimensions, non-proportional.", run: () => applyToTargets("matchBoth", (t, r) => geometry.match(t, r, { width: true, height: true })) },
   { id: "fitInside", group: "Size", label: "Fit inside", icon: "fitInside", desc: "Scale proportionally to fit within the reference.", run: () => applyToTargets("fitInside", (t, r) => geometry.scale(t, r, "contain")) },
   { id: "fillOutside", group: "Size", label: "Fill reference", icon: "fillOutside", desc: "Scale proportionally to cover the reference.", run: () => applyToTargets("fillOutside", (t, r) => geometry.scale(t, r, "cover")) },
-  { id: "stretchLeft", group: "Size", label: "Stretch left", icon: "stretchLeft", desc: "Extend to the reference's far-left edge.", run: () => applyToTargets("stretchLeft", stretch("left")) },
-  { id: "stretchRight", group: "Size", label: "Stretch right", icon: "stretchRight", desc: "Extend to the reference's far-right edge.", run: () => applyToTargets("stretchRight", stretch("right")) },
-  { id: "stretchUp", group: "Size", label: "Stretch up", icon: "stretchUp", desc: "Extend to the reference's top edge.", run: () => applyToTargets("stretchUp", stretch("top")) },
-  { id: "stretchDown", group: "Size", label: "Stretch down", icon: "stretchDown", desc: "Extend to the reference's bottom edge.", run: () => applyToTargets("stretchDown", stretch("bottom")) },
-  { id: "fillLeft", group: "Size", label: "Fill gap left", icon: "fillLeft", desc: "Grow left to touch the reference.", run: () => applyToTargets("fillLeft", fillGap("left")) },
-  { id: "fillRight", group: "Size", label: "Fill gap right", icon: "fillRight", desc: "Grow right to touch the reference.", run: () => applyToTargets("fillRight", fillGap("right")) },
-  { id: "fillUp", group: "Size", label: "Fill gap up", icon: "fillUp", desc: "Grow up to touch the reference.", run: () => applyToTargets("fillUp", fillGap("top")) },
-  { id: "fillDown", group: "Size", label: "Fill gap down", icon: "fillDown", desc: "Grow down to touch the reference.", run: () => applyToTargets("fillDown", fillGap("bottom")) },
+  { id: "stretchLeft", group: "Size", label: "Stretch left", icon: "stretchLeft", desc: "Left edge → reference's left edge (shrinks or flips as needed).", run: () => applyToTargets("stretchLeft", stretch("left")) },
+  { id: "stretchRight", group: "Size", label: "Stretch right", icon: "stretchRight", desc: "Right edge → reference's right edge (shrinks or flips as needed).", run: () => applyToTargets("stretchRight", stretch("right")) },
+  { id: "stretchUp", group: "Size", label: "Stretch up", icon: "stretchUp", desc: "Top edge → reference's top edge (shrinks or flips as needed).", run: () => applyToTargets("stretchUp", stretch("top")) },
+  { id: "stretchDown", group: "Size", label: "Stretch down", icon: "stretchDown", desc: "Bottom edge → reference's bottom edge (shrinks or flips as needed).", run: () => applyToTargets("stretchDown", stretch("bottom")) },
+  { id: "fillLeft", group: "Size", label: "Fill gap left", icon: "fillLeft", desc: "Left edge → reference's right edge (shrinks or flips as needed).", run: () => applyToTargets("fillLeft", fillGap("left")) },
+  { id: "fillRight", group: "Size", label: "Fill gap right", icon: "fillRight", desc: "Right edge → reference's left edge (shrinks or flips as needed).", run: () => applyToTargets("fillRight", fillGap("right")) },
+  { id: "fillUp", group: "Size", label: "Fill gap up", icon: "fillUp", desc: "Top edge → reference's bottom edge (shrinks or flips as needed).", run: () => applyToTargets("fillUp", fillGap("top")) },
+  { id: "fillDown", group: "Size", label: "Fill gap down", icon: "fillDown", desc: "Bottom edge → reference's top edge (shrinks or flips as needed).", run: () => applyToTargets("fillDown", fillGap("bottom")) },
   { id: "resizeUp", group: "Size", label: "Resize +", icon: "resizeUp", desc: "Magic Resizer: scale by the factor (settings below).", run: () => magicResize() },
   { id: "resizeDown", group: "Size", label: "Resize −", icon: "resizeDown", desc: "Magic Resizer: scale by 1 / factor.", run: () => magicResize(1 / (Number(settings.resizeFactor) || 1.1)) },
   { id: "slice", group: "Size", label: "Slice / multiply", icon: "slice", desc: "Split one shape into rows × cols (settings below).", run: () => sliceShape() },
