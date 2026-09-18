@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-18.19";
+const BUILD = "2026-09-18.20";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK

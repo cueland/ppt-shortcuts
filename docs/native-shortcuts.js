@@ -172,4 +172,6 @@ const NATIVE_SHORTCUTS = [
   ["Shift+Alt+8", "types a special character while editing text", "macOS keyboard"],
   ["Shift+Alt+9", "types a special character while editing text", "macOS keyboard"],
   ["Ctrl+Shift+Tab", "Toggle Outline view / thumbnails", "PowerPoint"],
+  // Undocumented on the Mac shortcut page but observed: the chooser dialog names it.
+  ["Ctrl+Shift+S", "Slide Show", "PowerPoint"],
 ];
