@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-18.22";
+const BUILD = "2026-09-18.23";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -476,11 +476,11 @@ async function forEachTextFrame(actionId, fn) {
 
 const setMargins = () => forEachTextFrame("setMargins", (tf) => { const m = settings.margins; tf.leftMargin = +m.left; tf.rightMargin = +m.right; tf.topMargin = +m.top; tf.bottomMargin = +m.bottom; });
 const marginsZero = () => forEachTextFrame("marginsZero", (tf) => { tf.leftMargin = 0; tf.rightMargin = 0; tf.topMargin = 0; tf.bottomMargin = 0; });
-// Toggle between "shape fits text" and "no auto-fit". Never "text fits shape".
+// Toggle between "shape fits text" and "no auto-fit". Never "text fits shape", and never
+// touches word wrap — the two toggles are independent.
 const fitFormToText = () => forEachTextFrame("fitShapeToggle", (tf, s, context, all) => {
   const allOn = all.every((t) => t.autoSizeSetting === "AutoSizeShapeToFitText");
-  if (allOn) tf.autoSizeSetting = "AutoSizeNone";
-  else { tf.wordWrap = true; tf.autoSizeSetting = "AutoSizeShapeToFitText"; }
+  tf.autoSizeSetting = allOn ? "AutoSizeNone" : "AutoSizeShapeToFitText";
 });
 const wrapToggle = () => forEachTextFrame("wrapToggle", (tf, s, context, all) => { tf.wordWrap = !all.every((t) => t.wordWrap); });
 const setFontSize = () => forEachTextFrame("setFontSize", (tf) => { tf.textRange.font.size = Number(settings.fontSize) || 12; });
