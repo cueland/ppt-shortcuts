@@ -15,7 +15,7 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.7.0"
+VERSION = "0.3.8.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 ICON_V = "2"        # bump when any icon PNG changes (Office caches by URL)
 
@@ -75,8 +75,8 @@ RIBBON = [
     ("Text", "margins", [
         B("setMargins", "Margins", "margins", "Apply the margins from the pane"),
         B("marginsZero", "Zero margins", "marginsZero", "All four text margins to 0"),
-        B("fitFormToText", "Fit to text", "fitText", "Resize the shape to its text"),
-        B("wrapToggle", "Wrap", "wrap", "Toggle word wrap"),
+        B("fitFormToText", "Fit shape to text", "fitText", "Toggle: shape fits its text / no auto-fit"),
+        B("wrapToggle", "Wrap", "wrap", "Toggle word wrap on / off"),
         B("splitTextBox", "Split", "split", "Two boxes from one, at the cursor"),
         B("mergeTextBoxes", "Merge", "merge", "Combine text boxes in selection order"),
         B("bulletsToggle", "Bullets", "bullets", "Toggle bullets"),

@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-16.18";
+const BUILD = "2026-09-18.19";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -464,8 +464,11 @@ async function forEachTextFrame(actionId, fn) {
     const frames = selected.map((s) => ({ s, tf: s.proxy.getTextFrameOrNullObject ? s.proxy.getTextFrameOrNullObject() : s.proxy.textFrame }));
     for (const f of frames) f.tf.load("isNullObject,wordWrap,autoSizeSetting,leftMargin,rightMargin,topMargin,bottomMargin,textRange/text");
     await context.sync();
+    const live = frames.filter((f) => !f.tf.isNullObject);
+    // Toggles decide ONE target for the whole selection: on unless everything is already on.
+    const all = live.map((f) => f.tf);
     let n = 0;
-    for (const f of frames) { if (f.tf.isNullObject) continue; await fn(f.tf, f.s, context); n++; }
+    for (const f of live) { await fn(f.tf, f.s, context, all); n++; }
     await context.sync();
     log(`${actionId}: ${n} text frame(s)`);
   });
@@ -473,8 +476,13 @@ async function forEachTextFrame(actionId, fn) {
 
 const setMargins = () => forEachTextFrame("setMargins", (tf) => { const m = settings.margins; tf.leftMargin = +m.left; tf.rightMargin = +m.right; tf.topMargin = +m.top; tf.bottomMargin = +m.bottom; });
 const marginsZero = () => forEachTextFrame("marginsZero", (tf) => { tf.leftMargin = 0; tf.rightMargin = 0; tf.topMargin = 0; tf.bottomMargin = 0; });
-const fitFormToText = () => forEachTextFrame("fitFormToText", (tf) => { tf.wordWrap = true; tf.autoSizeSetting = "AutoSizeShapeToFitText"; });
-const wrapToggle = () => forEachTextFrame("wrapToggle", (tf) => { tf.wordWrap = !tf.wordWrap; });
+// Toggle between "shape fits text" and "no auto-fit". Never "text fits shape".
+const fitFormToText = () => forEachTextFrame("fitShapeToggle", (tf, s, context, all) => {
+  const allOn = all.every((t) => t.autoSizeSetting === "AutoSizeShapeToFitText");
+  if (allOn) tf.autoSizeSetting = "AutoSizeNone";
+  else { tf.wordWrap = true; tf.autoSizeSetting = "AutoSizeShapeToFitText"; }
+});
+const wrapToggle = () => forEachTextFrame("wrapToggle", (tf, s, context, all) => { tf.wordWrap = !all.every((t) => t.wordWrap); });
 const setFontSize = () => forEachTextFrame("setFontSize", (tf) => { tf.textRange.font.size = Number(settings.fontSize) || 12; });
 const bulletsToggle = () => forEachTextFrame("bulletsToggle", async (tf, s, context) => {
   const bf = tf.textRange.paragraphFormat.bulletFormat; bf.load("visible"); await context.sync(); bf.visible = !bf.visible;
@@ -1107,8 +1115,8 @@ const COMMANDS = [
   // Text
   { id: "setMargins", group: "Text", label: "Set margins", icon: "margins", desc: "Apply the margins below.", run: () => setMargins() },
   { id: "marginsZero", group: "Text", label: "Zero margins", icon: "marginsZero", desc: "All four text margins to 0.", run: () => marginsZero() },
-  { id: "fitFormToText", group: "Text", label: "Fit shape to text", icon: "fitText", desc: "Resize the shape to its text.", run: () => fitFormToText() },
-  { id: "wrapToggle", group: "Text", label: "Wrap text", icon: "wrap", desc: "Toggle word wrap.", run: () => wrapToggle() },
+  { id: "fitFormToText", group: "Text", label: "Fit shape ↔ off", icon: "fitText", desc: "Toggle: shape resizes to its text ↔ no auto-fit (never text-shrinks-to-shape).", run: () => fitFormToText() },
+  { id: "wrapToggle", group: "Text", label: "Wrap on/off", icon: "wrap", desc: "Toggle word wrap (on unless every selected box is already on).", run: () => wrapToggle() },
   { id: "splitTextBox", group: "Text", label: "Split at cursor", icon: "split", desc: "Two boxes from one, at the cursor.", run: () => splitTextBox() },
   { id: "mergeTextBoxes", group: "Text", label: "Merge boxes", icon: "merge", desc: "Combine in selection order.", run: () => mergeTextBoxes() },
   { id: "bulletsToggle", group: "Text", label: "Bullets on/off", icon: "bullets", desc: "Toggle bullets.", run: () => bulletsToggle() },

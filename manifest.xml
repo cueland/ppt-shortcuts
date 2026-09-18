@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
   <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
-  <Version>0.3.7.0</Version>
+  <Version>0.3.8.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ChristiantialElements"/>
@@ -1073,7 +1073,7 @@
         <bt:String id="S_group_Colour" DefaultValue="Colour"/>
         <bt:String id="S_lbl_setMargins" DefaultValue="Margins"/>
         <bt:String id="S_lbl_marginsZero" DefaultValue="Zero margins"/>
-        <bt:String id="S_lbl_fitFormToText" DefaultValue="Fit to text"/>
+        <bt:String id="S_lbl_fitFormToText" DefaultValue="Fit shape to text"/>
         <bt:String id="S_lbl_wrapToggle" DefaultValue="Wrap"/>
         <bt:String id="S_lbl_splitTextBox" DefaultValue="Split"/>
         <bt:String id="S_lbl_mergeTextBoxes" DefaultValue="Merge"/>
@@ -1196,8 +1196,8 @@
         <bt:String id="L_menu_desc_fontc" DefaultValue="Font colour from the palette"/>
         <bt:String id="L_desc_setMargins" DefaultValue="Apply the margins from the pane"/>
         <bt:String id="L_desc_marginsZero" DefaultValue="All four text margins to 0"/>
-        <bt:String id="L_desc_fitFormToText" DefaultValue="Resize the shape to its text"/>
-        <bt:String id="L_desc_wrapToggle" DefaultValue="Toggle word wrap"/>
+        <bt:String id="L_desc_fitFormToText" DefaultValue="Toggle: shape fits its text / no auto-fit"/>
+        <bt:String id="L_desc_wrapToggle" DefaultValue="Toggle word wrap on / off"/>
         <bt:String id="L_desc_splitTextBox" DefaultValue="Two boxes from one, at the cursor"/>
         <bt:String id="L_desc_mergeTextBoxes" DefaultValue="Combine text boxes in selection order"/>
         <bt:String id="L_desc_bulletsToggle" DefaultValue="Toggle bullets"/>
