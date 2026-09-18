@@ -70,9 +70,11 @@ you want — or click a key in the map. Esc cancels; Delete removes the command'
 is live immediately; nothing to redeploy.
 
 **Startup.** Office doesn't start a shared-runtime add-in until you launch it once.
-(Never change `VERSION` in `build-manifest.py`: documents store the add-in's `guid|version` id
-for auto-start, and a new version orphans them — "This add-in is no longer available", and no
-shortcut works until the add-in is launched by hand.) The add-in
+(Never change `VERSION` in `build-manifest.py` — it is `0.1.0.0` forever: documents store the
+add-in's `guid|version` id in `ppt/webextensions/` the first time auto-start is set and never update
+it, and roaming shortcut preferences store it too. A different version orphans them all: "This
+add-in is no longer available" on open, and no shortcut works until the add-in is launched by hand.
+`scripts/fix-deck-reference.py deck.pptx` repairs a deck that got a different version.) The add-in
 calls `Office.addin.setStartupBehavior("load")` so that documents you've used it in start it
 automatically next time; a brand-new deck may still need one click per PowerPoint session.
 

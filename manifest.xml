@@ -6,7 +6,7 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
   <Id>4e27ba64-4cfa-4081-92ec-9daba7554361</Id>
-  <Version>1.0.0.0</Version>
+  <Version>0.1.0.0</Version>
   <ProviderName>Christian Ueland</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ChristiantialElements"/>

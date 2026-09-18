@@ -15,11 +15,13 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-# NEVER bump this. PowerPoint identifies a sideloaded add-in by "<guid>|<version>", and every
-# document that auto-starts the add-in (setStartupBehavior "load") stores that exact id. A new
-# version orphans those references → "This add-in is no longer available" on open, and the
-# runtime doesn't start, so no shortcut works until the add-in is launched by hand.
-VERSION = "1.0.0.0"
+# NEVER change this. PowerPoint identifies a sideloaded add-in by "<guid>|<version>". Every
+# document that auto-starts the add-in stores that exact id in ppt/webextensions/webextensionN.xml
+# (<we:reference version="0.1.0.0" …/>) the FIRST time and never updates it, and the roaming
+# shortcut preferences store it too. A different version orphans all of them: "This add-in is no
+# longer available" on open, "isn't set up properly" on the tab, and no shortcut works until the
+# add-in is launched by hand. 0.1.0.0 is what the decks already contain.
+VERSION = "0.1.0.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 ICON_V = "2"        # bump when any icon PNG changes (Office caches by URL)
 
