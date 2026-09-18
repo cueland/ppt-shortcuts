@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-18.20";
+const BUILD = "2026-09-18.21";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -1720,10 +1720,16 @@ Office.onReady(async (info) => {
   }
   // Ask Office to start this runtime silently the next time the document opens, so the
   // shortcuts work without first opening the pane. Stored per document by Office.
+  // The document stores the add-in's exact id for this. Reset to "none" first so a stale
+  // reference (from an earlier manifest version) is replaced rather than left alongside.
   try {
     if (Office.addin && Office.addin.setStartupBehavior) {
-      await Office.addin.setStartupBehavior(Office.StartupBehavior ? Office.StartupBehavior.load : "load");
-      log("startup behavior: load (runtime will auto-start with this document)");
+      let before = "?";
+      try { before = Office.addin.getStartupBehavior ? await Office.addin.getStartupBehavior() : "n/a"; } catch (_) { /* ignore */ }
+      const SB = Office.StartupBehavior || { none: "none", load: "load" };
+      await Office.addin.setStartupBehavior(SB.none);
+      await Office.addin.setStartupBehavior(SB.load);
+      log(`startup behavior: was ${before} → reset → load (save the deck so the cloud copy gets the clean reference)`);
     }
   } catch (err) { log("setStartupBehavior unavailable: " + (err.message || err)); }
   try {
