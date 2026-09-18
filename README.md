@@ -69,7 +69,10 @@ Switch the pane to **Assign keys** (or right-click any icon). Click an icon, the
 you want — or click a key in the map. Esc cancels; Delete removes the command's key. The change
 is live immediately; nothing to redeploy.
 
-**Startup.** Office doesn't start a shared-runtime add-in until you launch it once. The add-in
+**Startup.** Office doesn't start a shared-runtime add-in until you launch it once.
+(Never change `VERSION` in `build-manifest.py`: documents store the add-in's `guid|version` id
+for auto-start, and a new version orphans them — "This add-in is no longer available", and no
+shortcut works until the add-in is launched by hand.) The add-in
 calls `Office.addin.setStartupBehavior("load")` so that documents you've used it in start it
 automatically next time; a brand-new deck may still need one click per PowerPoint session.
 

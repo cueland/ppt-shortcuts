@@ -15,7 +15,11 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://cueland.github.io/ppt-shortcuts"
 ADDIN_ID = "4e27ba64-4cfa-4081-92ec-9daba7554361"
-VERSION = "0.3.8.0"
+# NEVER bump this. PowerPoint identifies a sideloaded add-in by "<guid>|<version>", and every
+# document that auto-starts the add-in (setStartupBehavior "load") stores that exact id. A new
+# version orphans those references → "This add-in is no longer available" on open, and the
+# runtime doesn't start, so no shortcut works until the add-in is launched by hand.
+VERSION = "1.0.0.0"
 SHORTCUTS_V = "7"   # bump when shortcuts.json changes
 ICON_V = "2"        # bump when any icon PNG changes (Office caches by URL)
 
