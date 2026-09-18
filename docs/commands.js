@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-18.21";
+const BUILD = "2026-09-18.22";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -1590,6 +1590,7 @@ function wireTaskPane() {
   on("btn-probe-shapes", "click", () => createProbeShapes().catch((e) => log("createProbeShapes FAILED: " + e.message)));
   on("btn-acceptance-shapes", "click", () => createAcceptanceShapes().catch((e) => log("createAcceptanceShapes FAILED: " + e.message)));
   on("btn-shape-api", "click", () => dumpShapeApi().catch((e) => log("dumpShapeApi FAILED: " + e.message)));
+  on("btn-addin-refs", "click", () => dumpAddinRefs().catch((e) => log("dumpAddinRefs FAILED: " + e.message)));
   on("btn-clear-log", "click", () => { logBuffer.length = 0; log("log cleared"); });
 
   for (const key of ["RECENTER_ON_REF", "KEEP_CENTER", "SWAP_ZORDER", "SWAP_SIZE"]) {
@@ -1644,6 +1645,23 @@ async function createAcceptanceShapes() {
     log("Created acceptance shapes. Expect fitInside → 75×150, fillOutside → 300×600.");
   });
 }
+/** Read this deck's package and log every part that references add-ins (webextensions, custom XML). */
+async function dumpAddinRefs() {
+  const bytes = await getDeckBytes();
+  if (typeof JSZip === "undefined") throw new Error("JSZip not loaded");
+  const zip = await JSZip.loadAsync(bytes);
+  const names = Object.keys(zip.files).filter((n) => /webextension|customXml|_rels\/presentation\.xml\.rels|presProps|\[Content_Types\]/i.test(n)).sort();
+  log(`add-in refs: ${Math.round(bytes.length / 1024)} KB package, ${Object.keys(zip.files).length} parts; candidates: ${names.length}`);
+  const rows = [];
+  for (const n of names) {
+    const text = await zip.file(n).async("string");
+    const hit = /4e27ba64|webextension|we:reference/i.test(text);
+    rows.push({ part: n, size: text.length, mentionsAddin: hit ? "yes" : "" });
+    if (hit) log(`  ${n}:\n${text.replace(/></g, ">\n<").slice(0, 1500)}`);
+  }
+  renderTable("probe-output", rows);
+}
+
 async function dumpShapeApi() {
   const CANDIDATES = ["shadow", "shadowFormat", "effects", "effectFormat", "glow", "glowFormat", "reflection", "reflectionFormat", "softEdge", "softEdges", "softEdgeFormat", "threeDFormat", "style"];
   await PowerPoint.run(async (context) => {
