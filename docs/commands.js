@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-19.25";
+const BUILD = "2026-09-19.26";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -759,6 +759,51 @@ async function setVisible(visible) {
   });
 }
 
+
+// ---- Privileged notice: toggle a legal banner at the top of every slide ----
+//   Copied from "Privileged notification.pptx": rounded rectangle 451.6×19.5pt at (266.3, 0),
+//   accent fill #F15D22 with the theme's 15 % shade outline, white 14pt centred text.
+const NOTICE = {
+  name: "EE privileged notice",
+  text: "Legally Privileged – Subject to MC Approval and Consultation",
+  left: 266.3, top: 0, width: 451.6, height: 19.5,
+  fill: "#F15D22", line: "#240E05", lineWeight: 1,
+  fontSize: 14, fontColor: "#FFFFFF",
+};
+
+async function privilegedNoticeToggle() {
+  return PowerPoint.run(async (context) => {
+    const slides = context.presentation.slides;
+    slides.load("items/id");
+    await context.sync();
+    const per = slides.items.map((sl) => { const sh = sl.shapes; sh.load("items/id,items/name"); return { sl, sh }; });
+    await context.sync();
+    const present = per.some((x) => x.sh.items.some((s) => s.name === NOTICE.name));
+    let n = 0;
+    if (present) {
+      for (const x of per) for (const s of x.sh.items) if (s.name === NOTICE.name) { s.delete(); n++; }
+      await context.sync();
+      log(`privileged notice: removed from ${n} slide(s)`);
+    } else {
+      for (const x of per) {
+        const box = x.sh.addGeometricShape(PowerPoint.GeometricShapeType.roundedRectangle, { left: NOTICE.left, top: NOTICE.top, width: NOTICE.width, height: NOTICE.height });
+        box.name = NOTICE.name;
+        box.fill.setSolidColor(NOTICE.fill);
+        box.lineFormat.color = NOTICE.line; box.lineFormat.weight = NOTICE.lineWeight; box.lineFormat.visible = true;
+        const tf = box.textFrame;
+        tf.textRange.text = NOTICE.text;
+        tf.verticalAlignment = "Middle";
+        tf.wordWrap = false; tf.autoSizeSetting = "AutoSizeNone";
+        tf.textRange.font.size = NOTICE.fontSize; tf.textRange.font.color = NOTICE.fontColor; tf.textRange.font.bold = false;
+        tf.textRange.paragraphFormat.horizontalAlignment = "Center";
+        n++;
+      }
+      await context.sync();
+      log(`privileged notice: added to ${n} slide(s)`);
+    }
+  });
+}
+
 /** Duplicate the current slide in place: export it as a .pptx in memory, insert it right after itself. Selection stays on the original. */
 async function duplicateSlide() {
   return PowerPoint.run(async (context) => {
@@ -1136,6 +1181,7 @@ const COMMANDS = [
   { id: "unhide", group: "Tools", label: "Unhide all", icon: "unhide", desc: "Show every hidden shape on the slide.", run: () => setVisible(true) },
   { id: "exportSlides", group: "Tools", label: "Slides → new deck", icon: "newDeck", desc: "Open the selected slides as a new presentation, template kept exactly.", run: () => exportSelectedSlides(false) },
   { id: "exportSlidesSimplified", group: "Tools", label: "Slides → new deck (simplified)", icon: "newDeckLite", desc: "Same, but drop layouts and masters the selected slides don't use.", run: () => exportSelectedSlides(true) },
+  { id: "privilegedNotice", group: "Tools", label: "Privileged notice", icon: "notice", desc: "Add the 'Legally Privileged – Subject to MC…' banner to the top of every slide, or remove it from all if present.", run: () => privilegedNoticeToggle() },
   { id: "duplicateSlide", group: "Tools", label: "Duplicate slide", icon: "duplicate", desc: "Insert an exact copy of the current slide right after it (backup before editing).", run: () => duplicateSlide() },
   { id: "goToSlide", group: "Tools", label: "Go to slide", icon: "goto", desc: "Jump to the slide number below.", run: () => goToSlide() },
   { id: "agendaWizard", group: "Tools", label: "Agenda", icon: "agenda", desc: "Agenda + divider slides from the items below (v1, appended at the end).", run: () => agendaWizard() },
@@ -1332,6 +1378,7 @@ const ICONS = {
   unhide: S('<path d="M3 12s4-6 9-6 9 6 9 6-4 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/>'),
   newDeck: S('<rect x="3" y="5" width="12" height="9"/><path d="M15 9h6M18 6l3 3-3 3"/><rect x="3" y="17" width="12" height="3" opacity=".5"/>'),
   newDeckLite: S('<rect x="3" y="5" width="12" height="9"/><path d="M15 9h6M18 6l3 3-3 3"/><path d="M3 18.5h12" stroke-dasharray="2 2" opacity=".6"/>'),
+  notice: S('<rect x="3" y="3" width="18" height="6" rx="3" fill="currentColor" opacity=".85" stroke="none"/><path d="M4 13h16M4 17h11" opacity=".5"/>'),
   duplicate: S('<rect x="3" y="7" width="13" height="10"/><path d="M8 7V4h13v10h-3"/><path d="M9.5 12h4M11.5 10v4"/>'),
   goto: S('<rect x="3" y="4" width="18" height="16"/><path d="M9 9l-1.5 6M15.5 9L14 15M7 11h10M6.5 13.5h10"/>'),
   agenda: S('<path d="M5 7h14M5 12h14M5 17h9"/><circle cx="3" cy="7" r=".8" fill="currentColor"/><circle cx="3" cy="12" r=".8" fill="currentColor"/><circle cx="3" cy="17" r=".8" fill="currentColor"/>'),

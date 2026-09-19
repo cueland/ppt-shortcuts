@@ -701,6 +701,12 @@
 </Item>
   </Items>
 </Control>
+<Control xsi:type="Button" id="CE.privilegedNotice">
+  <Label resid="S_blank"/>
+  <Supertip><Title resid="S_lbl_privilegedNotice"/><Description resid="L_desc_privilegedNotice"/></Supertip>
+  <Icon><bt:Image size="16" resid="Icon.notice.16"/><bt:Image size="32" resid="Icon.notice.32"/><bt:Image size="80" resid="Icon.notice.80"/></Icon>
+  <Action xsi:type="ExecuteFunction"><FunctionName>ribbon_privilegedNotice</FunctionName></Action>
+</Control>
 <Control xsi:type="Button" id="CE.duplicateSlide">
   <Label resid="S_blank"/>
   <Supertip><Title resid="S_lbl_duplicateSlide"/><Description resid="L_desc_duplicateSlide"/></Supertip>
@@ -975,6 +981,9 @@
         <bt:Image id="Icon.newDeckLite.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeckLite-16.png?v=3"/>
         <bt:Image id="Icon.newDeckLite.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeckLite-32.png?v=3"/>
         <bt:Image id="Icon.newDeckLite.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/newDeckLite-80.png?v=3"/>
+        <bt:Image id="Icon.notice.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/notice-16.png?v=3"/>
+        <bt:Image id="Icon.notice.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/notice-32.png?v=3"/>
+        <bt:Image id="Icon.notice.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/notice-80.png?v=3"/>
         <bt:Image id="Icon.duplicate.16" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/duplicate-16.png?v=3"/>
         <bt:Image id="Icon.duplicate.32" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/duplicate-32.png?v=3"/>
         <bt:Image id="Icon.duplicate.80" DefaultValue="https://cueland.github.io/ppt-shortcuts/assets/icons/duplicate-80.png?v=3"/>
@@ -1103,6 +1112,7 @@
         <bt:String id="S_lbl_masterLabelRemove" DefaultValue="Master label -"/>
         <bt:String id="S_lbl_exportSlidesSimplified" DefaultValue="Slides to new deck (simplified)"/>
         <bt:String id="S_menu_tools" DefaultValue="Tools"/>
+        <bt:String id="S_lbl_privilegedNotice" DefaultValue="Privileged notice"/>
         <bt:String id="S_lbl_duplicateSlide" DefaultValue="Duplicate slide"/>
         <bt:String id="S_lbl_exportSlides" DefaultValue="Slides to new deck"/>
         <bt:String id="S_lbl_addSticky" DefaultValue="Sticky"/>
@@ -1224,6 +1234,7 @@
         <bt:String id="L_desc_masterLabelRemove" DefaultValue="Remove it from every layout"/>
         <bt:String id="L_desc_exportSlidesSimplified" DefaultValue="New deck from the selected slides, unused layouts and masters dropped"/>
         <bt:String id="L_menu_desc_tools" DefaultValue="Tools"/>
+        <bt:String id="L_desc_privilegedNotice" DefaultValue="Toggle the 'Legally Privileged – Subject to MC Approval and Consultation' banner on every slide"/>
         <bt:String id="L_desc_duplicateSlide" DefaultValue="Insert an exact copy of the current slide right after it"/>
         <bt:String id="L_desc_exportSlides" DefaultValue="Open the selected slides as a new presentation, template kept exactly"/>
         <bt:String id="L_desc_addSticky" DefaultValue="Reviewer note with initials + timestamp, in the default colour"/>
