@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-19.26";
+const BUILD = "2026-09-19.27";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -778,14 +778,17 @@ async function privilegedNoticeToggle() {
     await context.sync();
     const per = slides.items.map((sl) => { const sh = sl.shapes; sh.load("items/id,items/name"); return { sl, sh }; });
     await context.sync();
-    const present = per.some((x) => x.sh.items.some((s) => s.name === NOTICE.name));
+    // On every slide already → remove everywhere. Otherwise → add to the slides missing it.
+    const has = (x) => x.sh.items.some((s) => s.name === NOTICE.name);
+    const everywhere = per.length > 0 && per.every(has);
     let n = 0;
-    if (present) {
+    if (everywhere) {
       for (const x of per) for (const s of x.sh.items) if (s.name === NOTICE.name) { s.delete(); n++; }
       await context.sync();
       log(`privileged notice: removed from ${n} slide(s)`);
     } else {
       for (const x of per) {
+        if (has(x)) continue;
         const box = x.sh.addGeometricShape(PowerPoint.GeometricShapeType.roundedRectangle, { left: NOTICE.left, top: NOTICE.top, width: NOTICE.width, height: NOTICE.height });
         box.name = NOTICE.name;
         box.fill.setSolidColor(NOTICE.fill);
@@ -799,7 +802,7 @@ async function privilegedNoticeToggle() {
         n++;
       }
       await context.sync();
-      log(`privileged notice: added to ${n} slide(s)`);
+      log(`privileged notice: added to ${n} slide(s) (now on all ${per.length})`);
     }
   });
 }
@@ -1181,7 +1184,7 @@ const COMMANDS = [
   { id: "unhide", group: "Tools", label: "Unhide all", icon: "unhide", desc: "Show every hidden shape on the slide.", run: () => setVisible(true) },
   { id: "exportSlides", group: "Tools", label: "Slides → new deck", icon: "newDeck", desc: "Open the selected slides as a new presentation, template kept exactly.", run: () => exportSelectedSlides(false) },
   { id: "exportSlidesSimplified", group: "Tools", label: "Slides → new deck (simplified)", icon: "newDeckLite", desc: "Same, but drop layouts and masters the selected slides don't use.", run: () => exportSelectedSlides(true) },
-  { id: "privilegedNotice", group: "Tools", label: "Privileged notice", icon: "notice", desc: "Add the 'Legally Privileged – Subject to MC…' banner to the top of every slide, or remove it from all if present.", run: () => privilegedNoticeToggle() },
+  { id: "privilegedNotice", group: "Tools", label: "Privileged notice", icon: "notice", desc: "Put the 'Legally Privileged – Subject to MC…' banner on every slide that lacks it; if every slide already has it, remove it from all.", run: () => privilegedNoticeToggle() },
   { id: "duplicateSlide", group: "Tools", label: "Duplicate slide", icon: "duplicate", desc: "Insert an exact copy of the current slide right after it (backup before editing).", run: () => duplicateSlide() },
   { id: "goToSlide", group: "Tools", label: "Go to slide", icon: "goto", desc: "Jump to the slide number below.", run: () => goToSlide() },
   { id: "agendaWizard", group: "Tools", label: "Agenda", icon: "agenda", desc: "Agenda + divider slides from the items below (v1, appended at the end).", run: () => agendaWizard() },

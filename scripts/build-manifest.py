@@ -110,7 +110,7 @@ RIBBON = [
             B("masterLabelRemove", "Master label -", "masterOff", "Remove it from every layout"),
             B("exportSlidesSimplified", "Slides to new deck (simplified)", "newDeckLite", "New deck from the selected slides, unused layouts and masters dropped"),
         ]),
-        B("privilegedNotice", "Privileged notice", "notice", "Toggle the 'Legally Privileged – Subject to MC Approval and Consultation' banner on every slide"),
+        B("privilegedNotice", "Privileged notice", "notice", "Banner on every slide that lacks it; if all slides have it, remove from all"),
         B("duplicateSlide", "Duplicate slide", "duplicate", "Insert an exact copy of the current slide right after it"),
         B("exportSlides", "Slides to new deck", "newDeck", "Open the selected slides as a new presentation, template kept exactly"),
         B("addSticky", "Sticky", "sticky", "Reviewer note with initials + timestamp, in the default colour"),
