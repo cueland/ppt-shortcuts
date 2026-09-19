@@ -23,4 +23,4 @@ fi
 
 echo "Starting PowerPoint…"
 open -a "Microsoft PowerPoint"
-echo "Done. Open a presentation; the add-in appears under Home › ChristiantialElements."
+echo "Done. Open a presentation; the add-in appears under Home › Expropriated Elements."

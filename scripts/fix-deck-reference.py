@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Repair a deck whose stored ChristiantialElements auto-start reference names the wrong version.
+Repair a deck whose stored Expropriated Elements auto-start reference names the wrong version.
 
   python3 scripts/fix-deck-reference.py "deck.pptx"        # writes deck.fixed.pptx next to it
 

@@ -28,7 +28,7 @@ COMMANDS_JS = os.path.join(DOCS, "commands.js")
 SHORTCUTS_JSON = os.path.join(DOCS, "shortcuts.json")
 
 # Action "name" must match the extended-manifest schema: ^[A-Za-z0-9-_+]+$ (no spaces).
-NAME_PREFIX = "ChristiantialElements-"
+NAME_PREFIX = "ExpropriatedElements-"
 
 
 def read_bank():

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ChristiantialElements</title>
+  <title>Expropriated Elements</title>
   <!-- Office.js must load before commands.js; the CDN URL is the only supported source. -->
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
   <!-- JSZip: needed only by "Slides → new deck" (edits the .pptx package in memory). -->
@@ -12,7 +12,8 @@
   <style>
     :root { color-scheme: light dark; --accent: #1e40af; --line: rgba(127,127,127,.3); --soft: rgba(127,127,127,.12); }
     body { font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 10px 12px 24px; }
-    h1 { font-size: 15px; margin: 0; }
+    h1 { font-size: 15px; margin: 0; line-height: 0; }
+    h1 svg.logo { display: block; }
     h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; opacity: .7; margin: 18px 0 6px; }
     .muted { opacity: .65; font-size: 12px; }
     .row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; align-items: center; }
@@ -112,7 +113,13 @@
 </head>
 <body>
   <div id="head">
-    <h1>ChristiantialElements</h1>
+    <h1 aria-label="Expropriated Elements"><svg class="logo" viewBox="0 0 250 64" width="190" height="49" role="img" aria-hidden="true">
+      <!-- the EE device: one big rounded red initial, two grey words -->
+      <path d="M 46 12 A 24 24 0 1 0 46 52" fill="none" stroke="#B2352A" stroke-width="8.5" stroke-linecap="round"/>
+      <path d="M 5.5 32 H 50" fill="none" stroke="#B2352A" stroke-width="8.5" stroke-linecap="round"/>
+      <text x="55" y="27" font-family="Avenir Next, Futura, Century Gothic, Helvetica Neue, sans-serif" font-weight="300" font-size="27" fill="#8C8C8C" letter-spacing=".3">xpropriated</text>
+      <text x="55" y="57" font-family="Avenir Next, Futura, Century Gothic, Helvetica Neue, sans-serif" font-weight="300" font-size="27" fill="#8C8C8C" letter-spacing=".3">lements</text>
+    </svg></h1>
     <span class="row" style="margin:0"><button id="btn-compact" class="tog" title="Icons only, more per row">Compact</button><span class="seg"><button id="mode-run" class="on">Run</button><button id="mode-assign">Assign keys</button></span></span>
   </div>
   <div id="diagnostics" class="muted">Loading Office.js…</div>
@@ -165,7 +172,7 @@
   <pre id="log"></pre>
 
   <!-- ?b= is a cache-buster; bump it with BUILD in commands.js so a fresh page always gets fresh scripts. -->
-  <script src="native-shortcuts.js?b=24"></script>
-  <script src="commands.js?b=24"></script>
+  <script src="native-shortcuts.js?b=25"></script>
+  <script src="commands.js?b=25"></script>
 </body>
 </html>

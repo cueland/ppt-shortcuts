@@ -1,6 +1,6 @@
 /* global Office, OfficeRuntime, PowerPoint, NATIVE_SHORTCUTS */
 /*
- * ChristiantialElements — keyboard-driven shape tools for PowerPoint on macOS.
+ * Expropriated Elements — keyboard-driven shape tools for PowerPoint on macOS.
  *
  * Runs in the add-in's shared runtime (lifetime="long"), so the same JS context serves
  * both the keyboard-shortcut actions and the task pane. That's why command handlers can
@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-19.24";
+const BUILD = "2026-09-19.25";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -1701,7 +1701,7 @@ const logBuffer = [];
 function log(message) {
   const line = `${new Date().toLocaleTimeString()}  ${message}`;
   logBuffer.push(line); if (logBuffer.length > 200) logBuffer.shift();
-  console.log("[ChristiantialElements] " + message);
+  console.log("[ExpropriatedElements] " + message);
   const l = el("log"); if (l) { l.textContent = logBuffer.join("\n"); l.scrollTop = l.scrollHeight; }
 }
 function fmt(g) { const n = (v) => (Math.round(v * 100) / 100).toString(); return `${n(g.width)}×${n(g.height)} @ (${n(g.left)}, ${n(g.top)})`; }
