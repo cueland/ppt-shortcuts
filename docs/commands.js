@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-19.27";
+const BUILD = "2026-09-20.28";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -789,7 +789,7 @@ async function privilegedNoticeToggle() {
     } else {
       for (const x of per) {
         if (has(x)) continue;
-        const box = x.sh.addGeometricShape(PowerPoint.GeometricShapeType.roundedRectangle, { left: NOTICE.left, top: NOTICE.top, width: NOTICE.width, height: NOTICE.height });
+        const box = x.sh.addGeometricShape("RoundRectangle" /* enum key is roundRectangle; the literal avoids an undefined type → line */, { left: NOTICE.left, top: NOTICE.top, width: NOTICE.width, height: NOTICE.height });
         box.name = NOTICE.name;
         box.fill.setSolidColor(NOTICE.fill);
         box.lineFormat.color = NOTICE.line; box.lineFormat.weight = NOTICE.lineWeight; box.lineFormat.visible = true;
@@ -1689,7 +1689,7 @@ async function createAcceptanceShapes() {
     const slide = context.presentation.getSelectedSlides().getItemAt(0);
     const target = slide.shapes.addGeometricShape(PowerPoint.GeometricShapeType.rectangle, { left: 60, top: 80, width: 100, height: 200 });
     target.name = "Target 100x200"; target.textFrame.textRange.text = "target";
-    const ref = slide.shapes.addGeometricShape(PowerPoint.GeometricShapeType.roundedRectangle, { left: 300, top: 80, width: 300, height: 150 });
+    const ref = slide.shapes.addGeometricShape("RoundRectangle" /* enum key is roundRectangle; the literal avoids an undefined type → line */, { left: 300, top: 80, width: 300, height: 150 });
     ref.name = "Reference 300x150"; ref.textFrame.textRange.text = "reference";
     await context.sync();
     log("Created acceptance shapes. Expect fitInside → 75×150, fillOutside → 300×600.");
