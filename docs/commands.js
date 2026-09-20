@@ -27,7 +27,7 @@
 "use strict";
 
 // Shown in the pane and the log so you can tell which build PowerPoint actually loaded.
-const BUILD = "2026-09-20.28";
+const BUILD = "2026-09-20.29";
 
 // ---------------------------------------------------------------------------
 // 1. CONFIG + KEY BANK
@@ -776,16 +776,30 @@ async function privilegedNoticeToggle() {
     const slides = context.presentation.slides;
     slides.load("items/id");
     await context.sync();
-    const per = slides.items.map((sl) => { const sh = sl.shapes; sh.load("items/id,items/name"); return { sl, sh }; });
+    const per = slides.items.map((sl) => { const sh = sl.shapes; sh.load("items/id,items/name,items/type"); return { sl, sh }; });
     await context.sync();
+    // A notice is any shape carrying the exact text, wherever it sits — ours (by name) or one
+    // from the template / hand-copied. Text is read only from shapes that can hold text.
+    const norm = (t) => String(t || "").replace(/\s+/g, " ").trim().toLowerCase();
+    const want = norm(NOTICE.text);
+    const probes = [];
+    for (const x of per) for (const s of x.sh.items) {
+      if (s.name === NOTICE.name || !/^(GeometricShape|TextBox|Unsupported)$/.test(s.type)) continue;
+      const tf = s.getTextFrameOrNullObject ? s.getTextFrameOrNullObject() : null;
+      if (tf) { tf.load("isNullObject,textRange/text"); probes.push({ s, tf }); }
+    }
+    await context.sync();
+    const isNotice = new Set();
+    for (const x of per) for (const s of x.sh.items) if (s.name === NOTICE.name) isNotice.add(s.id);
+    for (const { s, tf } of probes) { try { if (!tf.isNullObject && norm(tf.textRange.text) === want) isNotice.add(s.id); } catch (_) { /* no text */ } }
+    const has = (x) => x.sh.items.some((s) => isNotice.has(s.id));
     // On every slide already → remove everywhere. Otherwise → add to the slides missing it.
-    const has = (x) => x.sh.items.some((s) => s.name === NOTICE.name);
     const everywhere = per.length > 0 && per.every(has);
     let n = 0;
     if (everywhere) {
-      for (const x of per) for (const s of x.sh.items) if (s.name === NOTICE.name) { s.delete(); n++; }
+      for (const x of per) for (const s of x.sh.items) if (isNotice.has(s.id)) { s.delete(); n++; }
       await context.sync();
-      log(`privileged notice: removed from ${n} slide(s)`);
+      log(`privileged notice: removed ${n} banner(s) from ${per.length} slide(s)`);
     } else {
       for (const x of per) {
         if (has(x)) continue;
